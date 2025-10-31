@@ -9,17 +9,111 @@ project:
     source_format: sfdx
 
 tasks:
-    robot:
-        options:
-            suites: robot/npc-exploration/tests
-            options:
-                outputdir: robot/npc-exploration/results
+  # permissions
+  assign_psl_kitchen_sink:
+    description: Assigns basically every PSL that looked relevant to NPC for the scratch org definition. This should be revised as requirements become clearer.
+    class_path: cumulusci.tasks.salesforce.users.permsets.AssignPermissionSetLicenses 
+    options:
+      api_names:
+        - AccountingSubledgerAdminPsl
+        - AccountingSubledgerAutomationPsl
+        - AccountingSubledgerGrowthBasePsl
+        - ActionPlansPsl
+        - AnalyticsQueryServicePsl
+        - BenefitDisbursementPermissionSetLicense
+        - BenefitManagementPermissionSetLicense
+        - CarePlansPermissionSetLicense
+        - CaseProceedingsPSL
+        - CaseReferralPsl
+        - ComplaintsManagementPsl
+        - CompliantDataSharingPsl
+        - DataProcessingEnginePsl
+        - DocumentChecklistPsl
+        - DynamicAssessmentPsl
+        - EinsteinAnalyticsPlusPsl
+        - EvidenceManagementPSL
+        - FieldServiceDispatcherPsl
+        - FieldServiceMobilePsl
+        - FieldServiceSchedulingPsl
+        - FieldServiceStandardPsl
+        - FundraisingAccessPsl
+        - GrantmakingPsl
+        - GroupMembershipPsl
+        - IndustriesARCPsl
+        - IndustriesAssessmentPsl
+        - IndustriesInteractionSummaryPsl
+        - IndustriesSalesExcellencePsl
+        - IndustriesServiceExcellencePsl
+        - InsightsBuilderPsl
+        - LifeEventsAccessPSL
+        - OmniStudioDesigner
+        - OmniStudioRuntime
+        - OutcomeManagementPsl
+        - ProgramManagementPsl
+        - Salesforce_org_AccountingSubledgerPsl
+        - Salesforce_org_NonprofitCloudCaseManagementPsl
+        - SonicEmbeddedStorePsl
+        - SurveyCreatorPsl
 
-    robot_testdoc:
-        options:
-            path: robot/npc-exploration/tests
-            output: robot/npc-exploration/doc/npc-exploration_tests.html
+  assign_fundraising_perms:
+    description: Assign all fundraising-related permission sets to the current user
+    class_path: cumulusci.tasks.salesforce.users.permsets.AssignPermissionSets
+    options:
+      api_names:
+        - FundraisingAccess
+        - Fundraising_Admin
+        - Fundraising_User
+        - GroupMembershipPsl
 
-    run_tests:
-        options:
-            required_org_code_coverage_percent: 75
+  assign_grantmaking_perms:
+    description: Assign all grantmaking-related permission sets to the current user
+    class_path: cumulusci.tasks.salesforce.users.permsets.AssignPermissionSets
+    options:
+      api_names:
+        - Grantmaking_Manager
+        - Grantmaking_Applicant
+        - GrantmakingManager
+
+  assign_casemgmt_perms:
+    description: Assign all case management-related permission sets to the current user
+    class_path: cumulusci.tasks.salesforce.users.permsets.AssignPermissionSets
+    options:
+      api_names:
+        - CarePlansPermissionSetLicense
+        - AdvancedProgramManagement
+        - Investigative_Case_Management_Officer
+        - Social_Program_Management_Caseworker
+        - Benefit_Management_Caseworker
+        - OutcomeManagement
+        - DocumentChecklist
+
+  # ui
+  reorder_app_menu:
+    class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+    options:
+      path: scripts/ReorderAppMenu.cls
+      apex: applyOrgAppOrder();
+
+  # sample data
+  load_sample_data:
+    class_path: cumulusci.tasks.sample_data.load_sample_data.LoadSampleData
+    options:
+      snowfakery_recipe: datasets/default/default.recipe.yml
+
+flows:
+  assign_all_npc_perms:
+    description: Assign all NPC implementation-guide permissions to me
+    steps:
+      1:
+        task: assign_fundraising_perms
+      2:
+        task: assign_grantmaking_perms
+      3:
+        task: assign_casemgmt_perms
+
+  dev_org:
+    steps:
+      90: 
+        flow: assign_all_npc_perms
+      91: 
+        task: reorder_app_menu

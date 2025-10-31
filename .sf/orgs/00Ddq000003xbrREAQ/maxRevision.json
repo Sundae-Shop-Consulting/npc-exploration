@@ -1,0 +1,30 @@
+{
+    "fileVersion": 0,
+    "serverMaxRevisionCounter": 41,
+    "sourceMembers": {
+        "TimelineObjectDefinition__GiftCommitmentTimeline": {
+            "memberType": "TimelineObjectDefinition",
+            "serverRevisionCounter": 38,
+            "lastRetrievedFromServer": 38,
+            "isNameObsolete": false
+        },
+        "PermissionSetGroup__force__Fundraising_Admin": {
+            "memberType": "PermissionSetGroup",
+            "serverRevisionCounter": 41,
+            "lastRetrievedFromServer": 41,
+            "isNameObsolete": false
+        },
+        "PermissionSetGroup__force__Fundraising_User": {
+            "memberType": "PermissionSetGroup",
+            "serverRevisionCounter": 40,
+            "lastRetrievedFromServer": 40,
+            "isNameObsolete": false
+        },
+        "TimelineObjectDefinition__IndicatorResults": {
+            "memberType": "TimelineObjectDefinition",
+            "serverRevisionCounter": 39,
+            "lastRetrievedFromServer": 39,
+            "isNameObsolete": false
+        }
+    }
+}

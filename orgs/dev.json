@@ -1,24 +1,64 @@
 {
   "orgName": "npc-exploration - Dev Org",
   "edition": "Developer",
+  "description": "Settings for creating a Nonprofit Cloud scratch org",
+  "features": [
+    "AccountingSubledgerGrowthEdition",
+    "AccountingSubledgerUser",
+    "AnalyticsQueryService",
+    "Assessments",
+    "Communities",
+    "ContactsToMultipleAccounts",
+    "EnableSetPasswordInApi",
+    "Fundraising",
+    "Grantmaking",
+    "DataProcessingEngine",
+    "DecisionTable",
+    "IndustriesActionPlan",
+    "DocumentChecklist",
+    "IndustriesSalesExcellenceAddOn",
+    "IndustriesServiceExcellenceAddOn",
+    "MarketingUser",
+    "NonprofitCloudCaseManagementUser",
+    "OmniStudioDesigner",
+    "OmniStudioRuntime",
+    "OutcomeManagement",
+    "PersonAccounts",
+    "ProgramManagement",
+    "PublicSectorAccess",
+    "StateAndCountryPicklist"
+  ],
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
     },
+    "mobileSettings": {
+      "enableS1EncryptedStoragePref2": false
+    },
     "chatterSettings": {
       "enableChatter": true
     },
-    "userManagementSettings": {
-      "enableNewProfileUI": true
+    "apexSettings": {
+      "enableDisableParallelApexTesting": true
     },
-    "securitySettings": {
-      "enableAdminLoginAsAnyUser": true,
-      "sessionSettings": {
-        "forceRelogin": false
-      }
+    "enhancedNotesSettings": {
+      "enableEnhancedNotes": true
     },
-    "languageSettings": {
-      "enableTranslationWorkbench": true
+    "industriesSettings": {
+      "enableBenefitManagementPreference": true,
+      "enableBenefitAndGoalSharingPref": true,
+      "enableCarePlansPreference": true,
+      "enableFundraising": true,
+      "enableGroupMembershipPref": true,
+      "enableGrantmaking": true,
+      "enableOutcomes": true
+    },
+    "nameSettings": {
+      "enableMiddleName": true,
+      "enableNameSuffix": true
+    },
+    "InterestTaggingSettings": {
+      "enableInterestTagging": true
     }
   }
 }

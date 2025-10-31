@@ -1,0 +1,41 @@
+- object: Account
+  nickname: nonprofit_account
+  count: 5
+  fields:
+    Name:
+      fake: company
+    Type: "Organization"
+    BillingStreet:
+      fake: street_address
+    BillingCity:
+      fake: city
+    BillingState:
+      fake: state
+    BillingCountry: "United States"
+    BillingPostalCode:
+      fake: postcode
+    Phone:
+      fake: phone_number
+    Description:
+      fake: catch_phrase
+
+- object: Contact
+  count: 15
+  fields:
+    FirstName:
+      fake: first_name
+    LastName:
+      fake: last_name
+    Email:
+      fake: email
+    MailingStreet:
+      fake: street_address
+    MailingCity:
+      fake: city
+    MailingState:
+      fake: state
+    MailingCountry: "United States"
+    MailingPostalCode:
+      fake: postcode
+    AccountId:
+      reference: nonprofit_account
