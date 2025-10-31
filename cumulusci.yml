@@ -1,0 +1,25 @@
+minimum_cumulusci_version: '4.6.0'
+project:
+    name: npc-exploration
+    package:
+        name: npc-exploration
+        api_version: '63.0'
+    git:
+        default_branch: 'main'
+    source_format: sfdx
+
+tasks:
+    robot:
+        options:
+            suites: robot/npc-exploration/tests
+            options:
+                outputdir: robot/npc-exploration/results
+
+    robot_testdoc:
+        options:
+            path: robot/npc-exploration/tests
+            output: robot/npc-exploration/doc/npc-exploration_tests.html
+
+    run_tests:
+        options:
+            required_org_code_coverage_percent: 75
