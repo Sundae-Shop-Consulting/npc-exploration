@@ -1,4 +1,7 @@
 .project
 .settings
+.sfdx
+.cci
+.sf
 salesforce.schema
 Referenced Packages

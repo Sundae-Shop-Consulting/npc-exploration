@@ -26,7 +26,8 @@
     "PersonAccounts",
     "ProgramManagement",
     "PublicSectorAccess",
-    "StateAndCountryPicklist"
+    "StateAndCountryPicklist",
+    "VolunteerManagement"
   ],
   "settings": {
     "lightningExperienceSettings": {
@@ -51,7 +52,8 @@
       "enableFundraising": true,
       "enableGroupMembershipPref": true,
       "enableGrantmaking": true,
-      "enableOutcomes": true
+      "enableOutcomes": true,
+      "enableVolunteerManagement": true
     },
     "nameSettings": {
       "enableMiddleName": true,
