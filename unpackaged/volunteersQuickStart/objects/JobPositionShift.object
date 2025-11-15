@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <compactLayouts>
+        <fullName>Job_Position_Shift_Compact_Layout</fullName>
+        <fields>Name</fields>
+        <fields>Status</fields>
+        <fields>StartDate</fields>
+        <fields>StartTime</fields>
+        <fields>EndDate</fields>
+        <fields>EndTime</fields>
+        <fields>JobPositionId</fields>
+        <fields>RemainingCapacity</fields>
+        <label>Job Position Shift Compact Layout</label>
+    </compactLayouts>
+    <fields>
+        <fullName>Default_Duration__c</fullName>
+        <externalId>false</externalId>
+        <formula>ROUND((EndTime - StartTime)/3600000,2)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Default Duration</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>External_ID__c</fullName>
+        <externalId>true</externalId>
+        <label>External ID</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Start_and_End_DateTime__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE(
+    MONTH(StartDate),
+    1, &quot;Jan&quot;,
+    2, &quot;Feb&quot;,
+    3, &quot;Mar&quot;,
+    4, &quot;Apr&quot;,
+    5, &quot;May&quot;,
+    6, &quot;Jun&quot;,
+    7, &quot;Jul&quot;,
+    8, &quot;Aug&quot;,
+    9, &quot;Sep&quot;,
+    10, &quot;Oct&quot;,
+    11, &quot;Nov&quot;,
+    12, &quot;Dec&quot;,
+    &quot;&quot;
+) &amp; &quot; &quot; &amp; 
+TEXT(DAY(StartDate)) &amp; &quot;, &quot; &amp; 
+TEXT(IF(HOUR(StartTime)&lt;12,
+    IF(HOUR(StartTime)=0, 12, HOUR(StartTime)),
+    IF(HOUR(StartTime)=12, 12, HOUR(StartTime)-12)
+)) &amp;
+&quot;:&quot; &amp;
+RIGHT(&quot;0&quot; &amp; TEXT(MINUTE(StartTime)), 2) &amp;
+IF(HOUR(StartTime) &gt;= 12, &quot; PM&quot;, &quot; AM&quot;) &amp;
+&quot; to &quot; &amp;
+CASE(
+    MONTH(EndDate),
+    1, &quot;Jan&quot;,
+    2, &quot;Feb&quot;,
+    3, &quot;Mar&quot;,
+    4, &quot;Apr&quot;,
+    5, &quot;May&quot;,
+    6, &quot;Jun&quot;,
+    7, &quot;Jul&quot;,
+    8, &quot;Aug&quot;,
+    9, &quot;Sep&quot;,
+    10, &quot;Oct&quot;,
+    11, &quot;Nov&quot;,
+    12, &quot;Dec&quot;,
+    &quot;&quot;
+) &amp; &quot; &quot; &amp; 
+TEXT(DAY(EndDate)) &amp; &quot;, &quot; &amp; 
+TEXT(IF(HOUR(EndTime)&lt;12,
+    IF(HOUR(EndTime)=0, 12, HOUR(EndTime)),
+    IF(HOUR(EndTime)=12, 12, HOUR(EndTime)-12)
+)) &amp;
+&quot;:&quot; &amp;
+RIGHT(&quot;0&quot; &amp; TEXT(MINUTE(EndTime)), 2) &amp;
+IF(HOUR(EndTime) &gt;= 12, &quot; PM&quot;, &quot; AM&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Start and End Date/Time</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Volunteer_Signup_URL__c</fullName>
+        <description>This formula field is aligned to the Sharing Settings for the Guest user. If the sharing settings are updated this field should also be updated to match to ensure the registration flow works properly.</description>
+        <externalId>false</externalId>
+        <formula>IF(ISPICKVAL(Status,&apos;In Progress&apos;),HYPERLINK($CustomMetadata.Site_URLs__mdt.Volunteer_Signup.Base_URL__c &amp; &quot;?inputId=&quot; &amp; Id,$CustomMetadata.Site_URLs__mdt.Volunteer_Signup.Base_URL__c &amp; &quot;?inputId=&quot; &amp; Id),&quot;&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>If Status of the record is &apos;In Progress&apos; then a URL will appear to enable registration for this record.</inlineHelpText>
+        <label>Volunteer Signup URL</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+</CustomObject>

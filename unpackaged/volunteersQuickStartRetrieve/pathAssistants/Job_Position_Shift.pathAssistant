@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>JobPositionShift</entityName>
+    <fieldName>Status</fieldName>
+    <masterLabel>Job Position Shift</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>PositionAssignmentCount</fieldNames>
+        <fieldNames>Description</fieldNames>
+        <picklistValueName>Complete</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Start_and_End_DateTime__c</fieldNames>
+        <fieldNames>PositionAssignmentCount</fieldNames>
+        <fieldNames>MaximumAttendeesCount</fieldNames>
+        <fieldNames>RemainingCapacity</fieldNames>
+        <picklistValueName>In Progress</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Description</fieldNames>
+        <picklistValueName>Upcoming</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>__MASTER__</recordTypeName>
+</PathAssistant>

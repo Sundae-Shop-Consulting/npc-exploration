@@ -54,6 +54,7 @@ tasks:
         - Salesforce_org_NonprofitCloudCaseManagementPsl
         - SonicEmbeddedStorePsl
         - SurveyCreatorPsl
+        - Volunteer_Management_User
 
   assign_fundraising_perms:
     description: Assign all fundraising-related permission sets to the current user
@@ -87,6 +88,14 @@ tasks:
         - OutcomeManagement
         - DocumentChecklist
 
+  assign_volunteermgmt_perms:
+    description: Assign all volunteer management-related permission sets to the current user
+    class_path: cumulusci.tasks.salesforce.users.permsets.AssignPermissionSets
+    options:
+      api_names:
+        - Volunteer_Management_User
+        - GroupMembershipPsl
+
   # ui
   reorder_app_menu:
     class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
@@ -100,16 +109,64 @@ tasks:
     options:
       snowfakery_recipe: datasets/default/default.recipe.yml
 
+  # volunteer quick start setup
+  update_verification_status_values:
+    class_path: cumulusci.tasks.metadata_etl.AddValueSetEntries
+    options:
+      api_names: LPIPXMVerificationStatusTypeEnum
+      entries:
+        - fullName: Awaiting Approval
+          label: Awaiting Approval
+        - fullName: Pending
+          label: Pending
+        - fullName: Approved
+          label: Approved
+        - fullName: Not Approved
+          label: Not Approved
+
+  delete_conflicting_layouts:
+    description: Delete Address/Examination layouts that conflict with unmanaged package install
+    class_path: cumulusci.tasks.salesforce.Deploy
+    options:
+      path: unpackaged/layoutCleanup
+    
+  install_quick_start_package:
+    class_path: cumulusci.tasks.salesforce.InstallPackageVersion
+    options:  
+      version: 04tfh000000ZNZd
+      version_number: 1.3
+
+  retrieve_package_components:
+    class_path: cumulusci.tasks.salesforce.RetrieveUnpackaged
+    options:
+      path: unpackaged/volunteersQuickStartRetrieve
+      package_xml: unpackaged/volunteersQuickStartRetrieve/package.xml
+
+  deploy_volunteer_quick_start_components:
+    class_path: cumulusci.tasks.salesforce.Deploy
+    options:
+      path: unpackaged/volunteersQuickStart
+
 flows:
   assign_all_npc_perms:
     description: Assign all NPC implementation-guide permissions to me
     steps:
       1:
         task: assign_fundraising_perms
-      2:
-        task: assign_grantmaking_perms
+      #2:
+        # task: assign_grantmaking_perms
       3:
         task: assign_casemgmt_perms
+      4:
+        task: assign_volunteermgmt_perms
+
+  deploy_volunteer_quick_start:
+    description: Deploys content's of Salesforce's open source Volunteer Management Quick Start
+    steps:
+      1:
+        task: update_verification_status_values
+      2:
+        task: deploy_volunteer_quick_start_components
 
   dev_org:
     steps:
@@ -117,3 +174,10 @@ flows:
         flow: assign_all_npc_perms
       91: 
         task: reorder_app_menu
+
+  volunteer_org:
+    steps:
+      1: 
+        flow: dev_org
+      2: 
+        flow: deploy_volunteer_quick_start

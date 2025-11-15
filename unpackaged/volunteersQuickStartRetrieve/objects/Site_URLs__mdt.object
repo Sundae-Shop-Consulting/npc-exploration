@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Created to store the URL for Volunteer Signup Experience cloud sites and is used by formula fields on the Volunteer Initiative, Job Position, Job Position Shift, Account, and Contact objects.</description>
+    <fields>
+        <fullName>Base_URL__c</fullName>
+        <description>https://nonprofit3.demo.my.site.com/volunteersignup/s/</description>
+        <fieldManageability>SubscriberControlled</fieldManageability>
+        <inlineHelpText>This is the Experience Cloud site&apos;s base URL, typically ending in &quot;/s/&quot;.</inlineHelpText>
+        <label>Base URL</label>
+        <required>false</required>
+        <type>Url</type>
+    </fields>
+    <label>Site URLs</label>
+    <pluralLabel>Site URLs</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

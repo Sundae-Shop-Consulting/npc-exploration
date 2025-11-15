@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <compactLayouts>
+        <fullName>Position_Compact_Layout</fullName>
+        <fields>Name</fields>
+        <fields>Status</fields>
+        <fields>Type</fields>
+        <fields>ScheduleType</fields>
+        <label>Position Compact Layout</label>
+    </compactLayouts>
+    <fields>
+        <fullName>External_ID__c</fullName>
+        <externalId>true</externalId>
+        <label>External ID</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <validationRules>
+        <fullName>As_Needed_for_Type_and_Schedule_Type</fullName>
+        <active>true</active>
+        <description>If As Needed is selected as Type, then Schedule Type must match.</description>
+        <errorConditionFormula>IF(ISPICKVAL( Type , &quot;As Needed&quot;), 
+NOT(ISPICKVAL( ScheduleType , &quot;As Needed&quot;)),
+FALSE
+)</errorConditionFormula>
+        <errorDisplayField>Type</errorDisplayField>
+        <errorMessage>A Position with a Type of &quot;As Needed&quot; must have a Schedule Type of &quot;As Needed&quot;</errorMessage>
+    </validationRules>
+</CustomObject>

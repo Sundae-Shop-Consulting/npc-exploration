@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <aggregateTypes>Unique</aggregateTypes>
+        <field>JobPositionAssignment$Name</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Unique</aggregateTypes>
+        <field>JobPositionAssignment$AssignedAccount</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>JobPositionAssignment$ActualDuration</field>
+    </columns>
+    <columns>
+        <field>JobPositionAssignment$ScheduledStartTime</field>
+    </columns>
+    <description>Total J.P. Assignments for all time, by Volunteer Initiative.</description>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>JobPositionAssignment$RelatedVolunteerInitiative</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>J.P. Assignments by Volunteer Initiative</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Volunteer_JPAssignments__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>JobPositionAssignment$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

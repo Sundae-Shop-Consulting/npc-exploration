@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>VolunteerInitiative.JobPosition.JobPositionShift.JobPositionAssignment$ActualDuration</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Unique</aggregateTypes>
+        <field>VolunteerInitiative.JobPosition.JobPositionShift.JobPositionAssignment$Name</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Unique</aggregateTypes>
+        <field>VolunteerInitiative.JobPosition.JobPositionShift.JobPositionAssignment$AssignedAccount</field>
+    </columns>
+    <crossFilters>
+        <operation>with</operation>
+        <primaryTableColumn>VolunteerInitiative.JobPosition.JobPositionShift$Id</primaryTableColumn>
+        <relatedTable>JobPositionAssignment</relatedTable>
+        <relatedTableJoinColumn>AssignedPositionShift</relatedTableJoinColumn>
+    </crossFilters>
+    <description>Total amount of unique volunteers by Volunteer Initiative and Job Postion.</description>
+    <filter>
+        <criteriaItems>
+            <column>VolunteerInitiative.JobPosition.JobPositionShift.JobPositionAssignment$ActualDuration</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>VolunteerInitiative.JobPosition.JobPositionShift.JobPositionAssignment$Status</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Awaiting Approval,Upcoming,In Progress,Pending Verification,Complete</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>VolunteerInitiative$Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>VolunteerInitiative.JobPosition$Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Unique Volunteers</name>
+    <params>
+        <name>co</name>
+        <value>0</value>
+    </params>
+    <reportType>Volunteer_Initiatives__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>VolunteerInitiative$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>
