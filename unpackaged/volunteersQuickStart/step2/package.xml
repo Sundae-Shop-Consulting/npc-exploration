@@ -18,51 +18,24 @@
         <name>CustomApplication</name>
     </types>
     <types>
-        <members>Address.Address_Formula__c</members>
-        <members>Competency.External_ID__c</members>
-        <members>Examination.External_ID__c</members>
-        <members>JobPosition.Default_Duration__c</members>
-        <members>JobPosition.External_ID__c</members>
-        <members>JobPosition.Volunteer_Signup_URL__c</members>
-        <members>JobPositionAssignment.Created_From_Sign_Up_Link__c</members>
-        <members>JobPositionAssignment.Email__c</members>
-        <members>JobPositionAssignment.External_ID__c</members>
-        <members>JobPositionAssignment.First_Name__c</members>
-        <members>JobPositionAssignment.Last_Name__c</members>
-        <members>JobPositionAssignment.Mass_Quick_Update_Field__c</members>
-        <members>JobPositionAssignment.Scheduled_Duration__c</members>
-        <members>JobPositionAssignment.Volunteer_ID__c</members>
-        <members>JobPositionAssignment.What_motivated_you_to_Volunteer__c</members>
-        <members>JobPositionAssignment.Would_you_recommend__c</members>
-        <members>JobPositionQualification.External_ID__c</members>
-        <members>JobPositionQualification.Qualification_Link__c</members>
-        <members>JobPositionQualification.Qualification_Text__c</members>
-        <members>JobPositionShift.Default_Duration__c</members>
-        <members>JobPositionShift.External_ID__c</members>
-        <members>JobPositionShift.Start_and_End_DateTime__c</members>
-        <members>JobPositionShift.Volunteer_Signup_URL__c</members>
-        <members>Location.Address_Formula__c</members>
-        <members>PersonCompetency.Competency_Name__c</members>
-        <members>PersonCompetency.External_ID__c</members>
-        <members>PersonExamination.Examination_Name__c</members>
-        <members>PersonExamination.External_ID__c</members>
-        <members>PersonExamination.VerificationStatus</members>
-        <members>Position.External_ID__c</members>
-        <members>PositionQualification.External_ID__c</members>
-        <members>PositionQualification.Qualification_Link__c</members>
-        <members>PositionQualification.Qualification_Text__c</members>
-        <members>Site_URLs__mdt.Base_URL__c</members>
-        <members>VolunteerInitiative.Default_Duration__c</members>
-        <members>VolunteerInitiative.External_ID__c</members>
-        <members>VolunteerInitiative.Volunteer_Signup_URL__c</members>
-        <name>CustomField</name>
-    </types>
-    <types>
-        <members>Site_URLs__mdt.Volunteer_Signup</members>
+        <members>Site_URLs.Volunteer_Signup</members>
         <name>CustomMetadata</name>
     </types>
-    <types>
+    <types>        
+        <members>Address</members>
+        <members>Competency</members>
+        <members>Examination</members>
+        <members>JobPosition</members>
+        <members>JobPositionAssignment</members>
+        <members>JobPositionQualification</members>
+        <members>JobPositionShift</members>
+        <members>Location</members>
+        <members>PersonCompetency</members>
+        <members>PersonExamination</members>
+        <members>Position</members>
+        <members>PositionQualification</members>
         <members>Site_URLs__mdt</members>
+        <members>VolunteerInitiative</members>
         <name>CustomObject</name>
     </types>
     <types>
@@ -152,6 +125,7 @@
         <name>QuickAction</name>
     </types>
     <types>
+        <members>VMQSReports</members>
         <members>VMQSReports/Available_Job_Positions_mij</members>
         <members>VMQSReports/JP_Assignments_by_AccountOrg_HJ9</members>
         <members>VMQSReports/JP_Assignments_by_Job_Position_6Bi</members>

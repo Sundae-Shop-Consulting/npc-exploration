@@ -145,7 +145,7 @@ tasks:
   deploy_volunteer_quick_start_components:
     class_path: cumulusci.tasks.salesforce.Deploy
     options:
-      path: unpackaged/volunteersQuickStart
+      path: unpackaged/volunteersQuickStart/step1
 
 flows:
   assign_all_npc_perms:
