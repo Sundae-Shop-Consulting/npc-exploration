@@ -142,10 +142,20 @@ tasks:
       path: unpackaged/volunteersQuickStartRetrieve
       package_xml: unpackaged/volunteersQuickStartRetrieve/package.xml
 
-  deploy_volunteer_quick_start_components:
+  deploy_step1:
     class_path: cumulusci.tasks.salesforce.Deploy
     options:
       path: unpackaged/volunteersQuickStart/step1
+
+  deploy_step2:
+    class_path: cumulusci.tasks.salesforce.Deploy
+    options:
+      path: unpackaged/volunteersQuickStart/step2
+  
+  deploy_volunteer_quick_start_components:
+    class_path: cumulusci.tasks.salesforce.Deploy
+    options:
+      path: unpackaged/volunteersQuickStart/step2
 
 flows:
   assign_all_npc_perms:
