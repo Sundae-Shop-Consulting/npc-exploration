@@ -1,0 +1,192 @@
+This project includes metadata and configuration assets originally
+developed and distributed by Salesforce, Inc. under the Apache
+License, Version 2.0. These assets were extracted from an unmanaged
+package and are incorporated here in accordance with the terms of
+the Apache 2.0 license.
+
+The following Salesforce-authored components are included:
+
+* App
+  - Volunteer_Management_Quick_Start App
+
+* File
+  - Capture20250908101230
+
+* Lightning Pages
+  - Address
+  - Competency
+  - Examination
+  - Home_Page_Default
+  - Job_Position_Assignment
+  - Job_Position_Qualification
+  - Job_Position_Record_Page
+  - Job_Position_Shift_Record_Page
+  - Location_Record_Page
+  - Operating_Hours
+  - Person_Competency
+  - Person_Examination
+  - Person_Location_Availability
+  - Position_Qualification
+  - Position_Record_Page
+  - Time_Slot
+  - Volunteer_Donor_Gift_Summary
+  - Volunteer_Initiative_Record_Page
+  - Volunteer_Management_UtilityBar
+  - Volunteer_Person_Account_Page_Layout
+
+* Actions
+  - Assign_Volunteer
+  - Create_Competency
+  - Create_Exam_or_B_Check
+  - Key_Position_Fields
+  - Mark_Absent
+  - Mark_Complete
+  - Qualify_Volunteer
+  - Record_Volunteer_Hours
+  - Use_for_Vol_Initiative
+
+* List Views
+  - Open Volunteer Initiatives
+  - Shifts This Week
+  - Volunteers This Week
+
+* Compact Layouts
+  - Job_Position_Assignment_Compact_Layout
+  - Job_Position_Compact_Layout
+  - Job_Position_Shift_Compact_Layout
+  - Location_Compact_Layout
+  - Position_Compact_Layout
+  - Volunteer_Initiative_Compact_Layout
+
+* Path Assistants
+  - Job_Position
+  - Job_Position_Assignment
+  - Job_Position_Shift
+  - Person_Competency
+  - Person_Examination
+  - Position
+  - Volunteer_Initiatives
+
+* Page Layouts
+  - Address Layout
+  - Competency Layout
+  - Examination Layout
+  - Job Position Assignment Layout
+  - Job Position Layout
+  - Job Position Qualification Layout
+  - Job Position Shift Layout
+  - Operating Hours Layout
+  - Person Competency Layout
+  - Person Examination Layout
+  - Position Qualification Layout
+  - Recurrence Schedule Layout
+  - Volunteer History
+  - Volunteer Initiative Layout
+  - Volunteer Layout
+
+* Custom Fields
+  - Address
+    · Address Formula
+  - Competency
+    · External ID
+  - Examination
+    · External ID
+  - Job Position
+    · Default Duration
+    · External ID
+    · Volunteer Signup URL
+  - Job Position Assignment
+    · External ID
+    · Mass Quick Update Field
+    · Scheduled Duration
+    · What motivated you to Volunteer?
+    · Would you recommend this activity?
+  - Job Position Qualification
+    · External ID
+    · Qualification Link
+    · Qualification Text
+  - Job Position Shift
+    · Default Duration
+    · External ID
+    · Start and End Date/Time
+    · Volunteer Signup URL
+  - Location
+    · Address Formula
+  - Person Competency
+    · Competency Name
+    · External ID
+  - Person Examination
+    · Examination Name
+    · External ID
+  - Position
+    · External ID
+  - Position Qualification
+    · External ID
+    · Qualification Link
+    · Qualification Text
+  - Volunteer Initiative
+    · Default Duration
+    · External ID
+    · Volunteer Signup URL
+
+* Permission Sets
+  - VMQS_Custom_Fields
+
+* Flow Definitions
+  - VMQS_Competency_Related_Records
+  - VMQS_Donor_Gift_Summary
+  - VMQS_Job_Position_Qualification
+  - VMQS_Person_Competencies_and_Person_Exminations
+  - VMQS_Person_Competency
+  - VMQS_Person_Examination
+  - VMQS_Positions_Qualification_Text
+  - VMQS_Volunteer_Job_Position_Location_and_Address
+
+* Analytics
+  - Custom Report Types
+    · Volunteer Initiatives
+    · Volunteer Initiatives, Job Positions, and J. P. Shifts
+    · Volunteer J.P. Assignments
+  - Report Folder
+    · Volunteer Management Report
+  - Reports
+    · Available Job Positions
+    · J.P. Assignments by Account/Org
+    · J.P. Assignments by Job Position
+    · J.P. Assignments by Month
+    · J.P. Assignments by Volunteer Initiative
+    · J.P. Assignments for Dashboard
+    · Job Positions with Shift Summary
+    · Shift Capacity
+    · Unique Volunteers
+    · Upcoming J.P. Shifts Needing Volunteers
+    · Upcoming J.P. Shifts with Volunteers
+    · Upcoming Volunteers
+    · Volunteers Active Last Month
+    · Volunteers Daily Shift Roster
+
+* Volunteer Registration
+  - Site URLs (Custom Metadata Type)
+    · Volunteer_Signup
+    · Base URL (Custom Field)
+  - Page Layouts
+    · Volunteer Signup Site URL Layout
+  - Flow Definitions
+    · VMQS_Sign_Up_Guest_User
+    · VMQS_Create_Volunteer_from_JP_Assignment
+
+* Automation
+  - Validation Rules
+    · Job Position Assignment: Absent
+    · Job Position Assignment: ActualDuration_and_ActualStartTime
+    · Position: As_Needed_for_Type_and_Schedule_Type
+    · Volunteer Initiative: Start_Date_and_End_Date on Volunteer Initiative
+  - Rollups
+    · VMQS_Rollup_Donor_Gift_Summary
+    · VMQS_Rollup_Jop_Position_Shift
+    · VMQS_Rollup_Volunteer_Initiative
+
+-----
+
+Additional Notices:
+Portions of this project are © 2025 Sundae Shop Consulting.
