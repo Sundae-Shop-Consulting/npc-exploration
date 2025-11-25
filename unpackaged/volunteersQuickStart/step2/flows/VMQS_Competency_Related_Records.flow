@@ -62,7 +62,7 @@
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>QualificationReferenceRecordId__NotFound</field>
+            <field>QualificationReferenceRecordId</field>
             <operator>EqualTo</operator>
             <value>
                 <elementReference>recordId</elementReference>
@@ -83,7 +83,7 @@
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>CompetencyId__NotFound</field>
+            <field>CompetencyId</field>
             <operator>EqualTo</operator>
             <value>
                 <elementReference>recordId</elementReference>
@@ -104,7 +104,7 @@
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>QualificationReferenceRecordId__NotFound</field>
+            <field>QualificationReferenceRecordId</field>
             <operator>EqualTo</operator>
             <value>
                 <elementReference>recordId</elementReference>

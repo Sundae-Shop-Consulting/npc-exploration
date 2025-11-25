@@ -11,7 +11,7 @@
             <assignToReference>uniqueAccountIds</assignToReference>
             <operator>Add</operator>
             <value>
-                <elementReference>Loop_through_Account_JPA.AssignedAccountId__NotFound</elementReference>
+                <elementReference>Loop_through_Account_JPA.AssignedAccountId</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -27,7 +27,7 @@
             <assignToReference>uniqueContactIds</assignToReference>
             <operator>Add</operator>
             <value>
-                <elementReference>Loop_through_Contact_JPA.AssignedContactId__NotFound</elementReference>
+                <elementReference>Loop_through_Contact_JPA.AssignedContactId</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -210,7 +210,7 @@
             <assignToReference>volInitiative.Id</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>$Record.RelatedVolunteerInitiativeId__NotFound</elementReference>
+                <elementReference>$Record.RelatedVolunteerInitiativeId</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -229,7 +229,7 @@
         <collectionReference>Get_all_Job_Position_Assignments_for_this_Volunteer_Initiative</collectionReference>
         <conditionLogic>and</conditionLogic>
         <conditions>
-            <leftValueReference>currentItem_Filter_all_Account_related_JPA.AssignedAccountId__NotFound</leftValueReference>
+            <leftValueReference>currentItem_Filter_all_Account_related_JPA.AssignedAccountId</leftValueReference>
             <operator>IsNull</operator>
             <rightValue>
                 <booleanValue>false</booleanValue>
@@ -314,7 +314,7 @@
         <collectionReference>Get_all_Job_Position_Assignments_for_this_Volunteer_Initiative</collectionReference>
         <conditionLogic>and</conditionLogic>
         <conditions>
-            <leftValueReference>currentItem_Filter_all_Contact_related_JPAs.AssignedContactId__NotFound</leftValueReference>
+            <leftValueReference>currentItem_Filter_all_Contact_related_JPAs.AssignedContactId</leftValueReference>
             <operator>IsNull</operator>
             <rightValue>
                 <booleanValue>false</booleanValue>
@@ -413,7 +413,7 @@
                 <leftValueReference>uniqueAccountIds</leftValueReference>
                 <operator>Contains</operator>
                 <rightValue>
-                    <elementReference>Loop_through_Account_JPA.AssignedAccountId__NotFound</elementReference>
+                    <elementReference>Loop_through_Account_JPA.AssignedAccountId</elementReference>
                 </rightValue>
             </conditions>
             <connector>
@@ -439,7 +439,7 @@
                 <leftValueReference>uniqueContactIds</leftValueReference>
                 <operator>Contains</operator>
                 <rightValue>
-                    <elementReference>Loop_through_Contact_JPA.AssignedContactId__NotFound</elementReference>
+                    <elementReference>Loop_through_Contact_JPA.AssignedContactId</elementReference>
                 </rightValue>
             </conditions>
             <connector>
@@ -536,10 +536,10 @@
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>RelatedVolunteerInitiativeId__NotFound</field>
+            <field>RelatedVolunteerInitiativeId</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>$Record.RelatedVolunteerInitiativeId__NotFound</elementReference>
+                <elementReference>$Record.RelatedVolunteerInitiativeId</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>

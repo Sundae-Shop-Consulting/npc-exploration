@@ -11,7 +11,7 @@
             <assignToReference>jobPositionShift.Id</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>$Record.AssignedPositionShiftId__NotFound</elementReference>
+                <elementReference>$Record.AssignedPositionShiftId</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -58,10 +58,10 @@
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>AssignedPositionShiftId__NotFound</field>
+            <field>AssignedPositionShiftId</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>$Record.AssignedPositionShiftId__NotFound</elementReference>
+                <elementReference>$Record.AssignedPositionShiftId</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>

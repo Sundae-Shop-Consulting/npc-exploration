@@ -21,6 +21,10 @@
         <members>VolunteerInitiative</members>
         <name>CustomObject</name>
     </types>
+        <types>
+        <members>VMQS_Custom_Fields</members>
+        <name>PermissionSet</name>
+    </types>
     <types>
         <members>VMQSReports</members>
         <members>VMQSReports/Available_Job_Positions</members>

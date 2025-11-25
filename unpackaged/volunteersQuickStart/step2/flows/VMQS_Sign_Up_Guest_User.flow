@@ -73,21 +73,21 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
-            <assignToReference>var_JobPositionAssignment.JobPositionId__NotFound</assignToReference>
+            <assignToReference>var_JobPositionAssignment.JobPositionId</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Get_Job_Position_Shift.JobPositionId__NotFound</elementReference>
+                <elementReference>Get_Job_Position_Shift.JobPositionId</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>var_JobPositionAssignment.RelatedVolunteerInitiativeId__NotFound</assignToReference>
+            <assignToReference>var_JobPositionAssignment.RelatedVolunteerInitiativeId</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Get_Job_Position_Shift.JobPosition.VolunteerInitiativeId__NotFound</elementReference>
+                <elementReference>Get_Job_Position_Shift.JobPosition.VolunteerInitiativeId</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>var_JobPositionAssignment.AssignedPositionShiftId__NotFound</assignToReference>
+            <assignToReference>var_JobPositionAssignment.AssignedPositionShiftId</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>Get_Job_Position_Shift.Id</elementReference>
@@ -117,17 +117,17 @@
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>var_JobPositionAssignment.JobPositionId__NotFound</assignToReference>
+            <assignToReference>var_JobPositionAssignment.JobPositionId</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>Get_Job_Position.Id</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>var_JobPositionAssignment.RelatedVolunteerInitiativeId__NotFound</assignToReference>
+            <assignToReference>var_JobPositionAssignment.RelatedVolunteerInitiativeId</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Get_Job_Position.VolunteerInitiativeId__NotFound</elementReference>
+                <elementReference>Get_Job_Position.VolunteerInitiativeId</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -154,14 +154,14 @@
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>var_JobPositionAssignment.JobPositionId__NotFound</assignToReference>
+            <assignToReference>var_JobPositionAssignment.JobPositionId</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>Get_Single_Job_Position_from_Volunteer_Initiative.Id</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>var_JobPositionAssignment.RelatedVolunteerInitiativeId__NotFound</assignToReference>
+            <assignToReference>var_JobPositionAssignment.RelatedVolunteerInitiativeId</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>Get_Volunteer_Initiative.Id</elementReference>
@@ -191,14 +191,14 @@
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>var_JobPositionAssignment.JobPositionId__NotFound</assignToReference>
+            <assignToReference>var_JobPositionAssignment.JobPositionId</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>How_would_you_like_to_help</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>var_JobPositionAssignment.RelatedVolunteerInitiativeId__NotFound</assignToReference>
+            <assignToReference>var_JobPositionAssignment.RelatedVolunteerInitiativeId</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>Get_Volunteer_Initiative.Id</elementReference>
@@ -228,7 +228,7 @@
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>var_JobPositionAssignment.RelatedVolunteerInitiativeId__NotFound</assignToReference>
+            <assignToReference>var_JobPositionAssignment.RelatedVolunteerInitiativeId</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>Get_Volunteer_Initiative.Id</elementReference>
@@ -280,7 +280,7 @@
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>var_JobPositionAssignment.AssignedPositionShiftId__NotFound</assignToReference>
+            <assignToReference>var_JobPositionAssignment.AssignedPositionShiftId</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>Get_Selected_JobPositionShift.Id</elementReference>
@@ -645,7 +645,7 @@ IF({!Job_Position_Shift},{!Get_Job_Position_Shift.Id},
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>JobPositionId__NotFound</field>
+            <field>JobPositionId</field>
             <operator>EqualTo</operator>
             <value>
                 <elementReference>Get_Single_Job_Position_from_Volunteer_Initiative.Id</elementReference>
@@ -666,7 +666,7 @@ IF({!Job_Position_Shift},{!Get_Job_Position_Shift.Id},
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>JobPositionId__NotFound</field>
+            <field>JobPositionId</field>
             <operator>EqualTo</operator>
             <value>
                 <elementReference>How_would_you_like_to_help</elementReference>
@@ -687,7 +687,7 @@ IF({!Job_Position_Shift},{!Get_Job_Position_Shift.Id},
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>JobPositionId__NotFound</field>
+            <field>JobPositionId</field>
             <operator>EqualTo</operator>
             <value>
                 <elementReference>inputId</elementReference>
@@ -708,7 +708,7 @@ IF({!Job_Position_Shift},{!Get_Job_Position_Shift.Id},
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>VolunteerInitiativeId__NotFound</field>
+            <field>VolunteerInitiativeId</field>
             <operator>EqualTo</operator>
             <value>
                 <elementReference>inputId</elementReference>
@@ -778,7 +778,7 @@ IF({!Job_Position_Shift},{!Get_Job_Position_Shift.Id},
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>VolunteerInitiativeId__NotFound</field>
+            <field>VolunteerInitiativeId</field>
             <operator>EqualTo</operator>
             <value>
                 <elementReference>Get_Volunteer_Initiative.Id</elementReference>

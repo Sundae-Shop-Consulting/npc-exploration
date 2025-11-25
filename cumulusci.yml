@@ -3,7 +3,7 @@ project:
     name: npc-exploration
     package:
         name: npc-exploration
-        api_version: '63.0'
+        api_version: '64.0'
     git:
         default_branch: 'main'
     source_format: sfdx
@@ -96,6 +96,13 @@ tasks:
         - Volunteer_Management_User
         - GroupMembershipPsl
 
+  assign_volunteerquickstart_perms:
+    description: Assign all volunteer management-related permission sets to the current user
+    class_path: cumulusci.tasks.salesforce.users.permsets.AssignPermissionSets
+    options:
+      api_names:
+        - VMQS_Custom_Fields
+
   # ui
   reorder_app_menu:
     class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
@@ -131,6 +138,7 @@ tasks:
       path: unpackaged/layoutCleanup
     
   install_quick_start_package:
+    description: Package from https://github.com/SFDC-Assets/PSA-Volunteer-Management
     class_path: cumulusci.tasks.salesforce.InstallPackageVersion
     options:  
       version: 04tfh000000ZNZd
@@ -151,11 +159,18 @@ tasks:
     class_path: cumulusci.tasks.salesforce.Deploy
     options:
       path: unpackaged/volunteersQuickStart/step2
+
+  deploy_all_retrieved:
+    class_path: cumulusci.tasks.salesforce.Deploy
+    options:
+      path: unpackaged/volunteersQuickStart/step2
   
   deploy_volunteer_quick_start_components:
     class_path: cumulusci.tasks.salesforce.Deploy
     options:
-      path: unpackaged/volunteersQuickStart/step2
+      path: unpackaged/volunteersQuickStartRetrieve
+
+
 
 flows:
   assign_all_npc_perms:
@@ -191,3 +206,17 @@ flows:
         flow: dev_org
       2: 
         flow: deploy_volunteer_quick_start
+
+  deploy_volunteer_partial:
+    steps:
+      1:
+        task: assign_volunteermgmt_perms
+      2:
+        task: deploy_step1
+      3:
+        task: assign_volunteerquickstart_perms
+      4:
+        task: update_verification_status_values
+      5:
+        task: deploy_step2
+      

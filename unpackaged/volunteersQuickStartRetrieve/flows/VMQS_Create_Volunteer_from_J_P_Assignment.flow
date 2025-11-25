@@ -229,7 +229,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <inputAssignments>
-            <field>AssignedAccountId__NotFound</field>
+            <field>AssignedAccountId</field>
             <value>
                 <elementReference>var_AccountId</elementReference>
             </value>

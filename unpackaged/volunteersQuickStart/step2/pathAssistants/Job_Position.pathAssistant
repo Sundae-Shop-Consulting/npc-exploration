@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>JobPosition</entityName>
+    <fieldName>Status</fieldName>
+    <masterLabel>Job Position</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>Description</fieldNames>
+        <fieldNames>LastFilledDate</fieldNames>
+        <fieldNames>LocationId</fieldNames>
+        <fieldNames>ManagerId</fieldNames>
+        <picklistValueName>In Progress</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Title</fieldNames>
+        <fieldNames>StartDate</fieldNames>
+        <fieldNames>EndDate</fieldNames>
+        <fieldNames>Description</fieldNames>
+        <picklistValueName>Upcoming</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>__MASTER__</recordTypeName>
+</PathAssistant>

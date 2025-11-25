@@ -117,7 +117,7 @@
             </value>
         </filters>
         <filters>
-            <field>QualificationReferenceRecordId__NotFound</field>
+            <field>QualificationReferenceRecordId</field>
             <operator>EqualTo</operator>
             <value>
                 <stringValue></stringValue>

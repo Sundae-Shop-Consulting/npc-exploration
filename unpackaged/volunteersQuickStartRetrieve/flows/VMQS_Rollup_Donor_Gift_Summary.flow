@@ -219,10 +219,10 @@
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>AssignedAccountId__NotFound</field>
+            <field>AssignedAccountId</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>$Record.AssignedAccountId__NotFound</elementReference>
+                <elementReference>$Record.AssignedAccountId</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
@@ -243,7 +243,7 @@
             <field>DonorId</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>$Record.AssignedAccountId__NotFound</elementReference>
+                <elementReference>$Record.AssignedAccountId</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>

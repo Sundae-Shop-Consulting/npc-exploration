@@ -66,13 +66,13 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <inputAssignments>
-            <field>CompetencyId__NotFound</field>
+            <field>CompetencyId</field>
             <value>
                 <elementReference>Competency.recordId</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>PersonId__NotFound</field>
+            <field>PersonId</field>
             <value>
                 <elementReference>Volunteer.recordId</elementReference>
             </value>

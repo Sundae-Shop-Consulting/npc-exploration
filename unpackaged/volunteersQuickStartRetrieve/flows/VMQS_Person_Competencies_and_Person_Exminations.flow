@@ -62,7 +62,7 @@
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>PersonId__NotFound</field>
+            <field>PersonId</field>
             <operator>EqualTo</operator>
             <value>
                 <elementReference>Get_Person_Account.Id</elementReference>
