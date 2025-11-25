@@ -11,7 +11,7 @@ To create a scratch org using this configuration:
 3. Run `cci flow run dev_org` to deploy this project and assign yourself a whole bunch of permissions.
 4. Run `cci org browser` to open the org in your browser.
 
-This will create a scratch org with a number of NPC features enabled, including Fundraising, Program Management, and Volunteer Management. In the future this will also include Grantmaking, but the setup required some additional troubleshooting that hasn't been completed yet.
+This will create a scratch org with a number of NPC features enabled, including Fundraising, Program Management, and Volunteer Management. In the future this will also include Grantmaking, but the setup for grantmaking required some additional troubleshooting that hasn't been completed yet.
 
 ### Volunteer Management Quick Start
 
