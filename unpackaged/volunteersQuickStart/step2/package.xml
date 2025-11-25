@@ -69,6 +69,10 @@
         <name>PathAssistant</name>
     </types>
     <types>
+        <members>VMQS_Custom_Fields</members>
+        <name>PermissionSet</name>
+    </types>
+    <types>
         <members>Account.Create_Competency</members>
         <members>Account.Create_Exam_or_B_Check</members>
         <members>Account.Record_Volunteer_Hours</members>
