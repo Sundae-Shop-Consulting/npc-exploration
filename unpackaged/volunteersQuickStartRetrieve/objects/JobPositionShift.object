@@ -107,4 +107,22 @@ IF(HOUR(EndTime) &gt;= 12, &quot; PM&quot;, &quot; AM&quot;)</formula>
         <type>Text</type>
         <unique>false</unique>
     </fields>
+    <listViews>
+        <fullName>Shifts_Next_7_Days</fullName>
+        <columns>Name</columns>
+        <columns>StartDate</columns>
+        <columns>EndDate</columns>
+        <columns>StartTime</columns>
+        <columns>EndTime</columns>
+        <columns>Status</columns>
+        <columns>RemainingCapacity</columns>
+        <columns>JobPosition</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>StartDate</field>
+            <operation>equals</operation>
+            <value>THIS_WEEK</value>
+        </filters>
+        <label>Shifts This Week</label>
+    </listViews>
 </CustomObject>

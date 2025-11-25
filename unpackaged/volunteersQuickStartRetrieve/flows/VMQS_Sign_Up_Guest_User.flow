@@ -821,6 +821,14 @@ IF({!Job_Position_Shift},{!Get_Job_Position_Shift.Id},
             <name>Error_Text</name>
             <fieldText>&lt;p&gt;Something went wrong, please contact the person who sent you this link.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>false</showFooter>
         <showHeader>false</showHeader>
@@ -844,6 +852,14 @@ IF({!Job_Position_Shift},{!Get_Job_Position_Shift.Id},
             <fieldType>RadioButtons</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
@@ -860,11 +876,27 @@ IF({!Job_Position_Shift},{!Get_Job_Position_Shift.Id},
             <name>Success_Text_General</name>
             <fieldText>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Thank you for completing your volunteer registration.&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>Success_Text_Shift</name>
             <fieldText>&lt;p&gt;&lt;strong&gt;What:&lt;/strong&gt; {!var_JobPositionAssignment.JobPosition.Title}&lt;/p&gt;&lt;p&gt;&lt;strong&gt;When: &lt;/strong&gt;{!var_JobPositionAssignment.ScheduledStartTime}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
@@ -898,6 +930,14 @@ IF({!Job_Position_Shift},{!Get_Job_Position_Shift.Id},
             <fieldType>RadioButtons</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
@@ -913,6 +953,14 @@ IF({!Job_Position_Shift},{!Get_Job_Position_Shift.Id},
             <name>jobPositionShift_Single</name>
             <fieldText>&lt;p&gt;The shift you are registering for is {!Get_Job_Position_Shift.Start_and_End_DateTime__c}.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
@@ -934,6 +982,14 @@ IF({!Job_Position_Shift},{!Get_Job_Position_Shift.Id},
             <fieldType>InputField</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>6</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>screen_lastName</name>
@@ -945,6 +1001,14 @@ IF({!Job_Position_Shift},{!Get_Job_Position_Shift.Id},
             <fieldType>InputField</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>6</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>screen_email</name>
@@ -965,6 +1029,14 @@ IF({!Job_Position_Shift},{!Get_Job_Position_Shift.Id},
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>

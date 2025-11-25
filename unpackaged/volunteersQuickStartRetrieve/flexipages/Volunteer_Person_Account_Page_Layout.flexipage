@@ -116,6 +116,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListApiName</name>
+                    <value>JobPositionAssignments</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListComponentOverride</name>
@@ -441,6 +442,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListApiName</name>
+                    <value>PersonLocationAvailabilities</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListDisplayType</name>
@@ -449,12 +451,24 @@
                 <componentInstanceProperties>
                     <name>relatedListFieldAliases</name>
                     <valueList>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
+                        <valueListItems>
+                            <value>Name</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Account</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Contact</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Location</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>UsageType</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>OperatingHours</value>
+                        </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
                 <componentInstanceProperties>

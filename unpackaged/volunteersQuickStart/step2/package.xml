@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>JobPosition.Job_Position_Compact_Layout</members>
-        <members>JobPositionAssignment.Job_Position_Assignment_Compact_Layout</members>
-        <members>JobPositionShift.Job_Position_Shift_Compact_Layout</members>
-        <members>Location.Location_Compact_Layout</members>
-        <members>Position.Position_Compact_Layout</members>
-        <members>VolunteerInitiative.Volunteer_Initiative_Compact_Layout</members>
-        <name>CompactLayout</name>
-    </types>
-    <types>
         <members>Capture20250908101230</members>
         <name>ContentAsset</name>
     </types>
@@ -57,21 +48,15 @@
         <name>Flow</name>
     </types>
     <types>
-        <members>Address.Address Layout</members>
-        <members>Competency.Competency Layout</members>
-        <members>Donor Gift Summary.Volunteer History</members>
-        <members>Examination.Examination Layout</members>
-        <members>Person Account.Volunteer Layout</members>
-        <members>PersonCompetency.PersonCompetency Layout</members>
-        <members>PersonExamination.PersonExamination</members>
-        <members>Site URLs.Volunteer Signup Site URL Layout</members>
+        <members>Address-Address Layout</members>
+        <members>Competency-Competency Layout</members>
+        <members>DonorGiftSummary-Volunteer History</members>
+        <members>Examination-Examination Layout</members>
+        <members>PersonAccount-Volunteer Layout</members>
+        <members>PersonCompetency-Person Competency Layout</members>
+        <members>PersonExamination-Person Examination</members>
+        <members>Site_URLs__mdt-Volunteer Signup Site URL Layout</members>
         <name>Layout</name>
-    </types>
-    <types>
-        <members>JobPositionAssignment.Volunteers This Week</members>
-        <members>JobPositionShift.Shifts This Week</members>
-        <members>VolunteerInitiative.Open VolunteerInitiatives</members>
-        <name>ListView</name>
     </types>
     <types>
         <members>Job_Position</members>
@@ -98,13 +83,6 @@
         <members>VMSQ_Task</members>
         <members>VolunteerInitiative.Assign_Volunteer</members>
         <name>QuickAction</name>
-    </types>
-    <types>
-        <members>JobPositionAssignment.Absent</members>
-        <members>JobPositionAssignment.ActualDuration_and_ActualStartTime</members>
-        <members>Position.As_Needed_for_Type_and_Schedule_Type</members>
-        <members>VolunteerInitiative.Start_Date_and_End_Date</members>
-        <name>ValidationRule</name>
     </types>
     <version>64.0</version>
 </Package>

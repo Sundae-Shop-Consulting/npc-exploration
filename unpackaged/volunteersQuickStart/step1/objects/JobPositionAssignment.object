@@ -129,6 +129,22 @@ ROUND((ScheduledEndTime-ScheduledStartTime)*24,2))</formula>
             </valueSetDefinition>
         </valueSet>
     </fields>
+    <listViews>
+        <fullName>Volunteers_This_Week</fullName>
+        <columns>Name</columns>
+        <columns>AssignedAccount</columns>
+        <columns>ScheduledStartTime</columns>
+        <columns>ScheduledEndTime</columns>
+        <columns>AssignedPositionShift</columns>
+        <columns>Status</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ScheduledStartTime</field>
+            <operation>greaterOrEqual</operation>
+            <value>THIS_WEEK</value>
+        </filters>
+        <label>Volunteers This Week</label>
+    </listViews>
     <validationRules>
         <fullName>Absent</fullName>
         <active>true</active>

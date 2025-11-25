@@ -43,6 +43,26 @@
         <type>Text</type>
         <unique>false</unique>
     </fields>
+    <listViews>
+        <fullName>Open_Volunteer_Initiatives</fullName>
+        <columns>Name</columns>
+        <columns>StartDate</columns>
+        <columns>EndDate</columns>
+        <columns>Status</columns>
+        <columns>IsPublished</columns>
+        <columns>ParentVolunteerInitiative</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status</field>
+            <operation>equals</operation>
+            <value>Upcoming,In Progress</value>
+        </filters>
+        <filters>
+            <field>ParentVolunteerInitiative</field>
+            <operation>notEqual</operation>
+        </filters>
+        <label>Open Volunteer Initiatives</label>
+    </listViews>
     <validationRules>
         <fullName>Start_Date_and_End_Date</fullName>
         <active>true</active>

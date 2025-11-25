@@ -578,7 +578,7 @@
                     <name>adminFilters</name>
                     <valueList>
                         <valueListItems>
-                            <value>null|EQUALS|[&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;1&quot;]</value>
+                            <value>Status|EQUALS|[&quot;Upcoming&quot;,&quot;In Progress&quot;,&quot;Pending Verification&quot;,&quot;Awaiting Approval&quot;]</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
@@ -592,6 +592,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListApiName</name>
+                    <value>JobPositionAssignments</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListDisplayType</name>
@@ -600,12 +601,24 @@
                 <componentInstanceProperties>
                     <name>relatedListFieldAliases</name>
                     <valueList>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
+                        <valueListItems>
+                            <value>Name</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>AssignedAccount</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Status</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>ActualDuration</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>AssignedPositionShift</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Scheduled_Duration__c</value>
+                        </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
@@ -652,7 +665,7 @@
                     <name>adminFilters</name>
                     <valueList>
                         <valueListItems>
-                            <value>null|EQUALS|[&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;1&quot;]</value>
+                            <value>Status|EQUALS|[&quot;Upcoming&quot;,&quot;In Progress&quot;,&quot;Pending Verification&quot;,&quot;Awaiting Approval&quot;]</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
@@ -666,6 +679,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListApiName</name>
+                    <value>JobPositionAssignments</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListDisplayType</name>
@@ -674,13 +688,27 @@
                 <componentInstanceProperties>
                     <name>relatedListFieldAliases</name>
                     <valueList>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
+                        <valueListItems>
+                            <value>Name</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>AssignedAccount</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Status</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>ActualDuration</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>ScheduledStartTime</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>ScheduledEndTime</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Scheduled_Duration__c</value>
+                        </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
@@ -719,7 +747,7 @@
                     <name>adminFilters</name>
                     <valueList>
                         <valueListItems>
-                            <value>null|EQUALS|[&quot;5&quot;,&quot;6&quot;,&quot;7&quot;]</value>
+                            <value>Status|EQUALS|[&quot;Complete&quot;,&quot;Canceled&quot;,&quot;Absent&quot;]</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
@@ -733,6 +761,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListApiName</name>
+                    <value>JobPositionAssignments</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListDisplayType</name>
@@ -741,10 +770,18 @@
                 <componentInstanceProperties>
                     <name>relatedListFieldAliases</name>
                     <valueList>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
+                        <valueListItems>
+                            <value>Name</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>AssignedAccount</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>ActualDuration</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Status</value>
+                        </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
@@ -806,7 +843,7 @@
                     <name>adminFilters</name>
                     <valueList>
                         <valueListItems>
-                            <value>null|GREATER_OR_EQUAL|TODAY</value>
+                            <value>StartDate|GREATER_OR_EQUAL|TODAY</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
@@ -820,6 +857,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListApiName</name>
+                    <value>JobPositions</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListDisplayType</name>
@@ -828,11 +866,21 @@
                 <componentInstanceProperties>
                     <name>relatedListFieldAliases</name>
                     <valueList>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
+                        <valueListItems>
+                            <value>Name</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Start_and_End_DateTime__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>RemainingCapacity</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>PositionAssignmentCount</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Status</value>
+                        </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
@@ -845,6 +893,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>sortFieldAlias</name>
+                    <value>StartDate</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>sortFieldOrder</name>
@@ -863,7 +912,7 @@
                     <name>adminFilters</name>
                     <valueList>
                         <valueListItems>
-                            <value>null|LESS_THAN|TODAY</value>
+                            <value>StartDate|LESS_THAN|TODAY</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
@@ -877,6 +926,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListApiName</name>
+                    <value>JobPositions</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListDisplayType</name>
@@ -885,11 +935,21 @@
                 <componentInstanceProperties>
                     <name>relatedListFieldAliases</name>
                     <valueList>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
+                        <valueListItems>
+                            <value>Name</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Start_and_End_DateTime__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>RemainingCapacity</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>PositionAssignmentCount</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Status</value>
+                        </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
@@ -902,6 +962,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>sortFieldAlias</name>
+                    <value>StartDate</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>sortFieldOrder</name>
@@ -938,6 +999,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListApiName</name>
+                    <value>PositionQualifications</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListDisplayType</name>
@@ -946,9 +1008,15 @@
                 <componentInstanceProperties>
                     <name>relatedListFieldAliases</name>
                     <valueList>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
+                        <valueListItems>
+                            <value>Name</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Qualification_Link__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>ProficiencyLevel</value>
+                        </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
@@ -994,6 +1062,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListApiName</name>
+                    <value>JobPositionQualifications</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListDisplayType</name>
@@ -1002,9 +1071,15 @@
                 <componentInstanceProperties>
                     <name>relatedListFieldAliases</name>
                     <valueList>
-                        <valueListItems/>
-                        <valueListItems/>
-                        <valueListItems/>
+                        <valueListItems>
+                            <value>Name</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Qualification_Link__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>ProficiencyLevel</value>
+                        </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
                 <componentInstanceProperties>

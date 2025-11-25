@@ -515,7 +515,7 @@
                     <name>adminFilters</name>
                     <valueList>
                         <valueListItems>
-                            <value>Status|NOT_CONTAIN|[&quot;5&quot;,&quot;6&quot;,&quot;7&quot;]</value>
+                            <value>Status|NOT_CONTAIN|[&quot;Complete&quot;,&quot;Canceled&quot;,&quot;Absent&quot;]</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
@@ -587,7 +587,7 @@
                     <name>adminFilters</name>
                     <valueList>
                         <valueListItems>
-                            <value>Status|CONTAINS|[&quot;5&quot;,&quot;6&quot;,&quot;7&quot;]</value>
+                            <value>Status|CONTAINS|[&quot;Complete&quot;,&quot;Canceled&quot;,&quot;Absent&quot;]</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>

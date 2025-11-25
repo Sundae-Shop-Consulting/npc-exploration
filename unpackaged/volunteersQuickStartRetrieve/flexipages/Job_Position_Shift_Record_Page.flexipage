@@ -714,7 +714,7 @@
                     <name>adminFilters</name>
                     <valueList>
                         <valueListItems>
-                            <value>Status|EQUALS|[&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;]</value>
+                            <value>Status|EQUALS|[&quot;Awaiting Approval&quot;,&quot;Upcoming&quot;,&quot;In Progress&quot;,&quot;Pending Verification&quot;]</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
@@ -783,7 +783,7 @@
                     <name>adminFilters</name>
                     <valueList>
                         <valueListItems>
-                            <value>Status|EQUALS|[&quot;5&quot;,&quot;6&quot;,&quot;7&quot;]</value>
+                            <value>Status|EQUALS|[&quot;Complete&quot;,&quot;Canceled&quot;,&quot;Absent&quot;]</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>

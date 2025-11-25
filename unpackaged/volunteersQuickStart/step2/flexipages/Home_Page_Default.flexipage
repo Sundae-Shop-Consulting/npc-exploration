@@ -209,7 +209,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>reportName</name>
-                    <value>JP_Assignments_by_Month_mJO</value>
+                    <value>JP_Assignments_by_Month</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>showRefreshButton</name>

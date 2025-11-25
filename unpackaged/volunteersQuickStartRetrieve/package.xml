@@ -105,20 +105,20 @@
         <name>Flow</name>
     </types>
     <types>
-        <members>Address.Address Layout</members>
-        <members>Competency.Competency Layout</members>
-        <members>Donor Gift Summary.Volunteer History</members>
-        <members>Examination.Examination Layout</members>
-        <members>Person Account.Volunteer Layout</members>
-        <members>PersonCompetency.PersonCompetency Layout</members>
-        <members>PersonExamination.PersonExamination</members>
-        <members>Site URLs.Volunteer Signup Site URL Layout</members>
+        <members>Address-Address Layout</members>
+        <members>Competency-Competency Layout</members>
+        <members>DonorGiftSummary-Volunteer History</members>
+        <members>Examination-Examination Layout</members>
+        <members>PersonAccount-Volunteer Layout</members>
+        <members>PersonCompetency-Person Competency Layout</members>
+        <members>PersonExamination-Person Examination</members>
+        <members>Site_URLs__mdt-Volunteer Signup Site URL Layout</members>
         <name>Layout</name>
     </types>
     <types>
-        <members>JobPositionAssignment.Volunteers This Week</members>
-        <members>JobPositionShift.Shifts This Week</members>
-        <members>VolunteerInitiative.Open VolunteerInitiatives</members>
+        <members>JobPositionAssignment.Volunteers_This_Week</members>
+        <members>JobPositionShift.Shifts_Next_7_Days</members>
+        <members>VolunteerInitiative.Open_Volunteer_Initiatives</members>
         <name>ListView</name>
     </types>
     <types>

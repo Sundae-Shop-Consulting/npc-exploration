@@ -160,17 +160,6 @@ tasks:
     options:
       path: unpackaged/volunteersQuickStart/step2
 
-  deploy_all_retrieved:
-    class_path: cumulusci.tasks.salesforce.Deploy
-    options:
-      path: unpackaged/volunteersQuickStart/step2
-  
-  deploy_volunteer_quick_start_components:
-    class_path: cumulusci.tasks.salesforce.Deploy
-    options:
-      path: unpackaged/volunteersQuickStartRetrieve
-
-
 
 flows:
   assign_all_npc_perms:
@@ -191,7 +180,13 @@ flows:
       1:
         task: update_verification_status_values
       2:
-        task: deploy_volunteer_quick_start_components
+        task: assign_volunteermgmt_perms
+      3:
+        task: deploy_step1
+      4:
+        task: assign_volunteerquickstart_perms
+      5:
+        task: deploy_step2
 
   dev_org:
     steps:
