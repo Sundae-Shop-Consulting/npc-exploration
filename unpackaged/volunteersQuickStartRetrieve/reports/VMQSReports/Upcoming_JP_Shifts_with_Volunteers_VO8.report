@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <aggregates>
+        <calculatedFormula>JobPositionShift.MaximumAttendeesCount:SUM-JobPositionAssignment.AssignedContact.Name:UNIQUE</calculatedFormula>
+        <datatype>number</datatype>
+        <developerName>FORMULA2</developerName>
+        <isActive>true</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Shift Capacity</masterLabel>
+        <scale>0</scale>
+    </aggregates>
+    <columns>
+        <field>VolunteerInitiative.JobPosition.JobPositionShift.JobPositionAssignment$AssignedAccount</field>
+    </columns>
+    <columns>
+        <field>VolunteerInitiative.JobPosition.JobPositionShift.JobPositionAssignment$Status</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>VolunteerInitiative.JobPosition.JobPositionShift.JobPositionAssignment$ActualDuration</field>
+    </columns>
+    <crossFilters>
+        <operation>with</operation>
+        <primaryTableColumn>VolunteerInitiative.JobPosition.JobPositionShift$Id</primaryTableColumn>
+        <relatedTable>JobPositionAssignment</relatedTable>
+        <relatedTableJoinColumn>AssignedPositionShift</relatedTableJoinColumn>
+    </crossFilters>
+    <description>A list of upcoming J.P. Shifts with at least one Job Position Assignment marked as Awaiting Approval, In Progress, or In Progress for a volunteer. Can be used as a check-in sheet.</description>
+    <filter>
+        <criteriaItems>
+            <column>VolunteerInitiative.JobPosition.JobPositionShift$StartDate</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>greaterOrEqual</operator>
+            <value>TODAY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>VolunteerInitiative.JobPosition.JobPositionShift.JobPositionAssignment$Status</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Awaiting Approval,Upcoming,In Progress</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>VolunteerInitiative.JobPosition$Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>VolunteerInitiative.JobPosition.JobPositionShift$Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Upcoming J.P. Shifts with Volunteers</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Volunteer_Initiatives__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>VolunteerInitiative$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

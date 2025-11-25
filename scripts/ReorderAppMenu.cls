@@ -8,13 +8,17 @@ private static String FUNDRAISING_STRATEGY = 'FundraisingStrategy';
 private static String FUNDRAISING_OPERATIONS = 'FundraisingOperationsConsole';
 private static String DONOR_ENGAGEMENT = 'DonorEngagement';
 private static String PROGRAM_MANAGEMENT = 'ProgramManagementConsole';
+private static String VOLUNTEER_MANAGEMENT = 'VolunteerManagement';
+private static String VOLUNTEER_MANAGEMENT_QUICK_START = 'Volunteer_Management_Quick_Start';
 
 // Put these at the top, in this order
 private static List<String> PRIORITY_APPS = new List<String>{
     FUNDRAISING_STRATEGY,
     FUNDRAISING_OPERATIONS,
     DONOR_ENGAGEMENT,
-    PROGRAM_MANAGEMENT
+    PROGRAM_MANAGEMENT,
+    VOLUNTEER_MANAGEMENT,
+    VOLUNTEER_MANAGEMENT_QUICK_START
 };
 
 public static void applyOrgAppOrder() {

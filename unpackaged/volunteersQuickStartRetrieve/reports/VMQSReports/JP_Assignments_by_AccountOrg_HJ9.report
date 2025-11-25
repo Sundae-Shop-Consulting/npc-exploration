@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>JobPositionAssignment$Name</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>JobPositionAssignment$ActualDuration</field>
+    </columns>
+    <columns>
+        <field>JobPositionAssignment$Status</field>
+    </columns>
+    <columns>
+        <field>JobPositionAssignment$RelatedVolunteerInitiative</field>
+    </columns>
+    <columns>
+        <field>JobPositionAssignment$JobPosition</field>
+    </columns>
+    <columns>
+        <field>JobPositionAssignment$AssignedPositionShift</field>
+    </columns>
+    <columns>
+        <field>JobPositionAssignment$AssignedPositionShift.StartDate</field>
+    </columns>
+    <columns>
+        <field>JobPositionAssignment$AssignedPositionShift.StartTime</field>
+    </columns>
+    <columns>
+        <field>JobPositionAssignment$AssignedPositionShift.EndDate</field>
+    </columns>
+    <columns>
+        <field>JobPositionAssignment$AssignedPositionShift.EndTime</field>
+    </columns>
+    <description>Total J.P. Assignments for all time, by Account/org.</description>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>JobPositionAssignment$AssignedAccount</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>J.P. Assignments by Account/Org</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Volunteer_JPAssignments__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>JobPositionAssignment$ActualStartTime</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

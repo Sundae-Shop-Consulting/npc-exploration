@@ -3,7 +3,7 @@ project:
     name: npc-exploration
     package:
         name: npc-exploration
-        api_version: '63.0'
+        api_version: '64.0'
     git:
         default_branch: 'main'
     source_format: sfdx
@@ -54,6 +54,7 @@ tasks:
         - Salesforce_org_NonprofitCloudCaseManagementPsl
         - SonicEmbeddedStorePsl
         - SurveyCreatorPsl
+        - Volunteer_Management_User
 
   assign_fundraising_perms:
     description: Assign all fundraising-related permission sets to the current user
@@ -87,6 +88,21 @@ tasks:
         - OutcomeManagement
         - DocumentChecklist
 
+  assign_volunteermgmt_perms:
+    description: Assign all volunteer management-related permission sets to the current user
+    class_path: cumulusci.tasks.salesforce.users.permsets.AssignPermissionSets
+    options:
+      api_names:
+        - Volunteer_Management_User
+        - GroupMembershipPsl
+
+  assign_volunteerquickstart_perms:
+    description: Assign all volunteer management-related permission sets to the current user
+    class_path: cumulusci.tasks.salesforce.users.permsets.AssignPermissionSets
+    options:
+      api_names:
+        - VMQS_Custom_Fields
+
   # ui
   reorder_app_menu:
     class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
@@ -100,20 +116,86 @@ tasks:
     options:
       snowfakery_recipe: datasets/default/default.recipe.yml
 
+  # volunteer quick start setup
+  update_verification_status_values:
+    class_path: cumulusci.tasks.metadata_etl.AddValueSetEntries
+    options:
+      api_names: LPIPXMVerificationStatusTypeEnum
+      entries:
+        - fullName: Awaiting Approval
+          label: Awaiting Approval
+        - fullName: Pending
+          label: Pending
+        - fullName: Approved
+          label: Approved
+        - fullName: Not Approved
+          label: Not Approved
+    
+  install_volunteer_quick_start_package:
+    description: Installs VMSQ package from Salesforce (https://github.com/SFDC-Assets/PSA-Volunteer-Management). To get install to succeed you must manually rename the Address/Examination layouts that conflict with unmanaged package install and enable History Tracking on Account. You shouldn't need to use this unless you want to compare the unpackaged metadata here with the original contents.
+    class_path: cumulusci.tasks.salesforce.InstallPackageVersion
+    options:  
+      version: 04tfh000000ZNZd
+      version_number: 1.3
+
+  retrieve_volunteer_quick_start_components:
+    description: Retrieves all components in the VMSQ package if you run it against an org with the package installed. Note that the package.xml file for retrieve contains some components like compactLayout that are embedded in object files, so the manifest for retrieve doesn't exactly match the manifest for deploy.
+    class_path: cumulusci.tasks.salesforce.RetrieveUnpackaged
+    options:
+      path: unpackaged/volunteersQuickStartRetrieve
+      package_xml: unpackaged/volunteersQuickStartRetrieve/package.xml
+
+  deploy_volunteers_quick_start_step1:
+    class_path: cumulusci.tasks.salesforce.Deploy
+    options:
+      path: unpackaged/volunteersQuickStart/step1
+
+  deploy_volunteers_quick_start_step2:
+    class_path: cumulusci.tasks.salesforce.Deploy
+    options:
+      path: unpackaged/volunteersQuickStart/step2
+
+
 flows:
   assign_all_npc_perms:
     description: Assign all NPC implementation-guide permissions to me
     steps:
       1:
         task: assign_fundraising_perms
-      2:
-        task: assign_grantmaking_perms
+      #2:
+        # task: assign_grantmaking_perms
       3:
         task: assign_casemgmt_perms
+      4:
+        task: assign_volunteermgmt_perms
 
   dev_org:
     steps:
       90: 
         flow: assign_all_npc_perms
       91: 
+        task: reorder_app_menu    
+
+  deploy_volunteer_quick_start:
+    description: Deploys content's of Salesforce's open source Volunteer Management Quick Start
+    steps:
+      1:
+        task: update_verification_status_values
+      2:
+        task: assign_volunteermgmt_perms
+      3:
+        task: deploy_volunteers_quick_start_step1
+      4:
+        task: assign_volunteerquickstart_perms
+      5:
+        task: deploy_volunteers_quick_start_step2
+      6: 
         task: reorder_app_menu
+  
+  volunteer_quick_start_org:
+    steps:
+      1: 
+        flow: dev_org
+      2:
+        flow: deploy_volunteer_quick_start
+      

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>Capture20250908101230</members>
+        <name>ContentAsset</name>
+    </types>
+    <types>
+        <members>Volunteer_Management_Quick_Start</members>
+        <name>CustomApplication</name>
+    </types>
+    <types>
+        <members>Address</members>
+        <members>Competency</members>
+        <members>Examination</members>
+        <members>Home_Page_Default</members>
+        <members>Job_Position_Assignment</members>
+        <members>Job_Position_Qualification</members>
+        <members>Job_Position_Record_Page</members>
+        <members>Job_Position_Shift_Record_Page</members>
+        <members>Location_Record_Page</members>
+        <members>Operating_Hours</members>
+        <members>Person_Competency</members>
+        <members>Person_Examination</members>
+        <members>Person_Location_Availability</members>
+        <members>Position_Qualification</members>
+        <members>Position_Record_Page</members>
+        <members>Time_Slot</members>
+        <members>Volunteer_Donor_Gift_Summary</members>
+        <members>Volunteer_Initiative_Record_Page</members>
+        <members>Volunteer_Management_UtilityBar</members>
+        <members>Volunteer_Person_Account_Page_Layout</members>
+        <name>FlexiPage</name>
+    </types>
+    <types>
+        <members>VMQS_Competency_Related_Records</members>
+        <members>VMQS_Create_Volunteer_from_J_P_Assignment</members>
+        <members>VMQS_Donor_Gift_Summary</members>
+        <members>VMQS_Job_Position_Qualification</members>
+        <members>VMQS_Person_Competencies_and_Person_Exminations</members>
+        <members>VMQS_Person_Competency</members>
+        <members>VMQS_Person_Examination</members>
+        <members>VMQS_Positions_Qualification_Text</members>
+        <members>VMQS_Rollup_Donor_Gift_Summary</members>
+        <members>VMQS_Rollup_Jop_Position_Shift</members>
+        <members>VMQS_Rollup_Volunteer_Initiative</members>
+        <members>VMQS_Sign_Up_Guest_User</members>
+        <members>VMQS_Volunteer_Job_Position_Location_and_Address</members>
+        <name>Flow</name>
+    </types>
+    <types>
+        <members>Address-Address Layout</members>
+        <members>Competency-Competency Layout</members>
+        <members>DonorGiftSummary-Volunteer History</members>
+        <members>Examination-Examination Layout</members>
+        <members>PersonAccount-Volunteer Layout</members>
+        <members>PersonCompetency-Person Competency Layout</members>
+        <members>PersonExamination-Person Examination</members>
+        <members>Site_URLs__mdt-Volunteer Signup Site URL Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>Job_Position</members>
+        <members>Job_Position_Assignment</members>
+        <members>Job_Position_Shift</members>
+        <members>Person_Competency</members>
+        <members>Person_Examination</members>
+        <members>Position</members>
+        <members>Volunteer_Initiatives</members>
+        <name>PathAssistant</name>
+    </types>
+    <types>
+        <members>VMQS_Custom_Fields</members>
+        <name>PermissionSet</name>
+    </types>
+    <types>
+        <members>Account.Create_Competency</members>
+        <members>Account.Create_Exam_or_B_Check</members>
+        <members>Account.Record_Volunteer_Hours</members>
+        <members>Competency.Qualify_Volunteer</members>
+        <members>Examination.Qualify_Volunteer</members>
+        <members>JobPosition.Assign_Volunteer</members>
+        <members>JobPositionAssignment.Mark_Absent</members>
+        <members>JobPositionAssignment.Mark_Complete</members>
+        <members>JobPositionShift.Assign_Volunteer</members>
+        <members>Position.Key_Position_Fields</members>
+        <members>Position.Use_for_Vol_Initiative</members>
+        <members>VMSQ_Task</members>
+        <members>VolunteerInitiative.Assign_Volunteer</members>
+        <name>QuickAction</name>
+    </types>
+    <version>64.0</version>
+</Package>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>VolunteerInitiative.JobPosition.JobPositionShift.JobPositionAssignment$AssignedAccount</field>
+    </columns>
+    <columns>
+        <field>VolunteerInitiative.JobPosition.JobPositionShift.JobPositionAssignment$Status</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>VolunteerInitiative.JobPosition.JobPositionShift.JobPositionAssignment$ActualDuration</field>
+    </columns>
+    <crossFilters>
+        <operation>with</operation>
+        <primaryTableColumn>VolunteerInitiative.JobPosition.JobPositionShift$Id</primaryTableColumn>
+        <relatedTable>JobPositionAssignment</relatedTable>
+        <relatedTableJoinColumn>AssignedPositionShift</relatedTableJoinColumn>
+    </crossFilters>
+    <description>List of upcoming Volunteers by Shift Start Date &amp; Start Time.</description>
+    <filter>
+        <criteriaItems>
+            <column>VolunteerInitiative.JobPosition.JobPositionShift$StartDate</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>greaterOrEqual</operator>
+            <value>TODAY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>VolunteerInitiative.JobPosition.JobPositionShift.JobPositionAssignment$Status</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Awaiting Approval,Upcoming,In Progress</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <field>VolunteerInitiative.JobPosition.JobPositionShift$StartDate</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>VolunteerInitiative.JobPosition.JobPositionShift$StartTime</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Volunteers Daily Shift Roster</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Volunteer_Initiatives__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>VolunteerInitiative$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

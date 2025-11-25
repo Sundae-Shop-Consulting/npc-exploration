@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>VolunteerInitiative.JobPosition$Name</field>
+    </columns>
+    <columns>
+        <field>VolunteerInitiative.JobPosition$Title</field>
+    </columns>
+    <columns>
+        <field>VolunteerInitiative.JobPosition$StartDate</field>
+    </columns>
+    <columns>
+        <field>VolunteerInitiative$EndDate</field>
+    </columns>
+    <columns>
+        <field>VolunteerInitiative.JobPosition$Status</field>
+    </columns>
+    <description>All Job Positions that status is either On Going or In Progress, grouped by Volunteer Initiatives</description>
+    <filter>
+        <criteriaItems>
+            <column>VolunteerInitiative.JobPosition$Status</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Upcoming,In Progress</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>VolunteerInitiative$Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Available Job Positions</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Volunteer_Initiatives_Job_Positions_and_J_P_Shifts__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>VolunteerInitiative$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>
