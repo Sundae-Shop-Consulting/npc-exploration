@@ -10,18 +10,74 @@ private static String DONOR_ENGAGEMENT = 'DonorEngagement';
 private static String PROGRAM_MANAGEMENT = 'ProgramManagementConsole';
 private static String VOLUNTEER_MANAGEMENT = 'VolunteerManagement';
 private static String VOLUNTEER_MANAGEMENT_QUICK_START = 'Volunteer_Management_Quick_Start';
+private static String GRANTMAKING = 'Grantmaking';
+private static String OUTCOMES_MANAGEMENT = 'OutcomeManagementConsole';
+private static String PHILANTHROPIC_RESEARCH = 'PhilanthropicResearch';
+private static String PHILANTHROPY_AND_PARTNERSHIPS = 'PhilanthropyAndPartnerships';
 
 // Put these at the top, in this order
-private static List<String> PRIORITY_APPS = new List<String>{
+private static List<String> DEFAULT_PRIORITY_APPS = new List<String>{
+    PROGRAM_MANAGEMENT,
+    OUTCOMES_MANAGEMENT,
+    VOLUNTEER_MANAGEMENT,
+    VOLUNTEER_MANAGEMENT_QUICK_START,
     FUNDRAISING_STRATEGY,
     FUNDRAISING_OPERATIONS,
     DONOR_ENGAGEMENT,
-    PROGRAM_MANAGEMENT,
-    VOLUNTEER_MANAGEMENT,
-    VOLUNTEER_MANAGEMENT_QUICK_START
+    PHILANTHROPIC_RESEARCH,
+    PHILANTHROPY_AND_PARTNERSHIPS,
+    GRANTMAKING
 };
 
 public static void applyOrgAppOrder() {
+    applyOrgAppOrder(DEFAULT_PRIORITY_APPS);
+}
+
+public static void applyVolunteerAppOrder() {
+    List<String> volunteerPriorityApps = new List<String>{
+        VOLUNTEER_MANAGEMENT,
+        VOLUNTEER_MANAGEMENT_QUICK_START,
+        PROGRAM_MANAGEMENT,
+        OUTCOMES_MANAGEMENT,
+        DONOR_ENGAGEMENT
+    };
+    applyOrgAppOrder(volunteerPriorityApps);
+}
+
+public static void applyProgramManagementAppOrder() {
+    List<String> programsPriorityApps = new List<String>{
+        PROGRAM_MANAGEMENT,
+        OUTCOMES_MANAGEMENT,
+        VOLUNTEER_MANAGEMENT,
+        PHILANTHROPY_AND_PARTNERSHIPS,
+        DONOR_ENGAGEMENT
+    };
+    applyOrgAppOrder(programsPriorityApps);
+}
+
+public static void applyFundraisingAppOrder() {
+    List<String> fundraisingPriorityApps = new List<String>{
+        FUNDRAISING_STRATEGY,
+        FUNDRAISING_OPERATIONS,
+        DONOR_ENGAGEMENT,
+        PHILANTHROPY_AND_PARTNERSHIPS,
+        PHILANTHROPIC_RESEARCH,
+        OUTCOMES_MANAGEMENT
+    };
+    applyOrgAppOrder(fundraisingPriorityApps);
+}
+
+public static void applyGrantmakingAppOrder() {
+    List<String> grantmakingPriorityApps = new List<String>{
+        GRANTMAKING,
+        OUTCOMES_MANAGEMENT,
+        PHILANTHROPIC_RESEARCH,
+        PHILANTHROPY_AND_PARTNERSHIPS
+    };
+    applyOrgAppOrder(grantmakingPriorityApps);
+}
+
+public static void applyOrgAppOrder(List<String> appNames) {
     // 1) Get current org-visible app menu items in current order
     //    (you used this query in your version)
     List<UserAppMenuItem> current = [
@@ -44,7 +100,7 @@ public static void applyOrgAppOrder() {
     List<Id> finalOrder = new List<Id>();
     Set<Id> alreadyAdded = new Set<Id>();
 
-    for (String wantedName : PRIORITY_APPS) {
+    for (String wantedName : appNames) {
         Id appId = nameToAppId.get(wantedName);
         if (appId != null) {
             finalOrder.add(appId);

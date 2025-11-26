@@ -67,12 +67,11 @@ tasks:
         - GroupMembershipPsl
 
   assign_grantmaking_perms:
-    description: Assign all grantmaking-related permission sets to the current user
+    description: Assign grantmaking-related permission sets to the current user
     class_path: cumulusci.tasks.salesforce.users.permsets.AssignPermissionSets
     options:
       api_names:
         - Grantmaking_Manager
-        - Grantmaking_Applicant
         - GrantmakingManager
 
   assign_casemgmt_perms:
@@ -110,6 +109,30 @@ tasks:
       path: scripts/ReorderAppMenu.cls
       apex: applyOrgAppOrder();
 
+  reorder_app_menu_volunteering:
+    class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+    options:
+      path: scripts/ReorderAppMenu.cls
+      apex: applyVolunteerAppOrder();
+
+  reorder_app_menu_fundraising:
+    class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+    options:
+      path: scripts/ReorderAppMenu.cls
+      apex: applyFundraisingAppOrder();
+
+  reorder_app_menu_grantmaking:
+    class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+    options:
+      path: scripts/ReorderAppMenu.cls
+      apex: applyGrantmakingAppOrder();
+
+  reorder_app_menu_programs:
+    class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+    options:
+      path: scripts/ReorderAppMenu.cls
+      apex: applyProgramManagementAppOrder();
+  
   # sample data
   load_sample_data:
     class_path: cumulusci.tasks.sample_data.load_sample_data.LoadSampleData
@@ -162,8 +185,8 @@ flows:
     steps:
       1:
         task: assign_fundraising_perms
-      #2:
-        # task: assign_grantmaking_perms
+      2:
+        task: assign_grantmaking_perms
       3:
         task: assign_casemgmt_perms
       4:
@@ -177,7 +200,7 @@ flows:
         task: reorder_app_menu    
 
   deploy_volunteer_quick_start:
-    description: Deploys content's of Salesforce's open source Volunteer Management Quick Start
+    description: Deploys contents of Salesforce's open source Volunteer Management Quick Start
     steps:
       1:
         task: update_verification_status_values
