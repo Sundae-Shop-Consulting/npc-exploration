@@ -142,6 +142,11 @@ Insert JobPositionAssignment:
   sf_object: JobPositionAssignment
   fields:
   - Status
+  - ScheduledStartTime
+  - ScheduledEndTime
+  - ActualStartTime
+  - ActualEndTime
+  - ActualDuration
   lookups:
     AssignedAccountId:
       table:

@@ -460,24 +460,70 @@ CREATE TABLE "JobPositionAssignment" (
     "AssignedPositionShiftId" VARCHAR(255),
     "JobPositionId" VARCHAR(255),
     "RelatedVolunteerInitiativeId" VARCHAR(255),
+    "ScheduledStartTime" VARCHAR(255),
+    "ScheduledEndTime" VARCHAR(255),
+    "ActualStartTime" VARCHAR(255),
+    "ActualEndTime" VARCHAR(255),
+    "ActualDuration" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
--- Food bank: Alex and Maria history
-INSERT INTO "JobPositionAssignment" VALUES('JobPositionAssignment-1','Complete','Account-3','JobPositionShift-1','JobPosition-1','VolunteerInitiative-1');
-INSERT INTO "JobPositionAssignment" VALUES('JobPositionAssignment-2','Complete','Account-4','JobPositionShift-2','JobPosition-1','VolunteerInitiative-1');
-INSERT INTO "JobPositionAssignment" VALUES('JobPositionAssignment-3','In Progress','Account-3','JobPositionShift-3','JobPosition-2','VolunteerInitiative-1');
-INSERT INTO "JobPositionAssignment" VALUES('JobPositionAssignment-4','Upcoming','Account-5','JobPositionShift-3','JobPosition-2','VolunteerInitiative-1');
+-- Food bank
+INSERT INTO "JobPositionAssignment" VALUES(
+  'JobPositionAssignment-1','Complete','Account-3','JobPositionShift-1','JobPosition-1','VolunteerInitiative-1',
+  '2025-02-01T09:00:00Z','2025-02-01T12:00:00Z','2025-02-01T09:02:00Z','2025-02-01T11:58:00Z','2.93'
+);
+
+INSERT INTO "JobPositionAssignment" VALUES(
+  'JobPositionAssignment-2','Complete','Account-4','JobPositionShift-2','JobPosition-1','VolunteerInitiative-1',
+  '2025-02-08T09:00:00Z','2025-02-08T12:00:00Z','2025-02-08T09:05:00Z','2025-02-08T12:01:00Z','2.93'
+);
+
+INSERT INTO "JobPositionAssignment" VALUES(
+  'JobPositionAssignment-3','In Progress','Account-3','JobPositionShift-3','JobPosition-2','VolunteerInitiative-1',
+  '2025-02-15T09:00:00Z','2025-02-15T12:00:00Z','','',''
+);
+
+INSERT INTO "JobPositionAssignment" VALUES(
+  'JobPositionAssignment-4','Upcoming','Account-5','JobPositionShift-3','JobPosition-2','VolunteerInitiative-1',
+  '2025-03-01T09:00:00Z','2025-03-01T12:00:00Z','','',''
+);
 
 -- Park cleanup
-INSERT INTO "JobPositionAssignment" VALUES('JobPositionAssignment-5','Complete','Account-6','JobPositionShift-4','JobPosition-3','VolunteerInitiative-2');
-INSERT INTO "JobPositionAssignment" VALUES('JobPositionAssignment-6','Canceled','Account-7','JobPositionShift-4','JobPosition-3','VolunteerInitiative-2');
-INSERT INTO "JobPositionAssignment" VALUES('JobPositionAssignment-7','In Progress','Account-9','JobPositionShift-5','JobPosition-3','VolunteerInitiative-2');
-INSERT INTO "JobPositionAssignment" VALUES('JobPositionAssignment-8','Upcoming','Account-6','JobPositionShift-6','JobPosition-4','VolunteerInitiative-2');
+INSERT INTO "JobPositionAssignment" VALUES(
+  'JobPositionAssignment-5','Complete','Account-6','JobPositionShift-4','JobPosition-3','VolunteerInitiative-2',
+  '2025-01-12T09:00:00Z','2025-01-12T11:30:00Z','2025-01-12T09:00:00Z','2025-01-12T11:25:00Z','2.42'
+);
+
+INSERT INTO "JobPositionAssignment" VALUES(
+  'JobPositionAssignment-6','Canceled','Account-7','JobPositionShift-4','JobPosition-3','VolunteerInitiative-2',
+  '2025-01-12T09:00:00Z','2025-01-12T11:30:00Z','','',''
+);
+
+INSERT INTO "JobPositionAssignment" VALUES(
+  'JobPositionAssignment-7','In Progress','Account-9','JobPositionShift-5','JobPosition-3','VolunteerInitiative-2',
+  '2025-01-19T09:00:00Z','2025-01-19T11:30:00Z','','',''
+);
+
+INSERT INTO "JobPositionAssignment" VALUES(
+  'JobPositionAssignment-8','Upcoming','Account-6','JobPositionShift-6','JobPosition-4','VolunteerInitiative-2',
+  '2025-02-02T09:00:00Z','2025-02-02T11:30:00Z','','',''
+);
 
 -- Tutoring
-INSERT INTO "JobPositionAssignment" VALUES('JobPositionAssignment-9','Complete','Account-8','JobPositionShift-7','JobPosition-5','VolunteerInitiative-3');
-INSERT INTO "JobPositionAssignment" VALUES('JobPositionAssignment-10','Pending Verification','Account-10','JobPositionShift-8','JobPosition-5','VolunteerInitiative-3');
-INSERT INTO "JobPositionAssignment" VALUES('JobPositionAssignment-11','Upcoming','Account-3','JobPositionShift-9','JobPosition-6','VolunteerInitiative-3');
+INSERT INTO "JobPositionAssignment" VALUES(
+  'JobPositionAssignment-9','Complete','Account-8','JobPositionShift-7','JobPosition-5','VolunteerInitiative-3',
+  '2025-02-05T17:30:00Z','2025-02-05T19:30:00Z','2025-02-05T17:31:00Z','2025-02-05T19:25:00Z','1.90'
+);
+
+INSERT INTO "JobPositionAssignment" VALUES(
+  'JobPositionAssignment-10','Pending Verification','Account-10','JobPositionShift-8','JobPosition-5','VolunteerInitiative-3',
+  '2025-02-12T17:30:00Z','2025-02-12T19:30:00Z','','',''
+);
+
+INSERT INTO "JobPositionAssignment" VALUES(
+  'JobPositionAssignment-11','Upcoming','Account-3','JobPositionShift-9','JobPosition-6','VolunteerInitiative-3',
+  '2025-02-19T17:30:00Z','2025-02-19T19:30:00Z','','',''
+);
 
 COMMIT;
