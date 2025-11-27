@@ -16,22 +16,172 @@ CREATE TABLE "Account" (
     "IsPersonAccount" VARCHAR(255),
     "OperatingHoursId" VARCHAR(255),
     "ParentId" VARCHAR(255),
+    "PersonEmail" VARCHAR(255),
+    "Phone" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
 -- Business Accounts (non-person)
-INSERT INTO "Account" VALUES('Account-1','','','Seattle Community Food Bank','False','False','False','012RL000009LeYLYA0','False','','');
-INSERT INTO "Account" VALUES('Account-2','','','Friends of Greenlake Park','False','False','False','012RL000009LeYLYA0','False','','');
+INSERT INTO "Account" VALUES(
+  'Account-1',
+  '',
+  '',
+  'Seattle Community Food Bank',
+  'False',
+  'False',
+  'False',
+  '012RL000009LeYLYA0',
+  'False',
+  '',
+  '',
+  '',
+  '(206) 555-0100'
+);
+
+INSERT INTO "Account" VALUES(
+  'Account-2',
+  '',
+  '',
+  'Friends of Greenlake Park',
+  'False',
+  'False',
+  'False',
+  '012RL000009LeYLYA0',
+  'False',
+  '',
+  '',
+  '',
+  '(206) 555-0200'
+);
 
 -- Volunteer Person Accounts
-INSERT INTO "Account" VALUES('Account-3','Alex','Nguyen','','False','False','False','012RL000009LeYMYA0','True','','');
-INSERT INTO "Account" VALUES('Account-4','Maria','Lopez','','False','False','False','012RL000009LeYMYA0','True','','');
-INSERT INTO "Account" VALUES('Account-5','Jordan','Reed','','False','False','False','012RL000009LeYMYA0','True','','');
-INSERT INTO "Account" VALUES('Account-6','Priya','Patel','','False','False','False','012RL000009LeYMYA0','True','','');
-INSERT INTO "Account" VALUES('Account-7','Sam','Chen','','False','False','False','012RL000009LeYMYA0','True','','');
-INSERT INTO "Account" VALUES('Account-8','Taylor','Martin','','False','False','False','012RL000009LeYMYA0','True','','');
-INSERT INTO "Account" VALUES('Account-9','Owen','Garcia','','False','False','False','012RL000009LeYMYA0','True','','');
-INSERT INTO "Account" VALUES('Account-10','Lena','Hughes','','False','False','False','012RL000009LeYMYA0','True','','');
+INSERT INTO "Account" VALUES(
+  'Account-3',
+  'Alex',
+  'Nguyen',
+  '',
+  'False',
+  'False',
+  'False',
+  '012RL000009LeYMYA0',
+  'True',
+  '',
+  '',
+  'alex.nguyen@example.org',
+  '(206) 555-1003'
+);
+
+INSERT INTO "Account" VALUES(
+  'Account-4',
+  'Maria',
+  'Lopez',
+  '',
+  'False',
+  'False',
+  'False',
+  '012RL000009LeYMYA0',
+  'True',
+  '',
+  '',
+  'maria.lopez@example.org',
+  '(206) 555-1004'
+);
+
+INSERT INTO "Account" VALUES(
+  'Account-5',
+  'Jordan',
+  'Reed',
+  '',
+  'False',
+  'False',
+  'False',
+  '012RL000009LeYMYA0',
+  'True',
+  '',
+  '',
+  'jordan.reed@example.org',
+  '(206) 555-1005'
+);
+
+INSERT INTO "Account" VALUES(
+  'Account-6',
+  'Priya',
+  'Patel',
+  '',
+  'False',
+  'False',
+  'False',
+  '012RL000009LeYMYA0',
+  'True',
+  '',
+  '',
+  'priya.patel@example.org',
+  '(206) 555-1006'
+);
+
+INSERT INTO "Account" VALUES(
+  'Account-7',
+  'Sam',
+  'Chen',
+  '',
+  'False',
+  'False',
+  'False',
+  '012RL000009LeYMYA0',
+  'True',
+  '',
+  '',
+  'sam.chen@example.org',
+  '(206) 555-1007'
+);
+
+INSERT INTO "Account" VALUES(
+  'Account-8',
+  'Taylor',
+  'Martin',
+  '',
+  'False',
+  'False',
+  'False',
+  '012RL000009LeYMYA0',
+  'True',
+  '',
+  '',
+  'taylor.martin@example.org',
+  '(206) 555-1008'
+);
+
+INSERT INTO "Account" VALUES(
+  'Account-9',
+  'Owen',
+  'Garcia',
+  '',
+  'False',
+  'False',
+  'False',
+  '012RL000009LeYMYA0',
+  'True',
+  '',
+  '',
+  'owen.garcia@example.org',
+  '(206) 555-1009'
+);
+
+INSERT INTO "Account" VALUES(
+  'Account-10',
+  'Lena',
+  'Hughes',
+  '',
+  'False',
+  'False',
+  'False',
+  '012RL000009LeYMYA0',
+  'True',
+  '',
+  '',
+  'lena.hughes@example.org',
+  '(206) 555-1010'
+);
 
 -- =========================================================
 -- Account Record Type Mapping
@@ -150,22 +300,28 @@ INSERT INTO "PositionQualification" VALUES('PositionQualification-12','Position-
 INSERT INTO "PositionQualification" VALUES('PositionQualification-13','Position-6','Competency-6');
 INSERT INTO "PositionQualification" VALUES('PositionQualification-14','Position-6','Competency-7');
 
--- =========================================================
--- Volunteer Initiatives (programs / opportunities)
--- =========================================================
-
 CREATE TABLE "VolunteerInitiative" (
     id VARCHAR(255) NOT NULL,
     "IsPublished" VARCHAR(255),
     "Name" VARCHAR(255),
     "ParentVolunteerInitiativeId" VARCHAR(255),
+    "Description" VARCHAR(8000),
+    "StartDate" VARCHAR(255),
+    "EndDate" VARCHAR(255),
+    "Status" VARCHAR(255),
+    "AttendanceRate" VARCHAR(255),
+    "FilledAssignmentCount" VARCHAR(255),
+    "OpenAssignmentCount" VARCHAR(255),
+    "TotalActiveVolunteerCount" VARCHAR(255),
+    "TotalAssignmentCount" VARCHAR(255),
+    "TotalVolunteerHours" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
-INSERT INTO "VolunteerInitiative" VALUES('VolunteerInitiative-1','True','Weekend Food Pantry','');
-INSERT INTO "VolunteerInitiative" VALUES('VolunteerInitiative-2','True','Greenlake Park Cleanup Days','');
-INSERT INTO "VolunteerInitiative" VALUES('VolunteerInitiative-3','True','After-School Youth Tutoring','');
-INSERT INTO "VolunteerInitiative" VALUES('VolunteerInitiative-4','True','Summer Youth Tutoring Intensive','VolunteerInitiative-3');
+INSERT INTO "VolunteerInitiative" VALUES('VolunteerInitiative-1','True','Weekend Food Pantry','','A weekly food distribution effort serving families facing food insecurity in Seattle.','2025-01-01','','In Progress','92','24','6','18','30','180');
+INSERT INTO "VolunteerInitiative" VALUES('VolunteerInitiative-2','True','Greenlake Park Cleanup Days','','Monthly park cleanup focused on litter removal and light maintenance at Greenlake Park.','2025-03-01','','In Progress','88','16','8','20','24','120');
+INSERT INTO "VolunteerInitiative" VALUES('VolunteerInitiative-3','True','After-School Youth Tutoring','','Volunteer tutors support students with homework, reading, and enrichment activities during the school year.','2025-02-15','2025-06-15','In Progress','95','12','4','10','16','140');
+INSERT INTO "VolunteerInitiative" VALUES('VolunteerInitiative-4','True','Summer Youth Tutoring Intensive','VolunteerInitiative-3','A focused 6-week tutoring program to prepare students for fall classes.','2025-07-01','2025-08-15','Upcoming','0','0','10','0','10','0');
 
 -- =========================================================
 -- Locations

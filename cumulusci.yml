@@ -102,6 +102,13 @@ tasks:
       api_names:
         - VMQS_Custom_Fields
 
+  load_volunteer_sample_data:
+    description: "Loads volunteer sample data into the org using volunteer_mapping.yml and volunteer_storydata.sql"
+    class_path: cumulusci.tasks.bulkdata.load.LoadData
+    options:
+      mapping: datasets/volunteer_mapping.yml
+      sql_path: datasets/volunteer_storydata.sql
+
   # ui
   reorder_app_menu:
     class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
@@ -214,6 +221,8 @@ flows:
         task: deploy_volunteers_quick_start_step2
       6: 
         task: reorder_app_menu
+      7: 
+        task: load_volunteer_sample_data
   
   volunteer_quick_start_org:
     steps:
@@ -221,4 +230,5 @@ flows:
         flow: dev_org
       2:
         flow: deploy_volunteer_quick_start
+    
       

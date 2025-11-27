@@ -17,6 +17,16 @@ Insert VolunteerInitiative:
   fields:
   - IsPublished
   - Name
+  - Description
+  - StartDate
+  - EndDate
+  - Status
+  - AttendanceRate
+  - FilledAssignmentCount
+  - OpenAssignmentCount
+  - TotalActiveVolunteerCount
+  - TotalAssignmentCount
+  - TotalVolunteerHours
   lookups:
     ParentVolunteerInitiativeId:
       table:
@@ -24,6 +34,7 @@ Insert VolunteerInitiative:
       after: Insert VolunteerInitiative
 Insert Account:
   sf_object: Account
+  table: Account
   fields:
   - FirstName
   - LastName
@@ -32,6 +43,8 @@ Insert Account:
   - PersonHasOptedOutOfEmail
   - PersonHasOptedOutOfFax
   - RecordTypeId
+  - PersonEmail
+  - Phone
   lookups:
     OperatingHoursId:
       table:
