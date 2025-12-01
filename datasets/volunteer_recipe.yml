@@ -1,0 +1,307 @@
+# =========================================
+# Nonprofit Cloud Volunteer Management
+# Sample Data for Person Accounts
+# =========================================
+
+# -------------------------------------------------------
+# ORGANIZATIONAL ACCOUNTS (optional; used as volunteer sites)
+# -------------------------------------------------------
+- object: Account
+  nickname: volunteer_site
+  count: 5
+  fields:
+    Name:
+      fake: company
+    Type: "Organization"
+    BillingStreet:
+      fake: street_address
+    BillingCity:
+      fake: city
+    BillingState:
+      fake: state
+    BillingCountry: "United States"
+    BillingPostalCode:
+      fake: postcode
+    Phone:
+      fake: phone_number
+
+# -------------------------------------------------------
+# PERSON ACCOUNTS (volunteers)
+# -------------------------------------------------------
+- object: Account
+  nickname: volunteer_pa
+  count: 25
+  fields:
+    RecordType.Name: Person Account
+    FirstName:
+      fake: first_name
+    LastName:
+      fake: last_name
+    PersonEmail:
+      fake: email
+    PersonMailingStreet:
+      fake: street_address
+    PersonMailingCity:
+      fake: city
+    PersonMailingState:
+      fake: state
+    PersonMailingCountry: "United States"
+    PersonMailingPostalCode:
+      fake: postcode
+    Phone:
+      fake: phone_number
+
+# -------------------------------------------------------
+# VOLUNTEER INITIATIVES
+# -------------------------------------------------------
+- object: VolunteerInitiative
+  nickname: volunteer_initiative
+  count: 6
+  fields:
+    Name:
+      fake: catch_phrase
+    Description:
+      fake: paragraph
+
+    StartDate:
+      date_between:
+        start_date: -60d
+        end_date: today
+
+    EndDate:
+      date_between:
+        start_date: today
+        end_date: +180d
+
+    Status:
+      random_choice:
+        - Upcoming
+        - In Progress
+        - Complete
+        - Archived
+
+    IsPublished:
+      random_choice:
+        - true
+        - false
+
+# -------------------------------------------------------
+# POSITIONS
+# -------------------------------------------------------
+- object: Position
+  nickname: position
+  count: 12
+  fields:
+    Title:
+      fake: job
+
+    Name: ${{Title}}
+
+    Description:
+      fake: paragraph
+
+# -------------------------------------------------------
+# OPERATING HOURS
+# -------------------------------------------------------
+- object: OperatingHours
+  nickname: operating_hours
+  count: 5
+  fields:
+    Name:
+      fake: catch_phrase
+    # Valid Salesforce time zone ID
+    TimeZone: "America/Los_Angeles"
+
+# -------------------------------------------------------
+# LOCATIONS
+# -------------------------------------------------------
+- object: Location
+  nickname: volunteer_location
+  count: 8
+  fields:
+    Name:
+      fake: company
+    City:
+      fake: city
+    State:
+      fake: state
+    Country: "United States"
+
+# -------------------------------------------------------
+# JOB POSITIONS
+# -------------------------------------------------------
+- object: JobPosition
+  nickname: job_position
+  count: 15
+  fields:
+    Title:
+      fake: job
+
+    Name: ${{Title}}
+
+    Description:
+      fake: paragraph
+
+    VolunteerInitiativeId:
+      reference: volunteer_initiative
+    
+    PositionId:
+      reference: position
+
+
+# -------------------------------------------------------
+# JOB POSITION SHIFTS
+# -------------------------------------------------------
+- object: JobPositionShift
+  nickname: job_position_shift
+  count: 40
+  fields:
+    JobPositionId:
+      reference: job_position
+
+    # Dates: same-day shifts for now
+    StartDate:
+      date_between:
+        start_date: -7d
+        end_date: +30d
+
+    EndDate:
+      date_between:
+        start_date: ${{StartDate}}
+        end_date: ${{StartDate}}
+
+    # Time: pick a start time, then copy it to EndTime so it's never before
+    StartTime:
+      random_choice:
+        - "09:00:00"
+        - "10:00:00"
+        - "13:00:00"
+        - "14:00:00"
+
+    EndTime: ${{StartTime}}   # on or after StartTime (equal is allowed)
+
+    Status:
+      random_choice:
+        - Upcoming
+        - In Progress
+        - Complete
+        - Canceled
+
+    MaxAttendeesCount:
+      random_number:
+        min: 3
+        max: 15
+
+# -------------------------------------------------------
+# JOB POSITION ASSIGNMENTS (volunteers scheduled into shifts)
+# -------------------------------------------------------
+- object: JobPositionAssignment
+  nickname: job_position_assignment
+  count: 75
+  fields:
+    # Tie to the volunteer (Person Account)
+    AssignedAccountId:
+      reference: volunteer_pa
+
+    # Tie to the shift
+    AssignedPositionShiftId:
+      reference: job_position_shift
+
+    # Optional: also tie directly to the Job Position
+    JobPositionId:
+      reference: job_position
+
+    # Status values (must match your org's picklist)
+    Status:
+      random_choice:
+        - Upcoming
+        - Awaiting Approval
+        - In Progress
+        - Complete
+        - Pending Verification
+        - Canceled
+        - Absent
+
+    # Whether this assignment counts toward shift capacity
+    IsPartOfShiftCapacity: true
+
+    # Optional numeric duration in minutes, just for flavor
+    ActualDuration:
+      random_number:
+        min: 30
+        max: 240
+
+  # -------------------------------------------------------
+# COMPETENCIES
+# -------------------------------------------------------
+- object: Competency
+  nickname: competency
+  count: 20
+  fields:
+    # Required name for the competency (ex: "Pediatric Nursing", "Fluent Spanish")
+    Name:
+      fake: job
+
+    # Nice to have, but not required
+    Description:
+      fake: paragraph
+
+# -------------------------------------------------------
+# POSITION QUALIFICATIONS
+# -------------------------------------------------------
+- object: PositionQualification
+  nickname: position_qualification
+  count: 20
+  fields:
+    # Which Position requires this qualification
+    PositionId:
+      reference: position
+
+    # REQUIRED: the underlying qualification record (here, a Competency)
+    QualificationReferenceRecordId:
+      reference: competency
+
+    # Optional description of the requirement
+    Description:
+      fake: sentence
+
+# -------------------------------------------------------
+# JOB POSITION QUALIFICATIONS
+# -------------------------------------------------------
+- object: JobPositionQualification
+  nickname: job_position_qualification
+  count: 30
+  fields:
+    # Which Job Position this qualification is for
+    JobPositionId:
+      reference: job_position
+
+    # REQUIRED: the underlying qualification record (here, a Competency)
+    QualificationReferenceRecordId:
+      reference: competency
+
+    # Optional flavor text
+    Description:
+      fake: sentence
+
+# -------------------------------------------------------
+# PERSON LOCATION AVAILABILITY
+# -------------------------------------------------------
+- object: PersonLocationAvailability
+  nickname: person_location_availability
+  count: 40
+  fields:
+    # Volunteer (Person Account)
+    AccountId:
+      reference: volunteer_pa
+
+    # Where they’re available
+    LocationId:
+      reference: volunteer_location
+
+    # When they’re available
+    OperatingHoursId:
+      reference: operating_hours
+
+    # Explicitly set usage type (matches picklist)
+    UsageType: VolunteerManagement

@@ -1,0 +1,162 @@
+Insert Competency:
+  sf_object: Competency
+  fields:
+  - Name
+Insert OperatingHours:
+  sf_object: OperatingHours
+  fields:
+  - Name
+  - TimeZone
+Insert Position:
+  sf_object: Position
+  fields:
+  - IsInternalApprovalRequired
+  - Name
+Insert VolunteerInitiative:
+  sf_object: VolunteerInitiative
+  fields:
+  - IsPublished
+  - Name
+  - Description
+  - StartDate
+  - EndDate
+  - Status
+  - AttendanceRate
+  - FilledAssignmentCount
+  - OpenAssignmentCount
+  - TotalActiveVolunteerCount
+  - TotalAssignmentCount
+  - TotalVolunteerHours
+  lookups:
+    ParentVolunteerInitiativeId:
+      table:
+      - VolunteerInitiative
+      after: Insert VolunteerInitiative
+Insert Account:
+  sf_object: Account
+  table: Account
+  fields:
+  - FirstName
+  - LastName
+  - Name
+  - PersonDoNotCall
+  - PersonHasOptedOutOfEmail
+  - PersonHasOptedOutOfFax
+  - RecordTypeId
+  - PersonEmail
+  - Phone
+  lookups:
+    OperatingHoursId:
+      table:
+      - OperatingHours
+    ParentId:
+      table:
+      - Account
+      after: Insert Account
+# Insert PositionQualification:
+#   sf_object: PositionQualification
+#   lookups:
+#     PositionId:
+#       table:
+#         - Position
+#     QualificationReferenceRecordId:
+#       table:
+#         - Competency
+#       key_field: id
+Insert TimeSlot:
+  sf_object: TimeSlot
+  fields:
+  - DayOfWeek
+  - EndTime
+  - StartTime
+  - Type
+  lookups:
+    OperatingHoursId:
+      table:
+      - OperatingHours
+Insert Location:
+  sf_object: Location
+  fields:
+  - IsInventoryLocation
+  - IsMobile
+  - LocationType
+  - Name
+  - ShouldSyncWithOci
+  lookups:
+    AccountId:
+      table:
+      - Account
+    ParentLocationId:
+      table:
+      - Location
+      after: Insert Location
+Insert JobPosition:
+  sf_object: JobPosition
+  fields:
+  - Name
+  - Title
+  lookups:
+    LocationId:
+      table:
+      - Location
+    ManagerId:
+      table:
+      - Account
+    PositionId:
+      table:
+      - Position
+    VolunteerInitiativeId:
+      table:
+      - VolunteerInitiative
+Insert PersonLocationAvailability:
+  sf_object: PersonLocationAvailability
+  fields:
+  - UsageType
+  lookups:
+    AccountId:
+      table:
+      - Account
+    LocationId:
+      table:
+      - Location
+    OperatingHoursId:
+      table:
+      - OperatingHours
+# Insert JobPositionQualification:
+#   sf_object: JobPositionQualification
+#   lookups:
+#     JobPositionId:
+#       table:
+#         - JobPosition
+#     QualificationReferenceRecordId:
+#       table:
+#         - Competency
+#       key_field: id
+Insert JobPositionShift:
+  sf_object: JobPositionShift
+  lookups:
+    JobPositionId:
+      table:
+      - JobPosition
+Insert JobPositionAssignment:
+  sf_object: JobPositionAssignment
+  fields:
+  - Status
+  - ScheduledStartTime
+  - ScheduledEndTime
+  - ActualStartTime
+  - ActualEndTime
+  - ActualDuration
+  lookups:
+    AssignedAccountId:
+      table:
+      - Account
+    AssignedPositionShiftId:
+      table:
+      - JobPositionShift
+    JobPositionId:
+      table:
+      - JobPosition
+    RelatedVolunteerInitiativeId:
+      table:
+      - VolunteerInitiative
