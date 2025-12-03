@@ -141,10 +141,12 @@ tasks:
       apex: applyProgramManagementAppOrder();
   
   # sample data
-  load_sample_data:
-    class_path: cumulusci.tasks.sample_data.load_sample_data.LoadSampleData
+  load_volunteer_fake_data_from_snowfakery:
+    description: Load NPC volunteer sample data via Snowfakery
+    class_path: cumulusci.tasks.bulkdata.snowfakery.Snowfakery
     options:
-      snowfakery_recipe: datasets/default/default.recipe.yml
+      recipe: datasets/volunteer_recipe.yml
+      drop_missing_schema: True
 
   # volunteer quick start setup
   update_verification_status_values:
@@ -221,8 +223,6 @@ flows:
         task: deploy_volunteers_quick_start_step2
       6: 
         task: reorder_app_menu
-      7: 
-        task: load_volunteer_sample_data
   
   volunteer_quick_start_org:
     steps:
