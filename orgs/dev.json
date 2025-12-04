@@ -53,7 +53,9 @@
       "enableGroupMembershipPref": true,
       "enableGrantmaking": true,
       "enableOutcomes": true,
-      "enableVolunteerManagement": true
+      "enableVolunteerManagement": true,
+      "enableCaseReferralPref": true,
+      "enableInteractionSummaryPref": true
     },
     "nameSettings": {
       "enableMiddleName": true,
