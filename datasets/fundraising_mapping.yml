@@ -1,0 +1,499 @@
+Insert Account:
+  sf_object: Account
+  fields:
+  - FirstName
+  - LastName
+  - Name
+  - PersonDoNotCall
+  - PersonHasOptedOutOfEmail
+  - PersonHasOptedOutOfFax
+  - RecordTypeId
+  lookups:
+    ParentId:
+      table:
+      - Account
+      after: Insert Account
+Insert Campaign:
+  sf_object: Campaign
+  fields:
+  - IsActive
+  - Name
+  lookups:
+    ParentId:
+      table:
+      - Campaign
+      after: Insert Campaign
+Insert ContactPointAddress:
+  sf_object: ContactPointAddress
+  fields:
+  - IsDefault
+  - IsPrimary
+  - IsThirdPartyAddress
+  - IsUndeliverable
+  - Name
+Insert GiftBatch:
+  sf_object: GiftBatch
+  fields:
+  - DoesTotalGiftValueMatch
+  - ScreenTemplateName
+Insert GiftDesignation:
+  sf_object: GiftDesignation
+  fields:
+  - IsActive
+  - IsDefault
+  - Name
+Insert PartyRoleRelation:
+  sf_object: PartyRoleRelation
+  fields:
+  - Name
+  - RelatedRoleName
+  - RelationshipObjectName
+  - RoleName
+  - ShouldCreaInversRoleAuto
+  lookups:
+    RelatedInverseRecordId:
+      table:
+      - PartyRoleRelation
+      after: Insert PartyRoleRelation
+Insert AccountAccountRelation:
+  sf_object: AccountAccountRelation
+  fields:
+  - IsActive
+  lookups:
+    AccountId:
+      table:
+      - Account
+    PartyRoleRelationId:
+      table:
+      - PartyRoleRelation
+    RelatedAccountId:
+      table:
+      - Account
+    RelatedInverseRecordId:
+      table:
+      - AccountAccountRelation
+      after: Insert AccountAccountRelation
+Insert Contact:
+  sf_object: Contact
+  fields:
+  - CanAllowPortalSelfReg
+  - DoNotCall
+  - FirstName
+  - HasOptedOutOfEmail
+  - HasOptedOutOfFax
+  - LastName
+  lookups:
+    AccountId:
+      table:
+      - Account
+    ReportsToId:
+      table:
+      - Contact
+      after: Insert Contact
+Insert DonorGiftSummary:
+  sf_object: DonorGiftSummary
+  lookups:
+    DonorId:
+      table:
+      - Account
+    FirstGiftCampaignId:
+      table:
+      - Campaign
+Insert OutreachSourceCode:
+  sf_object: OutreachSourceCode
+  fields:
+  - Name
+  - SourceCode
+  lookups:
+    CampaignId:
+      table:
+      - Campaign
+Insert PartyRelationshipGroup:
+  sf_object: PartyRelationshipGroup
+  fields:
+  - Name
+  lookups:
+    AccountId:
+      table:
+      - Account
+Insert PaymentInstrument:
+  sf_object: PaymentInstrument
+  lookups:
+    AccountId:
+      table:
+      - Account
+Insert AccountContactRelation:
+  sf_object: AccountContactRelation
+  fields:
+  - IsActive
+  - IsIncludedInGroup
+  - IsPrimaryGroup
+  - IsPrimaryMember
+  lookups:
+    AccountId:
+      table:
+      - Account
+    ContactId:
+      table:
+      - Contact
+Insert ContactContactRelation:
+  sf_object: ContactContactRelation
+  fields:
+  - IsActive
+  lookups:
+    ContactId:
+      table:
+      - Contact
+    PartyRoleRelationId:
+      table:
+      - PartyRoleRelation
+    RelatedContactId:
+      table:
+      - Contact
+    RelatedInverseRecordId:
+      table:
+      - ContactContactRelation
+      after: Insert ContactContactRelation
+Insert ContactProfile:
+  sf_object: ContactProfile
+  fields:
+  - IsFirstGenerationStudent
+  lookups:
+    ContactId:
+      table:
+      - Contact
+Insert ListEmail:
+  sf_object: ListEmail
+  fields:
+  - FromAddress
+  - Name
+  - Status
+  lookups:
+    CampaignId:
+      table:
+      - Campaign
+    OutreachSourceCodeId:
+      table:
+      - OutreachSourceCode
+Insert Opportunity:
+  sf_object: Opportunity
+  fields:
+  - CloseDate
+  - IsPrivate
+  - Name
+  - StageName
+  lookups:
+    AccountId:
+      table:
+      - Account
+    CampaignId:
+      table:
+      - Campaign
+    ContactId:
+      table:
+      - Contact
+Insert OutreachSummary:
+  sf_object: OutreachSummary
+  lookups:
+    CampaignId:
+      table:
+      - Campaign
+    OutreachSourceCodeId:
+      table:
+      - OutreachSourceCode
+Insert PartyCategory:
+  sf_object: PartyCategory
+  lookups:
+    AccountId:
+      table:
+      - Account
+    ContactId:
+      table:
+      - Contact
+Insert PartyPhilanthropicMilestone:
+  sf_object: PartyPhilanthropicMilestone
+  lookups:
+    AccountId:
+      table:
+      - Account
+    ContactId:
+      table:
+      - Contact
+Insert PartyPhilanthropicRsrchPrfl:
+  sf_object: PartyPhilanthropicRsrchPrfl
+  fields:
+  - IsResearchCompleted
+  lookups:
+    AccountId:
+      table:
+      - Account
+    ContactId:
+      table:
+      - Contact
+Insert PartyPhilanthropicAssessment:
+  sf_object: PartyPhilanthropicAssessment
+  lookups:
+    AccountId:
+      table:
+      - Account
+    AssessmentOrganizationId:
+      table:
+      - Account
+    ContactId:
+      table:
+      - Contact
+    PartyPhilanthropicRsrchPrflId:
+      table:
+      - PartyPhilanthropicRsrchPrfl
+Insert PartyPhilanthropicOccurrence:
+  sf_object: PartyPhilanthropicOccurrence
+  lookups:
+    AccountId:
+      table:
+      - Account
+    ContactId:
+      table:
+      - Contact
+    ParticipantId:
+      table:
+      - Contact
+    PartyPhilanthropicAssessmentId:
+      table:
+      - PartyPhilanthropicAssessment
+    PartyPhilanthropicRsrchPrflId:
+      table:
+      - PartyPhilanthropicRsrchPrfl
+    RelatedOrganizationId:
+      table:
+      - Account
+Insert PartyPhilanthropicIndicator:
+  sf_object: PartyPhilanthropicIndicator
+  lookups:
+    AccountId:
+      table:
+      - Account
+    ContactId:
+      table:
+      - Contact
+    ParticipantId:
+      table:
+      - Contact
+    PartyPhilanthropicOccurrenceId:
+      table:
+      - PartyPhilanthropicOccurrence
+    PartyPhilanthropicRsrchPrflId:
+      table:
+      - PartyPhilanthropicRsrchPrfl
+    RelatedOrganizationId:
+      table:
+      - Account
+Insert GiftCommitment:
+  sf_object: GiftCommitment
+  fields:
+  - IsAssetTransferExpected
+  - Name
+  lookups:
+    CampaignId:
+      table:
+      - Campaign
+    CurrentGiftCmtScheduleId:
+      table:
+      - GiftCommitmentSchedule
+      after: Insert GiftCommitmentSchedule
+    DonorId:
+      table:
+      - Account
+    OpportunityId:
+      table:
+      - Opportunity
+    PartyPhilanthropicRsrchPrflId:
+      table:
+      - PartyPhilanthropicRsrchPrfl
+Insert GiftCommitmentSchedule:
+  sf_object: GiftCommitmentSchedule
+  fields:
+  - StartDate
+  - TransactionAmount
+  - TransactionPeriod
+  - Type
+  lookups:
+    CampaignId:
+      table:
+      - Campaign
+    GiftCommitmentId:
+      table:
+      - GiftCommitment
+    GiftCommitmentSchdBefEditId:
+      table:
+      - GiftCommitmentSchedule
+      after: Insert GiftCommitmentSchedule
+    OutreachSourceCodeId:
+      table:
+      - OutreachSourceCode
+    PaymentInstrumentId:
+      table:
+      - PaymentInstrument
+Insert GiftDefaultDesignation:
+  sf_object: GiftDefaultDesignation
+  fields:
+  - AllocatedPercentage
+  lookups:
+    GiftDesignationId:
+      table:
+      - GiftDesignation
+    ParentRecordId:
+      table:
+      - Campaign
+      - GiftCommitment
+      - Opportunity
+Insert GiftDefaultSoftCredit:
+  sf_object: GiftDefaultSoftCredit
+  fields:
+  - Role
+  lookups:
+    ParentRecordId:
+      table:
+      - GiftCommitment
+      - Opportunity
+    RecipientId:
+      table:
+      - Account
+Insert GiftCmtChangeAttrLog:
+  sf_object: GiftCmtChangeAttrLog
+  fields:
+  - ChangePerDayAmount
+  - ChangeStatus
+  - ChangeType
+  - EffectiveDate
+  lookups:
+    CampaignId:
+      table:
+      - Campaign
+    GiftCommitmentId:
+      table:
+      - GiftCommitment
+    GiftCommitmentScheduleId:
+      table:
+      - GiftCommitmentSchedule
+    OutreachSourceCodeId:
+      table:
+      - OutreachSourceCode
+Insert GiftTransaction:
+  sf_object: GiftTransaction
+  fields:
+  - Name
+  - OriginalAmount
+  - PaymentMethod
+  - Status
+  lookups:
+    CampaignId:
+      table:
+      - Campaign
+    DonorId:
+      table:
+      - Account
+    GiftCommitmentId:
+      table:
+      - GiftCommitment
+    GiftCommitmentScheduleId:
+      table:
+      - GiftCommitmentSchedule
+    MatchingEmployerTransactionId:
+      table:
+      - GiftTransaction
+      after: Insert GiftTransaction
+    OutreachSourceCodeId:
+      table:
+      - OutreachSourceCode
+    PartyPhilanthropicRsrchPrflId:
+      table:
+      - PartyPhilanthropicRsrchPrfl
+    PaymentInstrumentId:
+      table:
+      - PaymentInstrument
+Insert GiftEntry:
+  sf_object: GiftEntry
+  fields:
+  - FirstName
+  - GiftAmount
+  - GiftReceivedDate
+  - GiftType
+  - IsNewRecurringGift
+  - IsSetAsDefault
+  - LastName
+  - PaymentMethod
+  lookups:
+    CampaignId:
+      table:
+      - Campaign
+    DonorId:
+      table:
+      - Account
+    GiftBatchId:
+      table:
+      - GiftBatch
+    GiftCommitmentId:
+      table:
+      - GiftCommitment
+    GiftDesignation1Id:
+      table:
+      - GiftDesignation
+    GiftDesignation2Id:
+      table:
+      - GiftDesignation
+    GiftDesignation3Id:
+      table:
+      - GiftDesignation
+    GiftTransactionId:
+      table:
+      - GiftTransaction
+    OutreachSourceCodeId:
+      table:
+      - OutreachSourceCode
+Insert GiftRefund:
+  sf_object: GiftRefund
+  fields:
+  - Amount
+  - Date
+  lookups:
+    GiftTransactionId:
+      table:
+      - GiftTransaction
+Insert GiftSoftCredit:
+  sf_object: GiftSoftCredit
+  fields:
+  - Role
+  lookups:
+    GiftTransactionId:
+      table:
+      - GiftTransaction
+    PartyPhilanthropicRsrchPrflId:
+      table:
+      - PartyPhilanthropicRsrchPrfl
+    RecipientId:
+      table:
+      - Account
+Insert GiftTransactionDesignation:
+  sf_object: GiftTransactionDesignation
+  lookups:
+    GiftDesignationId:
+      table:
+      - GiftDesignation
+    GiftTransactionId:
+      table:
+      - GiftTransaction
+Insert GiftTribute:
+  sf_object: GiftTribute
+  lookups:
+    GiftCommitmentId:
+      table:
+      - GiftCommitment
+    GiftTransactionId:
+      table:
+      - GiftTransaction
+    HonoreeContactId:
+      table:
+      - Account
+    NotificationContactId:
+      table:
+      - Account
