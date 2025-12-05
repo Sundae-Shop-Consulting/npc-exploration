@@ -50,7 +50,6 @@
       "enableGroupMembershipPref": true,
       "enableInteractionSummaryPref": true,
       "enableOutcomes": true,
-      "enableProgramCohortsPref": true,
       "enableVolunteerManagement": true
     },
     "interestTaggingSettings": {

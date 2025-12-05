@@ -13,16 +13,19 @@ Insert Account:
       table:
       - Account
       after: Insert Account
+
 Insert BenefitType:
   sf_object: BenefitType
   fields:
   - Name
   - ProcessType
+
 Insert CarePlanTemplate:
   sf_object: CarePlanTemplate
   fields:
   - Name
   - Status
+
 Insert CodeSet:
   sf_object: CodeSet
   fields:
@@ -31,6 +34,7 @@ Insert CodeSet:
   - IsCustomCode
   - IsPrimary
   - Name
+
 Insert GoalDefinition:
   sf_object: GoalDefinition
   fields:
@@ -41,16 +45,29 @@ Insert GoalDefinition:
       table:
       - GoalDefinition
       after: Insert GoalDefinition
+
+Insert UnitOfMeasure:
+  sf_object: UnitOfMeasure
+  fields:
+    - Name
+    - UnitCode
+
 Insert IndicatorDefinition:
   sf_object: IndicatorDefinition
   fields:
   - Name
   - Status
+  lookups:
+    UnitOfMeasureId:
+      table:
+      - UnitOfMeasure
+
 Insert Outcome:
   sf_object: Outcome
   fields:
   - Name
   - Status
+
 Insert Program:
   sf_object: Program
   fields:
@@ -60,6 +77,7 @@ Insert Program:
       table:
       - Program
       after: Insert Program
+
 Insert RecurrenceSchedule:
   sf_object: RecurrenceSchedule
   fields:
@@ -68,6 +86,7 @@ Insert RecurrenceSchedule:
   - ProcessName
   - ScheduleFrequency
   - StartDate
+
 Insert Benefit:
   sf_object: Benefit
   fields:
@@ -83,6 +102,7 @@ Insert Benefit:
     ProgramId:
       table:
       - Program
+
 Insert CarePlanTemplateGoal:
   sf_object: CarePlanTemplateGoal
   lookups:
@@ -92,6 +112,7 @@ Insert CarePlanTemplateGoal:
     GoalDefinitionId:
       table:
       - GoalDefinition
+
 Insert CodeSetBundle:
   sf_object: CodeSetBundle
   fields:
@@ -142,6 +163,7 @@ Insert CodeSetBundle:
     CodeSet9Id:
       table:
       - CodeSet
+
 Insert Contact:
   sf_object: Contact
   fields:
@@ -159,6 +181,7 @@ Insert Contact:
       table:
       - Contact
       after: Insert Contact
+
 Insert IndicatorAssignment:
   sf_object: IndicatorAssignment
   fields:
@@ -175,6 +198,7 @@ Insert IndicatorAssignment:
     ProgramId:
       table:
       - Program
+
 Insert InteractionSummary:
   sf_object: InteractionSummary
   fields:
@@ -186,6 +210,16 @@ Insert InteractionSummary:
     PartnerAccountId:
       table:
       - Account
+
+Insert ProgramCohort:
+  sf_object: ProgramCohort
+  fields:
+  - Name
+  lookups:
+    ProgramId:
+      table:
+      - Program
+
 Insert BenefitSchedule:
   sf_object: BenefitSchedule
   fields:
@@ -197,6 +231,7 @@ Insert BenefitSchedule:
     BenefitId:
       table:
       - Benefit
+
 Insert CareBarrierType:
   sf_object: CareBarrierType
   fields:
@@ -207,6 +242,7 @@ Insert CareBarrierType:
       table:
       - CodeSet
       - CodeSetBundle
+
 Insert CarePlanTemplateBenefit:
   sf_object: CarePlanTemplateBenefit
   lookups:
@@ -216,6 +252,13 @@ Insert CarePlanTemplateBenefit:
     CarePlanTemplateId:
       table:
       - CarePlanTemplate
+
+Insert BusinessHours:
+  sf_object: BusinessHours
+  fields:
+  - Name
+  - TimeZoneSidKey
+
 Insert Case:
   sf_object: Case
   fields:
@@ -227,6 +270,9 @@ Insert Case:
     AccountId:
       table:
       - Account
+    BusinessHoursId:
+      table:
+      - BusinessHours
     ContactId:
       table:
       - Contact
@@ -234,20 +280,7 @@ Insert Case:
       table:
       - Case
       after: Insert Case
-Insert GoalAssignment:
-  sf_object: GoalAssignment
-  lookups:
-    DescriptionCodeId:
-      table:
-      - CodeSet
-      - CodeSetBundle
-    GoalAssigneeId:
-      table:
-      - Account
-      - Contact
-    GoalDefinitionId:
-      table:
-      - GoalDefinition
+
 Insert OutcomeActivity:
   sf_object: OutcomeActivity
   fields:
@@ -266,6 +299,7 @@ Insert OutcomeActivity:
     ProgramId:
       table:
       - Program
+
 Insert ProgramEnrollment:
   sf_object: ProgramEnrollment
   fields:
@@ -282,19 +316,9 @@ Insert ProgramEnrollment:
     ProgramId:
       table:
       - Program
-Insert BenefitAssignment:
-  sf_object: BenefitAssignment
-  lookups:
-    BenefitId:
-      table:
-      - Benefit
-    EnrolleeId:
-      table:
-      - Account
-      - Contact
-    ProgramEnrollmentId:
-      table:
-      - ProgramEnrollment
+
+
+
 Insert BenefitSession:
   sf_object: BenefitSession
   fields:
@@ -306,6 +330,7 @@ Insert BenefitSession:
     BenefitScheduleId:
       table:
       - BenefitSchedule
+
 Insert CareBarrier:
   sf_object: CareBarrier
   fields:
@@ -322,6 +347,7 @@ Insert CareBarrier:
     PatientId:
       table:
       - Account
+
 Insert CarePlan:
   sf_object: CarePlan
   fields:
@@ -338,6 +364,7 @@ Insert CarePlan:
       table:
       - Account
       - Contact
+
 Insert CaseParticipant:
   sf_object: CaseParticipant
   fields:
@@ -350,6 +377,7 @@ Insert CaseParticipant:
       table:
       - Account
       - Contact
+
 Insert CaseProgram:
   sf_object: CaseProgram
   fields:
@@ -361,6 +389,43 @@ Insert CaseProgram:
     ProgramId:
       table:
       - Program
+
+Insert GoalAssignment:
+  sf_object: GoalAssignment
+  fields:
+    - Status
+  lookups:
+    DescriptionCodeId:
+      table:
+      - CodeSet
+      - CodeSetBundle
+    GoalAssigneeId:
+      table:
+      - Account
+      - Contact
+    GoalDefinitionId:
+      table:
+      - GoalDefinition
+    ParentRecordId:
+      table:
+      - Account
+      - CarePlan
+      # Optionally add these if you actually use them in your SQL:
+      # - CarePlanActivity
+      # - GoalAssignment
+
+Insert ProgramCohortMember:
+  sf_object: ProgramCohortMember
+  fields:
+  - IsRemovedFromCohort
+  lookups:
+    ProgramCohortId:
+      table:
+      - ProgramCohort
+    ProgramEnrollmentId:
+      table:
+      - ProgramEnrollment
+
 Insert PublicComplaint:
   sf_object: PublicComplaint
   fields:
@@ -377,6 +442,7 @@ Insert PublicComplaint:
     ComplaintCaseId:
       table:
       - Case
+
 Insert Referral:
   sf_object: Referral
   fields:
@@ -400,6 +466,7 @@ Insert Referral:
       table:
       - Account
       - Contact
+
 Insert BenefitDisbursement:
   sf_object: BenefitDisbursement
   fields:
@@ -418,6 +485,7 @@ Insert BenefitDisbursement:
       table:
       - Account
       - Contact
+
 Insert BenefitScheduleAssignment:
   sf_object: BenefitScheduleAssignment
   fields:
@@ -429,6 +497,7 @@ Insert BenefitScheduleAssignment:
     BenefitScheduleId:
       table:
       - BenefitSchedule
+
 Insert CarePlanDetail:
   sf_object: CarePlanDetail
   fields:
@@ -446,6 +515,7 @@ Insert CarePlanDetail:
       - Account
       - CareBarrier
       - CarePlan
+
 Insert ComplaintCase:
   sf_object: ComplaintCase
   lookups:
@@ -455,12 +525,41 @@ Insert ComplaintCase:
     PublicComplaintId:
       table:
       - PublicComplaint
+
 Insert ComplaintParticipant:
   sf_object: ComplaintParticipant
   lookups:
     PublicComplaintId:
       table:
       - PublicComplaint
+    ParticipantId:
+      table:
+      - Account
+      - Contact
+
+Insert BenefitAssignment:
+  sf_object: BenefitAssignment
+  fields:
+    - Status
+    - StartDateTime
+    - EndDateTime
+  lookups:
+    BenefitId:
+      table:
+      - Benefit
+    EnrolleeId:
+      table:
+      - Account
+      - Contact
+    ProgramEnrollmentId:
+      table:
+      - ProgramEnrollment
+    ParentRecordId:
+      table:
+      - CarePlan
+      - GoalAssignment
+      - ProgramEnrollment
+      
 Insert GoalAssignmentDetail:
   sf_object: GoalAssignmentDetail
   lookups:
