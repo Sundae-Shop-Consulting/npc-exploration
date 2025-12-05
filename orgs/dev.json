@@ -1,6 +1,6 @@
 {
   "orgName": "npc-exploration - Dev Org",
-  "edition": "Developer",
+  "edition": "Enterprise",
   "description": "Settings for creating a Nonprofit Cloud scratch org",
   "features": [
     "AccountingSubledgerGrowthEdition",
@@ -9,13 +9,14 @@
     "Assessments",
     "Communities",
     "ContactsToMultipleAccounts",
+    "DataProcessingEngine",
+    "DecisionTable",
+    "DocumentChecklist",
+    "DocGenInd",
     "EnableSetPasswordInApi",
     "Fundraising",
     "Grantmaking",
-    "DataProcessingEngine",
-    "DecisionTable",
     "IndustriesActionPlan",
-    "DocumentChecklist",
     "IndustriesSalesExcellenceAddOn",
     "IndustriesServiceExcellenceAddOn",
     "MarketingUser",
@@ -30,39 +31,40 @@
     "VolunteerManagement"
   ],
   "settings": {
+    "apexSettings": {
+      "enableDisableParallelApexTesting": true
+    },
+    "chatterSettings": {
+      "enableChatter": true
+    },
+    "enhancedNotesSettings": {
+      "enableEnhancedNotes": true
+    },
+    "industriesSettings": {
+      "enableBenefitAndGoalSharingPref": true,
+      "enableBenefitManagementPreference": true,
+      "enableCarePlansPreference": true,
+      "enableCaseReferralPref": true,
+      "enableFundraising": true,
+      "enableGrantmaking": true,
+      "enableGroupMembershipPref": true,
+      "enableInteractionSummaryPref": true,
+      "enableOutcomes": true,
+      "enableProgramCohortsPref": true,
+      "enableVolunteerManagement": true
+    },
+    "interestTaggingSettings": {
+      "enableInterestTagging": true
+    },
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
     },
     "mobileSettings": {
       "enableS1EncryptedStoragePref2": false
     },
-    "chatterSettings": {
-      "enableChatter": true
-    },
-    "apexSettings": {
-      "enableDisableParallelApexTesting": true
-    },
-    "enhancedNotesSettings": {
-      "enableEnhancedNotes": true
-    },
-    "industriesSettings": {
-      "enableBenefitManagementPreference": true,
-      "enableBenefitAndGoalSharingPref": true,
-      "enableCarePlansPreference": true,
-      "enableFundraising": true,
-      "enableGroupMembershipPref": true,
-      "enableGrantmaking": true,
-      "enableOutcomes": true,
-      "enableVolunteerManagement": true,
-      "enableCaseReferralPref": true,
-      "enableInteractionSummaryPref": true
-    },
     "nameSettings": {
       "enableMiddleName": true,
       "enableNameSuffix": true
-    },
-    "InterestTaggingSettings": {
-      "enableInterestTagging": true
     }
   }
 }

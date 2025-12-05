@@ -1,0 +1,476 @@
+Insert Account:
+  sf_object: Account
+  fields:
+  - FirstName
+  - LastName
+  - Name
+  - PersonDoNotCall
+  - PersonHasOptedOutOfEmail
+  - PersonHasOptedOutOfFax
+  - RecordTypeId
+  lookups:
+    ParentId:
+      table:
+      - Account
+      after: Insert Account
+Insert BenefitType:
+  sf_object: BenefitType
+  fields:
+  - Name
+  - ProcessType
+Insert CarePlanTemplate:
+  sf_object: CarePlanTemplate
+  fields:
+  - Name
+  - Status
+Insert CodeSet:
+  sf_object: CodeSet
+  fields:
+  - Code
+  - IsActive
+  - IsCustomCode
+  - IsPrimary
+  - Name
+Insert GoalDefinition:
+  sf_object: GoalDefinition
+  fields:
+  - IsCustomGoalNameRequired
+  - Name
+  lookups:
+    ParentGoalId:
+      table:
+      - GoalDefinition
+      after: Insert GoalDefinition
+Insert IndicatorDefinition:
+  sf_object: IndicatorDefinition
+  fields:
+  - Name
+  - Status
+Insert Outcome:
+  sf_object: Outcome
+  fields:
+  - Name
+  - Status
+Insert Program:
+  sf_object: Program
+  fields:
+  - Name
+  lookups:
+    ParentProgramId:
+      table:
+      - Program
+      after: Insert Program
+Insert RecurrenceSchedule:
+  sf_object: RecurrenceSchedule
+  fields:
+  - Name
+  - NextScheduleDateTime
+  - ProcessName
+  - ScheduleFrequency
+  - StartDate
+Insert Benefit:
+  sf_object: Benefit
+  fields:
+  - IsActive
+  - Name
+  lookups:
+    BenefitTypeId:
+      table:
+      - BenefitType
+    GoalDefinitionId:
+      table:
+      - GoalDefinition
+    ProgramId:
+      table:
+      - Program
+Insert CarePlanTemplateGoal:
+  sf_object: CarePlanTemplateGoal
+  lookups:
+    CarePlanTemplateId:
+      table:
+      - CarePlanTemplate
+    GoalDefinitionId:
+      table:
+      - GoalDefinition
+Insert CodeSetBundle:
+  sf_object: CodeSetBundle
+  fields:
+  - Name
+  lookups:
+    CodeSet10Id:
+      table:
+      - CodeSet
+    CodeSet11Id:
+      table:
+      - CodeSet
+    CodeSet12Id:
+      table:
+      - CodeSet
+    CodeSet13Id:
+      table:
+      - CodeSet
+    CodeSet14Id:
+      table:
+      - CodeSet
+    CodeSet15Id:
+      table:
+      - CodeSet
+    CodeSet1Id:
+      table:
+      - CodeSet
+    CodeSet2Id:
+      table:
+      - CodeSet
+    CodeSet3Id:
+      table:
+      - CodeSet
+    CodeSet4Id:
+      table:
+      - CodeSet
+    CodeSet5Id:
+      table:
+      - CodeSet
+    CodeSet6Id:
+      table:
+      - CodeSet
+    CodeSet7Id:
+      table:
+      - CodeSet
+    CodeSet8Id:
+      table:
+      - CodeSet
+    CodeSet9Id:
+      table:
+      - CodeSet
+Insert Contact:
+  sf_object: Contact
+  fields:
+  - CanAllowPortalSelfReg
+  - DoNotCall
+  - FirstName
+  - HasOptedOutOfEmail
+  - HasOptedOutOfFax
+  - LastName
+  lookups:
+    AccountId:
+      table:
+      - Account
+    ReportsToId:
+      table:
+      - Contact
+      after: Insert Contact
+Insert IndicatorAssignment:
+  sf_object: IndicatorAssignment
+  fields:
+  - IndicatorAssignmentType
+  - Name
+  - Status
+  lookups:
+    IndicatorDefinitionId:
+      table:
+      - IndicatorDefinition
+    OutcomeId:
+      table:
+      - Outcome
+    ProgramId:
+      table:
+      - Program
+Insert InteractionSummary:
+  sf_object: InteractionSummary
+  fields:
+  - Name
+  lookups:
+    AccountId:
+      table:
+      - Account
+    PartnerAccountId:
+      table:
+      - Account
+Insert BenefitSchedule:
+  sf_object: BenefitSchedule
+  fields:
+  - DefaultBenefitQuantity
+  - FirstSessionEndDateTime
+  - FirstSessionStartDateTime
+  - Name
+  lookups:
+    BenefitId:
+      table:
+      - Benefit
+Insert CareBarrierType:
+  sf_object: CareBarrierType
+  fields:
+  - IsActive
+  - Name
+  lookups:
+    DiagnosisCodeSetId:
+      table:
+      - CodeSet
+      - CodeSetBundle
+Insert CarePlanTemplateBenefit:
+  sf_object: CarePlanTemplateBenefit
+  lookups:
+    BenefitId:
+      table:
+      - Benefit
+    CarePlanTemplateId:
+      table:
+      - CarePlanTemplate
+Insert Case:
+  sf_object: Case
+  fields:
+  - IsEscalated
+  - IsSelfServiceClosed
+  - IsStopped
+  - IsVisibleInSelfService
+  lookups:
+    AccountId:
+      table:
+      - Account
+    ContactId:
+      table:
+      - Contact
+    ParentId:
+      table:
+      - Case
+      after: Insert Case
+Insert GoalAssignment:
+  sf_object: GoalAssignment
+  lookups:
+    DescriptionCodeId:
+      table:
+      - CodeSet
+      - CodeSetBundle
+    GoalAssigneeId:
+      table:
+      - Account
+      - Contact
+    GoalDefinitionId:
+      table:
+      - GoalDefinition
+Insert OutcomeActivity:
+  sf_object: OutcomeActivity
+  fields:
+  - Name
+  - OutcomeActivityType
+  lookups:
+    BenefitId:
+      table:
+      - Benefit
+    GoalDefinitionId:
+      table:
+      - GoalDefinition
+    OutcomeId:
+      table:
+      - Outcome
+    ProgramId:
+      table:
+      - Program
+Insert ProgramEnrollment:
+  sf_object: ProgramEnrollment
+  fields:
+  - IsActive
+  - IsAnonymous
+  - Name
+  lookups:
+    AccountId:
+      table:
+      - Account
+    ContactId:
+      table:
+      - Contact
+    ProgramId:
+      table:
+      - Program
+Insert BenefitAssignment:
+  sf_object: BenefitAssignment
+  lookups:
+    BenefitId:
+      table:
+      - Benefit
+    EnrolleeId:
+      table:
+      - Account
+      - Contact
+    ProgramEnrollmentId:
+      table:
+      - ProgramEnrollment
+Insert BenefitSession:
+  sf_object: BenefitSession
+  fields:
+  - EndDateTime
+  - Name
+  - StartDateTime
+  - Status
+  lookups:
+    BenefitScheduleId:
+      table:
+      - BenefitSchedule
+Insert CareBarrier:
+  sf_object: CareBarrier
+  fields:
+  - IsActive
+  - Name
+  - Status
+  lookups:
+    CareBarrierTypeId:
+      table:
+      - CareBarrierType
+    CaseId:
+      table:
+      - Case
+    PatientId:
+      table:
+      - Account
+Insert CarePlan:
+  sf_object: CarePlan
+  fields:
+  - Name
+  - Status
+  lookups:
+    CarePlanTemplateId:
+      table:
+      - CarePlanTemplate
+    CaseId:
+      table:
+      - Case
+    ParticipantId:
+      table:
+      - Account
+      - Contact
+Insert CaseParticipant:
+  sf_object: CaseParticipant
+  fields:
+  - Status
+  lookups:
+    CaseId:
+      table:
+      - Case
+    ParticipantId:
+      table:
+      - Account
+      - Contact
+Insert CaseProgram:
+  sf_object: CaseProgram
+  fields:
+  - Name
+  lookups:
+    CaseId:
+      table:
+      - Case
+    ProgramId:
+      table:
+      - Program
+Insert PublicComplaint:
+  sf_object: PublicComplaint
+  fields:
+  - FirstName
+  - IncidentDate
+  - IsComplainantAuthorized
+  - IsReporterConfidential
+  - LastName
+  - ShouldInclInRegulatoryRpt
+  lookups:
+    AccountId:
+      table:
+      - Account
+    ComplaintCaseId:
+      table:
+      - Case
+Insert Referral:
+  sf_object: Referral
+  fields:
+  - IsSelfReferred
+  - ReferralType
+  lookups:
+    CaseId:
+      table:
+      - Case
+    ClientId:
+      table:
+      - Account
+    ProgramId:
+      table:
+      - Program
+    ProviderId:
+      table:
+      - Account
+      - Contact
+    ReferrerId:
+      table:
+      - Account
+      - Contact
+Insert BenefitDisbursement:
+  sf_object: BenefitDisbursement
+  fields:
+  - ActualCompletionDate
+  lookups:
+    BenefitAssignmentId:
+      table:
+      - BenefitAssignment
+    BenefitSessionId:
+      table:
+      - BenefitSession
+    ProgramEnrollmentId:
+      table:
+      - ProgramEnrollment
+    RecipientId:
+      table:
+      - Account
+      - Contact
+Insert BenefitScheduleAssignment:
+  sf_object: BenefitScheduleAssignment
+  fields:
+  - Name
+  lookups:
+    BenefitAssignmentId:
+      table:
+      - BenefitAssignment
+    BenefitScheduleId:
+      table:
+      - BenefitSchedule
+Insert CarePlanDetail:
+  sf_object: CarePlanDetail
+  fields:
+  - DetailType
+  lookups:
+    CarePlanId:
+      table:
+      - CarePlan
+    DetailCodeId:
+      table:
+      - CodeSet
+      - CodeSetBundle
+    DetailRecordId:
+      table:
+      - Account
+      - CareBarrier
+      - CarePlan
+Insert ComplaintCase:
+  sf_object: ComplaintCase
+  lookups:
+    CaseId:
+      table:
+      - Case
+    PublicComplaintId:
+      table:
+      - PublicComplaint
+Insert ComplaintParticipant:
+  sf_object: ComplaintParticipant
+  lookups:
+    PublicComplaintId:
+      table:
+      - PublicComplaint
+Insert GoalAssignmentDetail:
+  sf_object: GoalAssignmentDetail
+  lookups:
+    DetailCodeId:
+      table:
+      - CodeSet
+      - CodeSetBundle
+    DetailRecordId:
+      table:
+      - CareBarrier
+    GoalAssignmentId:
+      table:
+      - GoalAssignment
