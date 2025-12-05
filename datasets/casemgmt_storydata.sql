@@ -441,10 +441,10 @@ CREATE TABLE "CodeSet" (
 );
 
 INSERT INTO "CodeSet" VALUES
-('CodeSet-1','HOUSING','True','True','True','Housing Instability'),
-('CodeSet-2','INCOME','True','True','False','Insufficient Income'),
-('CodeSet-3','FOOD','True','True','False','Food Insecurity'),
-('CodeSet-4','LEGAL','True','True','False','Legal Issue');
+('CodeSet-1','HOUSING-DEMO','True','True','True','Housing Instability.'),
+('CodeSet-2','INCOME-DEMO','True','True','False','Insufficient Income.'),
+('CodeSet-3','FOOD-DEMO','True','True','False','Food Insecurity.'),
+('CodeSet-4','LEGAL-DEMO','True','True','False','Legal Issue.');
 
 CREATE TABLE "CodeSetBundle" (
     id VARCHAR(255) NOT NULL,
@@ -522,6 +522,75 @@ CREATE TABLE "CarePlanTemplateBenefit" (
 
 -- no rows yet, but structure exists
 
+CREATE TABLE "UnitOfMeasure" (
+    id VARCHAR(255) NOT NULL,
+    "Name" VARCHAR(255),
+    "UnitCode" VARCHAR(255),
+    PRIMARY KEY (id)
+);
+
+INSERT INTO "UnitOfMeasure" VALUES
+('UOM-1','Count','COUNT'),
+('UOM-2','Percent','PERCENT');
+
+
+--- =========================================================
+-- Recurrence Schedule (Program Management)
+-- =========================================================
+
+CREATE TABLE "RecurrenceSchedule" (
+    id VARCHAR(255) NOT NULL,
+    "Name" VARCHAR(255),
+    "NextScheduleDateTime" VARCHAR(255),
+    "ProcessName" VARCHAR(255),
+    "ScheduleFrequency" VARCHAR(255),
+    "ScheduleDayValue" INTEGER,
+    "StartDate" VARCHAR(255),
+    "EndDate" VARCHAR(255),
+    "TotalRecurrencesCount" INTEGER,
+    PRIMARY KEY (id)
+);
+
+-- Monthly schedule for grocery-related benefits
+INSERT INTO "RecurrenceSchedule" VALUES (
+  'RecSched-1',
+  'Monthly Grocery Support Schedule',
+  '2025-09-15T10:00:00.000Z',   -- NextScheduleDateTime
+  'Industries_ProgramManagement',
+  'Monthly',
+  NULL,                         -- ScheduleDayValue (not needed for Monthly)
+  '2025-06-15',                 -- StartDate
+  '2025-12-15',                 -- EndDate
+  7                             -- TotalRecurrencesCount
+);
+
+-- Quarterly schedule for housing check-ins
+INSERT INTO "RecurrenceSchedule" VALUES (
+  'RecSched-2',
+  'Quarterly Housing Stability Check-Ins',
+  '2025-04-01T17:00:00.000Z',
+  'Industries_ProgramManagement',
+  'Quarterly',
+  NULL,                         -- ScheduleDayValue (not needed for Quarterly)
+  '2025-01-01',
+  '2025-12-31',
+  4
+);
+
+-- Biweekly schedule for youth support touchpoints
+INSERT INTO "RecurrenceSchedule" VALUES (
+  'RecSched-3',
+  'Biweekly Youth Support Touchpoints',
+  '2025-03-14T16:00:00.000Z',
+  'Industries_ProgramManagement',
+  'Biweekly',
+  64,                           -- ScheduleDayValue: e.g., Monday (bit mask)
+  '2025-02-01',
+  '2025-06-30',
+  10
+);
+
+
 -- =========================================================
 -- Benefit Types, Benefits, Schedules, Sessions, Assignments
 -- =========================================================
@@ -530,13 +599,14 @@ CREATE TABLE "BenefitType" (
     id VARCHAR(255) NOT NULL,
     "Name" VARCHAR(255),
     "ProcessType" VARCHAR(255),
+    "UnitOfMeasureId" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
 INSERT INTO "BenefitType" VALUES
-('BenType-1','Grocery Vouchers','Program Management'),
-('BenType-2','Rental Assistance Payment','Program Management'),
-('BenType-3','Transit Passes','Program Management');
+('BenType-1','Grocery Vouchers','ProgramManagement','UOM-1'),
+('BenType-2','Rental Assistance Payment','ProgramManagement','UOM-1'),
+('BenType-3','Transit Passes','ProgramManagement','UOM-1');
 
 CREATE TABLE "Benefit" (
     id VARCHAR(255) NOT NULL,
@@ -822,17 +892,6 @@ INSERT INTO "Outcome" VALUES(
   'Planned'
 );
 
-CREATE TABLE "UnitOfMeasure" (
-    id VARCHAR(255) NOT NULL,
-    "Name" VARCHAR(255),
-    "UnitCode" VARCHAR(255),
-    PRIMARY KEY (id)
-);
-
-INSERT INTO "UnitOfMeasure" VALUES
-  ('UOM-1','Count','COUNT'),
-  ('UOM-2','Percent','PERCENT');
-
 CREATE TABLE "IndicatorDefinition" (
     id VARCHAR(255) NOT NULL,
     "Name" VARCHAR(255),
@@ -932,51 +991,6 @@ INSERT INTO "OutcomeActivity" VALUES (
   'Outcome-3',
   'Program-3'
 );
-
--- =========================================================
--- Recurrence Schedule (Program Management)
--- =========================================================
-
-CREATE TABLE "RecurrenceSchedule" (
-    id VARCHAR(255) NOT NULL,
-    "Name" VARCHAR(255),
-    "NextScheduleDateTime" VARCHAR(255),
-    "ProcessName" VARCHAR(255),
-    "ScheduleFrequency" VARCHAR(255),
-    "StartDate" VARCHAR(255),
-    PRIMARY KEY (id)
-);
-
--- Monthly schedule for grocery-related benefits
-INSERT INTO "RecurrenceSchedule" VALUES (
-  'RecSched-1',
-  'Monthly Grocery Support Schedule',
-  '2025-09-15T10:00:00.000Z',   -- NextScheduleDateTime (datetime)
-  'Industries_ProgramManagement', -- valid ProcessName for NPC PM
-  'Monthly',                     -- valid ScheduleFrequency
-  '2025-06-15'                   -- StartDate (date)
-);
-
--- Quarterly schedule for housing check-ins
-INSERT INTO "RecurrenceSchedule" VALUES (
-  'RecSched-2',
-  'Quarterly Housing Stability Check-Ins',
-  '2025-04-01T17:00:00.000Z',
-  'Industries_ProgramManagement',
-  'Quarterly',
-  '2025-01-01'
-);
-
--- Biweekly schedule for youth support touchpoints
-INSERT INTO "RecurrenceSchedule" VALUES (
-  'RecSched-3',
-  'Biweekly Youth Support Touchpoints',
-  '2025-03-14T16:00:00.000Z',
-  'Industries_ProgramManagement',
-  'Biweekly',
-  '2025-02-01'
-);
-
 
 
 COMMIT;

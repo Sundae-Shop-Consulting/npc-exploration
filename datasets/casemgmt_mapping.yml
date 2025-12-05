@@ -14,12 +14,6 @@ Insert Account:
       - Account
       after: Insert Account
 
-Insert BenefitType:
-  sf_object: BenefitType
-  fields:
-  - Name
-  - ProcessType
-
 Insert CarePlanTemplate:
   sf_object: CarePlanTemplate
   fields:
@@ -40,17 +34,22 @@ Insert GoalDefinition:
   fields:
   - IsCustomGoalNameRequired
   - Name
-  lookups:
-    ParentGoalId:
-      table:
-      - GoalDefinition
-      after: Insert GoalDefinition
 
 Insert UnitOfMeasure:
   sf_object: UnitOfMeasure
   fields:
     - Name
     - UnitCode
+
+Insert BenefitType:
+  sf_object: BenefitType
+  fields:
+  - Name
+  - ProcessType
+  lookups:
+    UnitOfMeasureId:
+      table:
+      - UnitOfMeasure
 
 Insert IndicatorDefinition:
   sf_object: IndicatorDefinition
@@ -85,7 +84,10 @@ Insert RecurrenceSchedule:
   - NextScheduleDateTime
   - ProcessName
   - ScheduleFrequency
+  - ScheduleDayValue
   - StartDate
+  - EndDate
+  - TotalRecurrencesCount
 
 Insert Benefit:
   sf_object: Benefit
