@@ -1041,30 +1041,45 @@ INSERT INTO "PublicComplaint" VALUES
  'Case-3'
 );
 
+-- =========================================================
+-- Complaint ↔ Case links
+-- =========================================================
+
 CREATE TABLE "ComplaintCase" (
     id VARCHAR(255) NOT NULL,
-    "Name" VARCHAR(255),
     "CaseId" VARCHAR(255),
     "PublicComplaintId" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
+-- Link PC-1 to Case-1
 INSERT INTO "ComplaintCase" VALUES
-('ComplaintCase-1','Sarah Housing Complaint Case','Case-2','Complaint-1'),
-('ComplaintCase-2','Suzanne Housing Complaint Case','Case-1','Complaint-2');
+('ComplaintCase-1',
+ 'Case-1',   -- underlying service/case record
+ 'PC-1'      -- PublicComplaint-1
+);
+
+-- Link PC-2 to Case-2
+INSERT INTO "ComplaintCase" VALUES
+('ComplaintCase-2',
+ 'Case-2',
+ 'PC-2'
+);
+
 
 CREATE TABLE "ComplaintParticipant" (
     id VARCHAR(255) NOT NULL,
     "Name" VARCHAR(255),
-    "ComplaintCaseId" VARCHAR(255),
+    "PublicComplaintId" VARCHAR(255),
     "ParticipantId" VARCHAR(255),
+    "Status" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
 INSERT INTO "ComplaintParticipant" VALUES
-('ComplaintPart-1','Complainant – Sarah','ComplaintCase-1','Contact-2'),
-('ComplaintPart-2','Complainant – Suzanne','ComplaintCase-2','Contact-1'),
-('ComplaintPart-3','Landlord Representative','ComplaintCase-2','Contact-11');
+('ComplaintPart-1','Complainant – Sarah','PC-1','Account-3', 'Active'),
+('ComplaintPart-2','Complainant – Suzanne','PC-2','Account-1', 'Active'),
+('ComplaintPart-3','Landlord Representative','PC-2','Contact-11', 'Active');
 
 -- =========================================================
 -- Outcome / Indicator

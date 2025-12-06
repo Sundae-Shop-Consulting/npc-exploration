@@ -491,6 +491,8 @@ Insert ComplaintCase:
 
 Insert ComplaintParticipant:
   sf_object: ComplaintParticipant
+  fields:
+  - Status
   lookups:
     PublicComplaintId:
       table:
