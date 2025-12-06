@@ -166,11 +166,13 @@ CREATE TABLE "Program" (
 );
 
 INSERT INTO "Program" VALUES
-('Program-1','Family Stability Case Management',NULL),
-('Program-2','Food Security Navigation',NULL),
-('Program-3','Emergency Rental Assistance','Program-1'),
-('Program-4','Youth Housing Support','Program-1'),
-('Program-5','Benefits Enrollment Clinics','Program-2');
+('Program-1','Family Stability Services',NULL),
+('Program-2','Food Security Supports',NULL),
+('Program-3','Rental Assistance',NULL);
+
+-- =========================================================
+-- Program Cohorts
+-- =========================================================
 
 CREATE TABLE "ProgramCohort" (
     id VARCHAR(255) NOT NULL,
@@ -179,12 +181,22 @@ CREATE TABLE "ProgramCohort" (
     PRIMARY KEY (id)
 );
 
+-- Family Stability Spring 2025 cohort
 INSERT INTO "ProgramCohort" VALUES
-('ProgCohort-1','Family Stability 2025 Cohort','Program-1'),
-('ProgCohort-2','Youth Housing Spring 2025','Program-4');
+('ProgCohort-1',
+ 'Family Stability – Spring 2025',
+ 'Program-1'      -- Family Stability Services
+);
+
+-- Food Security Spring 2025 cohort (or pick Rental Assistance if you prefer)
+INSERT INTO "ProgramCohort" VALUES
+('ProgCohort-2',
+ 'Food Security – Spring 2025',
+ 'Program-2'      -- Food Security Supports
+);
 
 -- =========================================================
--- Program Enrollment
+-- Program Enrollments (Person Accounts as participants)
 -- =========================================================
 
 CREATE TABLE "ProgramEnrollment" (
@@ -197,16 +209,19 @@ CREATE TABLE "ProgramEnrollment" (
     PRIMARY KEY (id)
 );
 
--- Program enrollments using Person Accounts as participants
+-- Family Stability enrollments
 INSERT INTO "ProgramEnrollment" VALUES
 ('Enroll-1','True','False','Suzanne – Family Stability','Account-2','Program-1'),
-('Enroll-2','True','False','Sarah – Family Stability','Account-3','Program-1'),
-('Enroll-3','True','False','Shawn – Family Stability','Account-4','Program-1'),
-('Enroll-4','True','False','Collin – Family Stability','Account-5','Program-1'),
-('Enroll-5','True','False','Carolyn – Rental Assistance','Account-6','Program-3'),
-('Enroll-6','True','False','Karl – Food Security','Account-7','Program-2'),
-('Enroll-7','False','False','Suzanne – Emergency Rental Assistance','Account-2','Program-3'),
-('Enroll-8','False','False','Sarah – Youth Housing','Account-3','Program-4');
+('Enroll-2','True','False','Sarah – Family Stability',  'Account-3','Program-1'),
+('Enroll-3','True','False','Shawn – Family Stability',  'Account-4','Program-1');
+
+-- Rental Assistance for Carolyn
+INSERT INTO "ProgramEnrollment" VALUES
+('Enroll-5','True','False','Carolyn – Rental Assistance','Account-6','Program-3');
+
+-- Food Security for Karl
+INSERT INTO "ProgramEnrollment" VALUES
+('Enroll-6','True','False','Karl – Food Security', 'Account-7','Program-2');
 
 CREATE TABLE "ProgramCohortMember" (
     id VARCHAR(255) NOT NULL,
@@ -218,9 +233,9 @@ CREATE TABLE "ProgramCohortMember" (
 
 INSERT INTO "ProgramCohortMember" VALUES
 ('CohortMember-1','False','ProgCohort-1','Enroll-1'),
-('CohortMember-2','False','ProgCohort-1','Enroll-3'),
-('CohortMember-3','False','ProgCohort-1','Enroll-4'),
-('CohortMember-4','False','ProgCohort-2','Enroll-8');
+('CohortMember-2','False','ProgCohort-1','Enroll-2'),
+('CohortMember-3','False','ProgCohort-1','Enroll-3'),
+('CohortMember-4','False','ProgCohort-2','Enroll-6');
 
 -- =========================================================
 -- Business Hours
@@ -312,23 +327,32 @@ INSERT INTO "CaseParticipant" VALUES
 ('CasePart-4','Active','Case-4','Account-5'),
 ('CasePart-5','Active','Case-5','Account-6');
 
+-- =========================================================
+-- Case ↔ Program Links
+-- =========================================================
+
 CREATE TABLE "CaseProgram" (
     id VARCHAR(255) NOT NULL,
+    "Name" VARCHAR(255),
     "CaseId" VARCHAR(255),
-    "ProgramEnrollmentId" VARCHAR(255),
+    "ProgramId" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
+-- Link each case to the primary program it’s working under
 INSERT INTO "CaseProgram" VALUES
-('CaseProg-1','Case-1','Enroll-1'),
-('CaseProg-2','Case-1','Enroll-7'),
-('CaseProg-3','Case-2','Enroll-3'),
-('CaseProg-4','Case-3','Enroll-4'),
-('CaseProg-5','Case-4','Enroll-5'),
-('CaseProg-6','Case-5','Enroll-2');
+('CaseProg-1','Suzanne – Family Stability','Case-1','Program-1'),
+('CaseProg-2','Sarah – Family Stability','Case-2','Program-1'),
+('CaseProg-3','Shawn – Family Stability','Case-3','Program-1'),
+('CaseProg-4','Collin – Rental Assistance','Case-4','Program-3'),
+('CaseProg-5','Carolyn – Rental Assistance','Case-5','Program-3');
 
 -- =========================================================
 -- Referral
+-- =========================================================
+
+-- =========================================================
+-- Referrals
 -- =========================================================
 
 CREATE TABLE "Referral" (
@@ -337,16 +361,60 @@ CREATE TABLE "Referral" (
     "ReferralType" VARCHAR(255),
     "CaseId" VARCHAR(255),
     "ClientId" VARCHAR(255),
+    "ProgramId" VARCHAR(255),
+    "ProviderId" VARCHAR(255),
     "ReferrerId" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
+-- Suzanne self-refers into Family Stability (inbound to org)
 INSERT INTO "Referral" VALUES
-('Referral-1','True','Self-Referral','Case-1','Contact-1',NULL),
-('Referral-2','False','External Provider','Case-2','Contact-2','Contact-11'),
-('Referral-3','False','External Provider','Case-3','Contact-3','Contact-12'),
-('Referral-4','True','Self-Referral','Case-4','Contact-4',NULL),
-('Referral-5','False','Community Partner','Case-5','Contact-5','Contact-11');
+('Ref-1',
+ 'True',                -- IsSelfReferred
+ 'INBOUND',             -- ReferralType
+ 'Case-1',              -- CaseId
+ 'Account-2',           -- ClientId (Suzanne – Person Account)
+ 'Program-1',           -- ProgramId
+ NULL,                  -- ProviderId
+ 'Account-2'            -- ReferrerId (self)
+);
+
+-- Sarah referred by partner org staff (external → org)
+INSERT INTO "Referral" VALUES
+('Ref-2',
+ 'False',
+ 'INBOUND',
+ 'Case-2',
+ 'Account-3',           -- Sarah
+ 'Program-1',
+ 'Account-32',          -- Lynn PLC (provider)
+ 'Contact-11'           -- Alex Rivera (referrer)
+);
+
+-- Shawn referred internally from another service/program
+INSERT INTO "Referral" VALUES
+('Ref-3',
+ 'False',
+ 'INTERNAL',
+ 'Case-3',
+ 'Account-4',           -- Shawn
+ 'Program-1',
+ NULL,
+ 'Contact-12'           -- Nora Singh (internal referrer)
+);
+
+-- Collin self-refers for Rental Assistance
+INSERT INTO "Referral" VALUES
+('Ref-4',
+ 'True',
+ 'INBOUND',
+ 'Case-4',
+ 'Account-5',           -- Collin
+ 'Program-3',
+ NULL,
+ 'Account-5'
+);
+
 
 -- =========================================================
 -- Care Plan Templates, Care Plans, Goals
@@ -407,6 +475,7 @@ CREATE TABLE "GoalAssignment" (
     "CarePlanId" VARCHAR(255),
     "GoalDefinitionId" VARCHAR(255),
     "ParentRecordId" VARCHAR(255),
+    "GoalAssigneeId" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
@@ -415,31 +484,31 @@ INSERT INTO "GoalAssignment" VALUES
  '2025-06-30T23:59:59.000Z',
  'Suzanne – Maintain Stable Housing',
  '2025-01-15T00:00:00.000Z',
- 'CP-1','GoalDef-1','Account-2'),
+ 'CP-1','GoalDef-1','Account-2','Account-2'),
 
 ('GoalAssign-2',
  '2025-03-31T23:59:59.000Z',
  'Suzanne – Resolve Rental Arrears',
  '2025-01-15T00:00:00.000Z',
- 'CP-1','GoalDef-2','Account-2'),
+ 'CP-1','GoalDef-2','Account-2','Account-2'),
 
 ('GoalAssign-3',
  NULL,
  'Suzanne – Improve Food Security',
  '2025-08-01T00:00:00.000Z',
- 'CP-2','GoalDef-3','Account-2'),
+ 'CP-2','GoalDef-3','Account-2','Account-2'),
 
 ('GoalAssign-4',
  '2025-09-30T23:59:59.000Z',
  'Sarah – Enroll in Housing Program',
  '2025-04-01T00:00:00.000Z',
- 'CP-3','GoalDef-4','Account-3'),
+ 'CP-3','GoalDef-4','Account-3','Account-3'),
 
 ('GoalAssign-5',
  NULL,
  'Carolyn – Resolve Rental Arrears',
  '2025-11-01T00:00:00.000Z',
- 'CP-4','GoalDef-2','Account-6');
+ 'CP-4','GoalDef-2','Account-6','Account-6');
 
 -- =========================================================
 -- Code Sets, Bundles, Barrier Types, Barriers
@@ -623,20 +692,28 @@ INSERT INTO "BenefitType" VALUES
 ('BenType-2','Rental Assistance Payment','ProgramManagement','UOM-1'),
 ('BenType-3','Transit Passes','ProgramManagement','UOM-1');
 
+-- =========================================================
+-- Benefits
+-- =========================================================
+
 CREATE TABLE "Benefit" (
     id VARCHAR(255) NOT NULL,
+    "IsActive" VARCHAR(255),
     "Name" VARCHAR(255),
     "BenefitTypeId" VARCHAR(255),
     "ProgramId" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
+-- Assume these BenefitType ids already exist and are valid:
+--  BenType-1 = Grocery Vouchers
+--  BenType-2 = Rental Assistance Payment
+--  BenType-3 = Transit Passes
+
 INSERT INTO "Benefit" VALUES
-('Benefit-1','Suzanne Grocery Support','BenType-1','Program-2'),
-('Benefit-2','Suzanne Rental Assistance','BenType-2','Program-3'),
-('Benefit-3','Sarah Housing Transition Support','BenType-2','Program-4'),
-('Benefit-4','Carolyn Rental Assistance','BenType-2','Program-3'),
-('Benefit-5','Suzanne Transit Support','BenType-3','Program-1');
+('Benefit-1','True','Monthly Grocery Vouchers','BenType-1','Program-2'),  -- Food Security
+('Benefit-2','True','One-time Rental Assistance','BenType-2','Program-3'), -- Rental Assistance
+('Benefit-3','True','Transit Pass Package','BenType-3','Program-1');       -- Family Stability
 
 CREATE TABLE "BenefitSchedule" (
     id VARCHAR(255) NOT NULL,
@@ -725,23 +802,57 @@ INSERT INTO "BenefitSession" VALUES
  'Completed',
  'BenSched-3');
 
+-- =========================================================
+-- Benefit Assignments
+-- =========================================================
+
 CREATE TABLE "BenefitAssignment" (
     id VARCHAR(255) NOT NULL,
-    "IsActive" VARCHAR(255),
-    "Name" VARCHAR(255),
-    "ParticipantId" VARCHAR(255),
-    "ProgramEnrollmentId" VARCHAR(255),
+    "Status" VARCHAR(255),
+    "StartDateTime" VARCHAR(255),
+    "EndDateTime" VARCHAR(255),
     "BenefitId" VARCHAR(255),
+    "EnrolleeId" VARCHAR(255),
+    "ProgramEnrollmentId" VARCHAR(255),
     "ParentRecordId" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
+-- Suzanne: transit passes as part of Family Stability
 INSERT INTO "BenefitAssignment" VALUES
-('BenAssign-1','True','Suzanne – Grocery Support','Contact-1','Enroll-1','Benefit-1','CP-2'),
-('BenAssign-2','True','Suzanne – Rental Assistance','Contact-1','Enroll-7','Benefit-2','Enroll-7'),
-('BenAssign-3','True','Sarah – Housing Support','Contact-2','Enroll-8','Benefit-3','Enroll-8'),
-('BenAssign-4','True','Carolyn – Rental Assistance','Contact-4','Enroll-5','Benefit-4','Enroll-5'),
-('BenAssign-5','True','Suzanne – Transit Support','Contact-1','Enroll-1','Benefit-5','Enroll-1');
+('BenAssign-1',
+ 'Active',
+ '2025-02-01T10:00:00.000Z',
+ '2025-06-01T10:00:00.000Z',
+ 'Benefit-3',   -- Transit Pass Package (Program-1)
+ 'Account-2',   -- Suzanne
+ 'Enroll-1',    -- Suzanne – Family Stability (Program-1)
+ 'Enroll-1'     -- ParentRecordId = ProgramEnrollment
+);
+
+-- Carolyn: rental assistance as part of Rental Assistance program
+INSERT INTO "BenefitAssignment" VALUES
+('BenAssign-2',
+ 'Active',
+ '2025-03-01T10:00:00.000Z',
+ '2025-08-01T10:00:00.000Z',
+ 'Benefit-2',   -- One-time Rental Assistance (Program-3)
+ 'Account-6',   -- Carolyn
+ 'Enroll-5',    -- Carolyn – Rental Assistance (Program-3)
+ 'Enroll-5'
+);
+
+-- Karl: grocery vouchers as part of Food Security program
+INSERT INTO "BenefitAssignment" VALUES
+('BenAssign-3',
+ 'Active',
+ '2025-04-01T10:00:00.000Z',
+ '2025-09-01T10:00:00.000Z',
+ 'Benefit-1',   -- Monthly Grocery Vouchers (Program-2)
+ 'Account-7',   -- Karl
+ 'Enroll-6',    -- Karl – Food Security (Program-2)
+ 'Enroll-6'
+);
 
 CREATE TABLE "BenefitScheduleAssignment" (
     id VARCHAR(255) NOT NULL,
@@ -751,25 +862,63 @@ CREATE TABLE "BenefitScheduleAssignment" (
 );
 
 INSERT INTO "BenefitScheduleAssignment" VALUES
-('BenSchedAssign-1','BenSched-1','BenAssign-1'),
+('BenSchedAssign-1','BenSched-1','BenAssign-3'),
 ('BenSchedAssign-2','BenSched-2','BenAssign-2'),
-('BenSchedAssign-3','BenSched-3','BenAssign-3');
+('BenSchedAssign-3','BenSched-3','BenAssign-1');
+
+-- =========================================================
+-- Benefit Disbursements
+-- =========================================================
 
 CREATE TABLE "BenefitDisbursement" (
     id VARCHAR(255) NOT NULL,
     "ActualCompletionDate" VARCHAR(255),
-    "Name" VARCHAR(255),
     "BenefitAssignmentId" VARCHAR(255),
     "BenefitSessionId" VARCHAR(255),
+    "ProgramEnrollmentId" VARCHAR(255),
+    "RecipientId" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
+-- Example disbursements
+-- (Update the BenefitAssignmentId / BenefitSessionId / ProgramEnrollmentId
+--  values to match the ids you already defined in your other tables.)
+
 INSERT INTO "BenefitDisbursement" VALUES
-('BenDisb-1','2025-09-15','Suzanne Grocery Sept','BenAssign-1','BenSess-1'),
-('BenDisb-2','2025-10-15','Suzanne Grocery Oct','BenAssign-1','BenSess-2'),
-('BenDisb-3','2025-11-15','Suzanne Grocery Nov','BenAssign-1','BenSess-3'),
-('BenDisb-4','2025-03-10','Suzanne Rental One-time','BenAssign-2','BenSess-5'),
-('BenDisb-5','2025-05-20','Sarah Housing Workshop','BenAssign-3','BenSess-6');
+('BenDisb-1',
+ '2025-02-20',     -- ActualCompletionDate
+ 'BenAssign-1',    -- BenefitAssignmentId  (e.g. Suzanne's grocery vouchers)
+ 'BenSess-1',      -- BenefitSessionId     (first session for that schedule)
+ 'Enroll-1',       -- ProgramEnrollmentId  (Suzanne – Program-1)
+ 'Account-2'       -- RecipientId          (Suzanne – Person Account)
+);
+
+INSERT INTO "BenefitDisbursement" VALUES
+('BenDisb-2',
+ '2025-03-05',
+ 'BenAssign-2',    -- another assignment (e.g. rental assistance for Carolyn)
+ 'BenSess-2',
+ 'Enroll-5',       -- Carolyn – Program-3
+ 'Account-6'       -- Carolyn – Person Account
+);
+
+INSERT INTO "BenefitDisbursement" VALUES
+('BenDisb-3',
+ '2025-08-15',
+ 'BenAssign-3',    -- food support for Karl
+ 'BenSess-3',
+ 'Enroll-6',       -- Karl – Program-2
+ 'Account-7'       -- Karl – Person Account
+);
+
+INSERT INTO "BenefitDisbursement" VALUES
+('BenDisb-4',
+ '2025-09-10',
+ 'BenAssign-1',    -- second disbursement on Suzanne's assignment
+ 'BenSess-4',
+ 'Enroll-1',
+ 'Account-2'
+);
 
 -- =========================================================
 -- Care Plan Detail and Goal Assignment Detail
@@ -780,15 +929,18 @@ CREATE TABLE "CarePlanDetail" (
     "Name" VARCHAR(255),
     "CarePlanId" VARCHAR(255),
     "Description" VARCHAR(255),
+    "DetailType" VARCHAR(255),
+    "DetailCodeId" VARCHAR(255),
+    "DetailRecordId" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
 INSERT INTO "CarePlanDetail" VALUES
-('CPDetail-1','Suzanne – Initial Intake','CP-1','Completed intake and assessment.'),
-('CPDetail-2','Suzanne – Landlord Negotiation','CP-1','Negotiated repayment plan.'),
-('CPDetail-3','Suzanne – Food Pantry Enrollment','CP-2','Enrolled in monthly food pickup.'),
-('CPDetail-4','Sarah – Housing Intake','CP-3','Completed youth housing intake.'),
-('CPDetail-5','Carolyn – Rental Arrears Intake','CP-4','Gathered documentation for arrears.');
+('CPDetail-1','Suzanne – Initial Intake','CP-1','Completed intake and assessment.','Assessment',NULL,'Account-2'),
+('CPDetail-2','Suzanne – Landlord Negotiation','CP-1','Negotiated repayment plan.','Action','CodeSet-1',NULL),
+('CPDetail-3','Suzanne – Food Pantry Enrollment','CP-2','Enrolled in monthly food pickup.','Service','CodeSet-3',NULL),
+('CPDetail-4','Sarah – Housing Intake','CP-3','Completed youth housing intake.','Assessment',NULL,'Account-3'),
+('CPDetail-5','Carolyn – Rental Arrears Intake','CP-4','Gathered documentation for arrears.','Assessment','CodeSet-1',NULL);
 
 CREATE TABLE "GoalAssignmentDetail" (
     id VARCHAR(255) NOT NULL,
@@ -834,17 +986,60 @@ INSERT INTO "InteractionSummary" VALUES
 -- Public Complaint, ComplaintCase, ComplaintParticipant
 -- =========================================================
 
+-- =========================================================
+-- Public Complaints
+-- =========================================================
+
 CREATE TABLE "PublicComplaint" (
     id VARCHAR(255) NOT NULL,
+    "FirstName" VARCHAR(255),
+    "LastName" VARCHAR(255),
     "IncidentDate" VARCHAR(255),
-    "Name" VARCHAR(255),
-    "ComplainantId" VARCHAR(255),
+    "IsComplainantAuthorized" VARCHAR(255),
+    "IsReporterConfidential" VARCHAR(255),
+    "ShouldInclInRegulatoryRpt" VARCHAR(255),
+    "AccountId" VARCHAR(255),
+    "ComplaintCaseId" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
+-- Complaints filed by or about clients (Person Accounts)
 INSERT INTO "PublicComplaint" VALUES
-('Complaint-1','2025-02-15','Noise Complaint – Shared Housing','Contact-2'),
-('Complaint-2','2025-07-10','Unsafe Housing Conditions','Contact-1');
+('PC-1',
+ 'Suzanne',
+ 'Bautista',
+ '2025-02-10',
+ 'True',   -- IsComplainantAuthorized
+ 'False',  -- IsReporterConfidential
+ 'True',   -- ShouldInclInRegulatoryRpt
+ 'Account-2',  -- Suzanne Bautista (Person Account)
+ 'Case-1'      -- Related case
+);
+
+INSERT INTO "PublicComplaint" VALUES
+('PC-2',
+ 'Sarah',
+ 'Ellis',
+ '2025-03-20',
+ 'True',
+ 'False',
+ 'True',
+ 'Account-3',  -- Sarah Ellis (Person Account)
+ 'Case-2'
+);
+
+-- Example of a complaint reported by a client but about a program experience
+INSERT INTO "PublicComplaint" VALUES
+('PC-3',
+ 'Shawn',
+ 'Ibarra',
+ '2025-04-05',
+ 'True',
+ 'False',
+ 'False',      -- internal only, not in regulatory report
+ 'Account-4',  -- Shawn Ibarra (Person Account)
+ 'Case-3'
+);
 
 CREATE TABLE "ComplaintCase" (
     id VARCHAR(255) NOT NULL,

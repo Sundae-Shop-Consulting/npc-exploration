@@ -342,14 +342,9 @@ Insert GoalAssignment:
   fields:
     - Status
   lookups:
-    DescriptionCodeId:
-      table:
-      - CodeSet
-      - CodeSetBundle
     GoalAssigneeId:
       table:
       - Account
-      - Contact
     GoalDefinitionId:
       table:
       - GoalDefinition
@@ -360,6 +355,58 @@ Insert GoalAssignment:
       # Optionally add these if you actually use them in your SQL:
       # - CarePlanActivity
       # - GoalAssignment
+
+Insert BenefitAssignment:
+  sf_object: BenefitAssignment
+  fields:
+    - Status
+    - StartDateTime
+    - EndDateTime
+  lookups:
+    BenefitId:
+      table:
+      - Benefit
+    EnrolleeId:
+      table:
+      - Account
+    ProgramEnrollmentId:
+      table:
+      - ProgramEnrollment
+    ParentRecordId:
+      table:
+      - CarePlan
+      - GoalAssignment
+      - ProgramEnrollment
+
+Insert BenefitDisbursement:
+  sf_object: BenefitDisbursement
+  fields:
+  - ActualCompletionDate
+  lookups:
+    BenefitAssignmentId:
+      table:
+      - BenefitAssignment
+    BenefitSessionId:
+      table:
+      - BenefitSession
+    ProgramEnrollmentId:
+      table:
+      - ProgramEnrollment
+    RecipientId:
+      table:
+      - Account
+
+Insert BenefitScheduleAssignment:
+  sf_object: BenefitScheduleAssignment
+  fields:
+  - Name
+  lookups:
+    BenefitAssignmentId:
+      table:
+      - BenefitAssignment
+    BenefitScheduleId:
+      table:
+      - BenefitSchedule
 
 Insert ProgramCohortMember:
   sf_object: ProgramCohortMember
@@ -414,37 +461,6 @@ Insert Referral:
       - Account
       - Contact
 
-Insert BenefitDisbursement:
-  sf_object: BenefitDisbursement
-  fields:
-  - ActualCompletionDate
-  lookups:
-    BenefitAssignmentId:
-      table:
-      - BenefitAssignment
-    BenefitSessionId:
-      table:
-      - BenefitSession
-    ProgramEnrollmentId:
-      table:
-      - ProgramEnrollment
-    RecipientId:
-      table:
-      - Account
-      - Contact
-
-Insert BenefitScheduleAssignment:
-  sf_object: BenefitScheduleAssignment
-  fields:
-  - Name
-  lookups:
-    BenefitAssignmentId:
-      table:
-      - BenefitAssignment
-    BenefitScheduleId:
-      table:
-      - BenefitSchedule
-
 Insert CarePlanDetail:
   sf_object: CarePlanDetail
   fields:
@@ -484,28 +500,7 @@ Insert ComplaintParticipant:
       - Account
       - Contact
 
-Insert BenefitAssignment:
-  sf_object: BenefitAssignment
-  fields:
-    - Status
-    - StartDateTime
-    - EndDateTime
-  lookups:
-    BenefitId:
-      table:
-      - Benefit
-    EnrolleeId:
-      table:
-      - Account
-      - Contact
-    ProgramEnrollmentId:
-      table:
-      - ProgramEnrollment
-    ParentRecordId:
-      table:
-      - CarePlan
-      - GoalAssignment
-      - ProgramEnrollment
+
       
 Insert GoalAssignmentDetail:
   sf_object: GoalAssignmentDetail
