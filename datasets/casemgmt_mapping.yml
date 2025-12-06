@@ -98,9 +98,6 @@ Insert Benefit:
     BenefitTypeId:
       table:
       - BenefitType
-    GoalDefinitionId:
-      table:
-      - GoalDefinition
     ProgramId:
       table:
       - Program
@@ -120,24 +117,6 @@ Insert CodeSetBundle:
   fields:
   - Name
   lookups:
-    CodeSet10Id:
-      table:
-      - CodeSet
-    CodeSet11Id:
-      table:
-      - CodeSet
-    CodeSet12Id:
-      table:
-      - CodeSet
-    CodeSet13Id:
-      table:
-      - CodeSet
-    CodeSet14Id:
-      table:
-      - CodeSet
-    CodeSet15Id:
-      table:
-      - CodeSet
     CodeSet1Id:
       table:
       - CodeSet
@@ -150,22 +129,7 @@ Insert CodeSetBundle:
     CodeSet4Id:
       table:
       - CodeSet
-    CodeSet5Id:
-      table:
-      - CodeSet
-    CodeSet6Id:
-      table:
-      - CodeSet
-    CodeSet7Id:
-      table:
-      - CodeSet
-    CodeSet8Id:
-      table:
-      - CodeSet
-    CodeSet9Id:
-      table:
-      - CodeSet
-
+ 
 Insert Contact:
   sf_object: Contact
   fields:
@@ -179,11 +143,7 @@ Insert Contact:
     AccountId:
       table:
       - Account
-    ReportsToId:
-      table:
-      - Contact
-      after: Insert Contact
-
+ 
 Insert IndicatorAssignment:
   sf_object: IndicatorAssignment
   fields:
@@ -206,10 +166,10 @@ Insert InteractionSummary:
   fields:
   - Name
   lookups:
-    AccountId:
+    RelatedRecordId:
       table:
-      - Account
-    PartnerAccountId:
+      - Case
+    AccountId:
       table:
       - Account
 
@@ -255,12 +215,6 @@ Insert CarePlanTemplateBenefit:
       table:
       - CarePlanTemplate
 
-Insert BusinessHours:
-  sf_object: BusinessHours
-  fields:
-  - Name
-  - TimeZoneSidKey
-
 Insert Case:
   sf_object: Case
   fields:
@@ -272,9 +226,6 @@ Insert Case:
     AccountId:
       table:
       - Account
-    BusinessHoursId:
-      table:
-      - BusinessHours
     ContactId:
       table:
       - Contact
@@ -305,21 +256,16 @@ Insert OutcomeActivity:
 Insert ProgramEnrollment:
   sf_object: ProgramEnrollment
   fields:
-  - IsActive
-  - IsAnonymous
-  - Name
+    - IsActive
+    - IsAnonymous
+    - Name
   lookups:
     AccountId:
       table:
-      - Account
-    ContactId:
-      table:
-      - Contact
+        - Account
     ProgramId:
       table:
-      - Program
-
-
+        - Program
 
 Insert BenefitSession:
   sf_object: BenefitSession
@@ -350,6 +296,18 @@ Insert CareBarrier:
       table:
       - Account
 
+Insert CaseParticipant:
+  sf_object: CaseParticipant
+  fields:
+  - Status
+  lookups:
+    CaseId:
+      table:
+      - Case
+    ParticipantId:
+      table:
+      - Account
+
 Insert CarePlan:
   sf_object: CarePlan
   fields:
@@ -365,20 +323,7 @@ Insert CarePlan:
     ParticipantId:
       table:
       - Account
-      - Contact
 
-Insert CaseParticipant:
-  sf_object: CaseParticipant
-  fields:
-  - Status
-  lookups:
-    CaseId:
-      table:
-      - Case
-    ParticipantId:
-      table:
-      - Account
-      - Contact
 
 Insert CaseProgram:
   sf_object: CaseProgram

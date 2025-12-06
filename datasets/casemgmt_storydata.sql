@@ -131,25 +131,28 @@ CREATE TABLE "Contact" (
     PRIMARY KEY (id)
 );
 
--- A subset of contacts tied to some accounts
-INSERT INTO "Contact" VALUES('Contact-1','False','False','False','Suzanne','Bautista','Account-2');
-INSERT INTO "Contact" VALUES('Contact-2','False','False','False','Sarah','Ellis','Account-3');
-INSERT INTO "Contact" VALUES('Contact-3','False','False','False','Shawn','Ibarra','Account-4');
-INSERT INTO "Contact" VALUES('Contact-4','False','False','False','Collin','Huerta','Account-5');
-INSERT INTO "Contact" VALUES('Contact-5','False','False','False','Carolyn','Dalton','Account-6');
-INSERT INTO "Contact" VALUES('Contact-6','False','False','False','Karl','Franklin','Account-7');
-INSERT INTO "Contact" VALUES('Contact-7','False','False','False','Ashlee','Aguilar','Account-8');
-INSERT INTO "Contact" VALUES('Contact-8','False','False','False','Lucas','Armstrong','Account-9');
-INSERT INTO "Contact" VALUES('Contact-9','False','False','False','Cristian','Kerr','Account-10');
-INSERT INTO "Contact" VALUES('Contact-10','False','False','False','Meghan','Christensen','Account-31');
+-- Client contacts – not children of Person Accounts
+INSERT INTO "Contact" VALUES('Contact-1','False','False','False','Suzanne','Bautista',NULL);
+INSERT INTO "Contact" VALUES('Contact-2','False','False','False','Sarah','Ellis',NULL);
+INSERT INTO "Contact" VALUES('Contact-3','False','False','False','Shawn','Ibarra',NULL);
+INSERT INTO "Contact" VALUES('Contact-4','False','False','False','Collin','Huerta',NULL);
+INSERT INTO "Contact" VALUES('Contact-5','False','False','False','Carolyn','Dalton',NULL);
+INSERT INTO "Contact" VALUES('Contact-6','False','False','False','Karl','Franklin',NULL);
+INSERT INTO "Contact" VALUES('Contact-7','False','False','False','Ashlee','Aguilar',NULL);
+INSERT INTO "Contact" VALUES('Contact-8','False','False','False','Lucas','Armstrong',NULL);
+INSERT INTO "Contact" VALUES('Contact-9','False','False','False','Cristian','Kerr',NULL);
+INSERT INTO "Contact" VALUES('Contact-10','False','False','False','Meghan','Christensen',NULL);
 
--- Staff / partner contacts
-INSERT INTO "Contact" VALUES('Contact-11','False','False','False','Alex','Rivera','Account-1');
-INSERT INTO "Contact" VALUES('Contact-12','False','False','False','Nora','Singh','Account-32');
+-- Staff / partner contacts – tied to **business** accounts
+INSERT INTO "Contact" VALUES('Contact-11','False','False','False','Alex','Rivera','Account-1');   -- Northside Community Clinic (business)
+INSERT INTO "Contact" VALUES('Contact-12','False','False','False','Nora','Singh','Account-32');  -- Lynn PLC (business)
+
+-- Additional standalone contacts (no org association)
 INSERT INTO "Contact" VALUES('Contact-13','False','False','False','Casey','Morgan',NULL);
 INSERT INTO "Contact" VALUES('Contact-14','False','False','False','Riley','James',NULL);
 INSERT INTO "Contact" VALUES('Contact-15','False','False','False','Elliot','Green',NULL);
 INSERT INTO "Contact" VALUES('Contact-16','False','False','False','Hannah','Ortiz',NULL);
+
 
 -- =========================================================
 -- Program and cohorts
@@ -180,25 +183,30 @@ INSERT INTO "ProgramCohort" VALUES
 ('ProgCohort-1','Family Stability 2025 Cohort','Program-1'),
 ('ProgCohort-2','Youth Housing Spring 2025','Program-4');
 
+-- =========================================================
+-- Program Enrollment
+-- =========================================================
+
 CREATE TABLE "ProgramEnrollment" (
     id VARCHAR(255) NOT NULL,
     "IsActive" VARCHAR(255),
     "IsAnonymous" VARCHAR(255),
     "Name" VARCHAR(255),
-    "ParticipantId" VARCHAR(255),
+    "AccountId" VARCHAR(255),
     "ProgramId" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
+-- Program enrollments using Person Accounts as participants
 INSERT INTO "ProgramEnrollment" VALUES
-('Enroll-1','True','False','Suzanne – Family Stability','Contact-1','Program-1'),
-('Enroll-2','True','False','Sarah – Family Stability','Contact-2','Program-1'),
-('Enroll-3','True','False','Shawn – Family Stability','Contact-3','Program-1'),
-('Enroll-4','True','False','Collin – Family Stability','Contact-4','Program-1'),
-('Enroll-5','True','False','Carolyn – Rental Assistance','Contact-5','Program-3'),
-('Enroll-6','True','False','Karl – Food Security','Contact-6','Program-2'),
-('Enroll-7','False','False','Suzanne – Emergency Rental Assistance','Contact-1','Program-3'),
-('Enroll-8','False','False','Sarah – Youth Housing','Contact-2','Program-4');
+('Enroll-1','True','False','Suzanne – Family Stability','Account-2','Program-1'),
+('Enroll-2','True','False','Sarah – Family Stability','Account-3','Program-1'),
+('Enroll-3','True','False','Shawn – Family Stability','Account-4','Program-1'),
+('Enroll-4','True','False','Collin – Family Stability','Account-5','Program-1'),
+('Enroll-5','True','False','Carolyn – Rental Assistance','Account-6','Program-3'),
+('Enroll-6','True','False','Karl – Food Security','Account-7','Program-2'),
+('Enroll-7','False','False','Suzanne – Emergency Rental Assistance','Account-2','Program-3'),
+('Enroll-8','False','False','Sarah – Youth Housing','Account-3','Program-4');
 
 CREATE TABLE "ProgramCohortMember" (
     id VARCHAR(255) NOT NULL,
@@ -214,18 +222,52 @@ INSERT INTO "ProgramCohortMember" VALUES
 ('CohortMember-3','False','ProgCohort-1','Enroll-4'),
 ('CohortMember-4','False','ProgCohort-2','Enroll-8');
 
+-- =========================================================
+-- Business Hours
+-- =========================================================
+
 CREATE TABLE "BusinessHours" (
     id VARCHAR(255) NOT NULL,
     "Name" VARCHAR(255),
     "TimeZoneSidKey" VARCHAR(255),
+    "IsActive" VARCHAR(255),
+    "MondayStartTime" VARCHAR(255),
+    "MondayEndTime" VARCHAR(255),
+    "TuesdayStartTime" VARCHAR(255),
+    "TuesdayEndTime" VARCHAR(255),
+    "WednesdayStartTime" VARCHAR(255),
+    "WednesdayEndTime" VARCHAR(255),
+    "ThursdayStartTime" VARCHAR(255),
+    "ThursdayEndTime" VARCHAR(255),
+    "FridayStartTime" VARCHAR(255),
+    "FridayEndTime" VARCHAR(255),
+    "SaturdayStartTime" VARCHAR(255),
+    "SaturdayEndTime" VARCHAR(255),
+    "SundayStartTime" VARCHAR(255),
+    "SundayEndTime" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
 -- Default business hours used by all cases in this dataset
 INSERT INTO "BusinessHours" VALUES(
   'BH-Default',
-  'Default NPC Case Business Hours',
-  'America/Los_Angeles'
+  'Default NPC Business Hours',
+  'America/Los_Angeles',
+  'True',              -- IsActive
+  '09:00:00.000Z',     -- MondayStartTime
+  '17:00:00.000Z',     -- MondayEndTime
+  '09:00:00.000Z',     -- TuesdayStartTime
+  '17:00:00.000Z',     -- TuesdayEndTime
+  '09:00:00.000Z',     -- WednesdayStartTime
+  '17:00:00.000Z',     -- WednesdayEndTime
+  '09:00:00.000Z',     -- ThursdayStartTime
+  '17:00:00.000Z',     -- ThursdayEndTime
+  '09:00:00.000Z',     -- FridayStartTime
+  '17:00:00.000Z',     -- FridayEndTime
+  NULL,                -- SaturdayStartTime
+  NULL,                -- SaturdayEndTime
+  NULL,                -- SundayStartTime
+  NULL                 -- SundayEndTime
 );
 
 -- =========================================================
@@ -238,7 +280,6 @@ CREATE TABLE "Case" (
     "IsSelfServiceClosed" VARCHAR(255),
     "IsStopped" VARCHAR(255),
     "IsVisibleInSelfService" VARCHAR(255),
-    "BusinessHoursId" VARCHAR(255),
     "AccountId" VARCHAR(255),
     "ContactId" VARCHAR(255),
     "ParentId" VARCHAR(255),
@@ -246,28 +287,30 @@ CREATE TABLE "Case" (
 );
 
 INSERT INTO "Case" VALUES
-('Case-1','False','False','False','False','BH-Default','Account-2','Contact-1',NULL),
-('Case-2','False','False','False','False','BH-Default','Account-3','Contact-2',NULL),
-('Case-3','False','False','False','False','BH-Default','Account-4','Contact-3',NULL),
-('Case-4','False','False','False','False','BH-Default','Account-5','Contact-4',NULL),
-('Case-5','False','False','False','False','BH-Default','Account-6','Contact-5',NULL);
+('Case-1','False','False','False','False','Account-2','Contact-1',NULL),
+('Case-2','False','False','False','False','Account-3','Contact-2',NULL),
+('Case-3','False','False','False','False','Account-4','Contact-3',NULL),
+('Case-4','False','False','False','False','Account-5','Contact-4',NULL),
+('Case-5','False','False','False','False','Account-6','Contact-5',NULL);
+
+-- =========================================================
+-- Case Participants
+-- =========================================================
 
 CREATE TABLE "CaseParticipant" (
     id VARCHAR(255) NOT NULL,
-    "Name" VARCHAR(255),
+    "Status" VARCHAR(255),
     "CaseId" VARCHAR(255),
     "ParticipantId" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
 INSERT INTO "CaseParticipant" VALUES
-('CasePart-1','Primary Applicant','Case-1','Contact-1'),
-('CasePart-2','Household Member','Case-1','Contact-2'),
-('CasePart-3','Primary Applicant','Case-2','Contact-2'),
-('CasePart-4','Partner Contact','Case-2','Contact-11'),
-('CasePart-5','Primary Applicant','Case-3','Contact-3'),
-('CasePart-6','Primary Applicant','Case-4','Contact-4'),
-('CasePart-7','Primary Applicant','Case-5','Contact-5');
+('CasePart-1','Active','Case-1','Account-2'),
+('CasePart-2','Active','Case-2','Account-3'),
+('CasePart-3','Active','Case-3','Account-4'),
+('CasePart-4','Active','Case-4','Account-5'),
+('CasePart-5','Active','Case-5','Account-6');
 
 CREATE TABLE "CaseProgram" (
     id VARCHAR(255) NOT NULL,
@@ -320,12 +363,13 @@ INSERT INTO "CarePlanTemplate" VALUES
 ('CPT-1','Family Stability – Standard','Published'),
 ('CPT-2','Youth Housing – Intensive','Draft');
 
+-- =========================================================
+-- Care Plans
+-- =========================================================
+
 CREATE TABLE "CarePlan" (
     id VARCHAR(255) NOT NULL,
-    "Description" VARCHAR(255),
-    "EndDate" VARCHAR(255),
     "Name" VARCHAR(255),
-    "StartDate" VARCHAR(255),
     "Status" VARCHAR(255),
     "CarePlanTemplateId" VARCHAR(255),
     "CaseId" VARCHAR(255),
@@ -333,42 +377,13 @@ CREATE TABLE "CarePlan" (
     PRIMARY KEY (id)
 );
 
+-- One care plan per case/client
 INSERT INTO "CarePlan" VALUES
-('CP-1','Stabilize housing and income',
- '2025-06-30T23:59:59.000Z',
- 'Suzanne Family Stability Plan',
- '2025-01-15T00:00:00.000Z',
- 'Completed',
- 'CPT-1',
- 'Case-1',
- 'Contact-1'),
+('CP-1','Suzanne – Family Stability Plan','Active','CPT-1','Case-1','Account-2'),
+('CP-2','Sarah – Family Stability Plan','Active','CPT-1','Case-2','Account-3'),
+('CP-3','Shawn – Family Stability Plan','Active','CPT-1','Case-3','Account-4'),
+('CP-4','Collin – Rental Assistance Plan','Active','CPT-1','Case-4','Account-5');
 
-('CP-2','Ongoing food security support',
- NULL,
- 'Suzanne Food Support Plan',
- '2025-08-01T00:00:00.000Z',
- 'Active',
- 'CPT-1',
- 'Case-1',
- 'Contact-1'),
-
-('CP-3','Youth housing transition plan',
- '2025-09-30T23:59:59.000Z',
- 'Sarah Youth Housing Plan',
- '2025-04-01T00:00:00.000Z',
- 'Completed',
- 'CPT-2',
- 'Case-2',
- 'Contact-2'),
-
-('CP-4','Initial stabilization for rental arrears',
- NULL,
- 'Carolyn Rental Assistance Plan',
- '2025-11-01T00:00:00.000Z',
- 'Active',
- 'CPT-1',
- 'Case-4',
- 'Contact-4');
 
 CREATE TABLE "GoalDefinition" (
     id VARCHAR(255) NOT NULL,
@@ -453,19 +468,12 @@ CREATE TABLE "CodeSetBundle" (
     "CodeSet2Id" VARCHAR(255),
     "CodeSet3Id" VARCHAR(255),
     "CodeSet4Id" VARCHAR(255),
-    "CodeSet5Id" VARCHAR(255),
-    "CodeSet6Id" VARCHAR(255),
-    "CodeSet7Id" VARCHAR(255),
-    "CodeSet8Id" VARCHAR(255),
-    "CodeSet9Id" VARCHAR(255),
-    "CodeSet10Id" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
 INSERT INTO "CodeSetBundle" VALUES
 ('CodeBundle-1','Basic Stability Barriers',
- 'CodeSet-1','CodeSet-2','CodeSet-3','CodeSet-4',
- NULL,NULL,NULL,NULL,NULL,NULL);
+ 'CodeSet-1','CodeSet-2','CodeSet-3','CodeSet-4');
 
 CREATE TABLE "CareBarrierType" (
     id VARCHAR(255) NOT NULL,
@@ -481,20 +489,27 @@ INSERT INTO "CareBarrierType" VALUES
 ('BarrierType-2','Income Barrier','Financial','CodeSet-2',NULL),
 ('BarrierType-3','Food Barrier','Food','CodeSet-3',NULL);
 
+-- =========================================================
+-- Care Barriers
+-- =========================================================
+
 CREATE TABLE "CareBarrier" (
     id VARCHAR(255) NOT NULL,
+    "IsActive" VARCHAR(255),
     "Name" VARCHAR(255),
-    "CarePlanId" VARCHAR(255),
+    "Status" VARCHAR(255),
     "CareBarrierTypeId" VARCHAR(255),
+    "CaseId" VARCHAR(255),
+    "PatientId" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
+-- Example barriers tied to cases + clients (Person Accounts)
 INSERT INTO "CareBarrier" VALUES
-('Barrier-1','Suzanne – Eviction Risk','CP-1','BarrierType-1'),
-('Barrier-2','Suzanne – Low Income','CP-1','BarrierType-2'),
-('Barrier-3','Suzanne – Food Insecurity','CP-2','BarrierType-3'),
-('Barrier-4','Sarah – Youth Housing Need','CP-3','BarrierType-1'),
-('Barrier-5','Carolyn – Rental Arrears','CP-4','BarrierType-1');
+('Barrier-1','True','Eviction notice','Open','CBType-1','Case-1','Account-2'),
+('Barrier-2','True','Food insecurity','Open','CBType-2','Case-1','Account-2'),
+('Barrier-3','True','Job loss','Open','CBType-3','Case-2','Account-3'),
+('Barrier-4','True','Unstable employment','Open','CBType-3','Case-3','Account-4');
 
 -- =========================================================
 -- CarePlanTemplateGoal, CarePlanTemplateBenefit
@@ -508,9 +523,9 @@ CREATE TABLE "CarePlanTemplateGoal" (
 );
 
 INSERT INTO "CarePlanTemplateGoal" VALUES
-('CPTGoal-1','CPT-1','GoalDef-1'),
-('CPTGoal-2','CPT-1','GoalDef-2'),
-('CPTGoal-3','CPT-1','GoalDef-3'),
+('CPTGoal-1','CPT-2','GoalDef-1'),
+('CPTGoal-2','CPT-2','GoalDef-2'),
+('CPTGoal-3','CPT-2','GoalDef-3'),
 ('CPTGoal-4','CPT-2','GoalDef-4');
 
 CREATE TABLE "CarePlanTemplateBenefit" (
@@ -798,18 +813,22 @@ CREATE TABLE "InteractionSummary" (
     id VARCHAR(255) NOT NULL,
     "Name" VARCHAR(255),
     "InteractionDate" VARCHAR(255),
-    "CaseId" VARCHAR(255),
-    "ParticipantId" VARCHAR(255),
+    "AccountId" VARCHAR(255),
+    "RelatedRecordId" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
+-- For this dataset:
+--  - AccountId = client’s Person Account
+--  - RelatedRecordId = Case
+
 INSERT INTO "InteractionSummary" VALUES
-('Interact-1','Suzanne – Intake Appointment','2025-01-10','Case-1','Contact-1'),
-('Interact-2','Suzanne – Landlord Call','2025-02-05','Case-1','Contact-1'),
-('Interact-3','Suzanne – Food Pantry Orientation','2025-08-05','Case-1','Contact-1'),
-('Interact-4','Sarah – Intake Appointment','2025-03-01','Case-2','Contact-2'),
-('Interact-5','Shawn – Intake Appointment','2025-03-15','Case-3','Contact-3'),
-('Interact-6','Carolyn – Rental Assistance Intake','2025-11-02','Case-4','Contact-4');
+('Interact-1','Suzanne – Intake Appointment','2025-01-10','Account-2','Case-1'),
+('Interact-2','Suzanne – Landlord Call','2025-02-05','Account-2','Case-1'),
+('Interact-3','Suzanne – Food Pantry Orientation','2025-08-05','Account-2','Case-1'),
+('Interact-4','Sarah – Intake Appointment','2025-03-01','Account-3','Case-2'),
+('Interact-5','Shawn – Intake Appointment','2025-03-15','Account-4','Case-3'),
+('Interact-6','Carolyn – Rental Assistance Intake','2025-11-02','Account-5','Case-4');
 
 -- =========================================================
 -- Public Complaint, ComplaintCase, ComplaintParticipant
