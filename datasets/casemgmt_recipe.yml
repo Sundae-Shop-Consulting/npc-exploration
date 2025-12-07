@@ -1,0 +1,726 @@
+# =========================================
+# Nonprofit Cloud Case Management
+# Sample Data Recipe
+# =========================================
+# This recipe creates a realistic case management scenario.
+# Field names verified against Nonprofit Cloud Developer Guide v65.0
+#
+# Requires scratch org features:
+# - ProgramManagement
+# - OutcomeManagement
+# - NonprofitCloudCaseManagementUser
+# - PersonAccounts
+
+# -------------------------------------------------------
+# PERSON ACCOUNTS (Clients/Constituents)
+# -------------------------------------------------------
+- object: Account
+  nickname: client_person_account
+  count: 30
+  fields:
+    # Use RecordTypeId via lookup or just set person account fields
+    FirstName:
+      fake: first_name
+    LastName:
+      fake: last_name
+    PersonEmail:
+      fake: email
+    PersonMailingStreet:
+      fake: street_address
+    PersonMailingCity:
+      fake: city
+    PersonMailingStateCode:
+      random_choice:
+        - CA
+        - NY
+        - TX
+        - WA
+        - IL
+        - FL
+        - PA
+        - OH
+    PersonMailingCountryCode: "US"
+    PersonMailingPostalCode:
+      fake: postcode
+    Phone:
+      fake: phone_number
+    PersonBirthdate:
+      date_between:
+        start_date: -65y
+        end_date: -18y
+
+# -------------------------------------------------------
+# ORGANIZATIONAL ACCOUNTS (Partner agencies, service providers)
+# -------------------------------------------------------
+- object: Account
+  nickname: organization_account
+  count: 8
+  fields:
+    Name:
+      fake: company
+    Type: "Organization"
+    BillingStreet:
+      fake: street_address
+    BillingCity:
+      fake: city
+    BillingStateCode:
+      random_choice:
+        - CA
+        - NY
+        - TX
+        - WA
+        - IL
+        - FL
+        - PA
+        - OH
+    BillingCountryCode: "US"
+    BillingPostalCode:
+      fake: postcode
+    Phone:
+      fake: phone_number
+
+# -------------------------------------------------------
+# PROGRAMS
+# -------------------------------------------------------
+- object: Program
+  nickname: program
+  count: 6
+  fields:
+    Name:
+      fake.text:
+        max_nb_chars: 80
+    
+    Status:
+      random_choice:
+        - Active
+        - Planning
+    
+    StartDate:
+      date_between:
+        start_date: -2y
+        end_date: -6m
+    
+    EndDate:
+      date_between:
+        start_date: +6m
+        end_date: +2y
+
+# -------------------------------------------------------
+# DEDICATED ACTIVE PROGRAM FOR BENEFIT CHAIN
+# -------------------------------------------------------
+- object: Program
+  nickname: benefit_program
+  count: 1
+  fields:
+    Name: "Benefits Test Program"
+    Status: Active
+    StartDate:
+      date_between:
+        start_date: -2y
+        end_date: -6m
+    EndDate:
+      date_between:
+        start_date: +6m
+        end_date: +2y
+
+# -------------------------------------------------------
+# PROGRAM ENROLLMENTS (General pool with various statuses)
+# -------------------------------------------------------
+- object: ProgramEnrollment
+  nickname: program_enrollment
+  count: 40
+  fields:
+    Name:
+      fake: catch_phrase
+    
+    ProgramId:
+      reference: program
+    
+    AccountId:
+      reference: client_person_account
+    
+    Status:
+      random_choice:
+        - Active
+        - Applied
+        - Completed
+        - Withdrawn
+    
+    StartDate:
+      date_between:
+        start_date: -1y
+        end_date: today
+
+# -------------------------------------------------------
+# DEDICATED CLIENT FOR BENEFIT CHAIN
+# -------------------------------------------------------
+- object: Account
+  nickname: benefit_client_account
+  count: 1
+  fields:
+    FirstName: "Benefits"
+    LastName: "TestClient"
+    PersonEmail: "benefits.test@example.com"
+    PersonMailingStreet: "123 Test Street"
+    PersonMailingCity: "Seattle"
+    PersonMailingStateCode: "WA"
+    PersonMailingCountryCode: "US"
+    PersonMailingPostalCode: "98101"
+    Phone: "555-0100"
+
+# -------------------------------------------------------
+# ACTIVE PROGRAM ENROLLMENT (For BenefitAssignment validation)
+# -------------------------------------------------------
+- object: ProgramEnrollment
+  nickname: active_program_enrollment
+  count: 1
+  fields:
+    Name: "Active Enrollment for Benefits"
+    ProgramId:
+      reference: benefit_program
+    AccountId:
+      reference: benefit_client_account
+    Status: Active
+    IsActive: true
+    StartDate:
+      date_between:
+        start_date: -1y
+        end_date: today
+
+# -------------------------------------------------------
+# REFERRALS (Entry point into services)
+# ReferralType is required: INBOUND or OUTBOUND
+# -------------------------------------------------------
+- object: Referral
+  nickname: referral
+  count: 35
+  fields:
+    # Name is Autonumber - don't set
+    
+    ClientId:
+      reference: client_person_account
+    
+    ReferrerId:
+      reference: organization_account
+    
+    # Required field
+    ReferralType: INBOUND
+    
+    Status:
+      random_choice:
+        - New
+        - In Review
+        - Approved
+        - Enrolled
+        - Rejected
+    
+    Priority:
+      random_choice:
+        - Critical
+        - High
+        - Medium
+        - Low
+    
+    ReferralDate:
+      date_between:
+        start_date: -6m
+        end_date: today
+    
+    Category:
+      random_choice:
+        - "Housing"
+        - "Food"
+        - "Mental Health"
+        - "Employment"
+        - "Family Services"
+    
+    Description:
+      fake: sentence
+
+# -------------------------------------------------------
+# CASES
+# -------------------------------------------------------
+- object: Case
+  nickname: case_record
+  count: 30
+  fields:
+    Subject:
+      fake: catch_phrase
+    
+    Description:
+      fake: sentence
+    
+    Status:
+      random_choice:
+        - New
+        - Working
+        - Escalated
+        - Closed
+    
+    Priority:
+      random_choice:
+        - High
+        - Medium
+        - Low
+    
+    Origin:
+      random_choice:
+        - Phone
+        - Email
+        - Web
+    
+    AccountId:
+      reference: client_person_account
+
+# -------------------------------------------------------
+# CASE PARTICIPANTS (Junction between Case and Account/Contact)
+# -------------------------------------------------------
+- object: CaseParticipant
+  nickname: case_participant
+  count: 1
+  fields:
+    CaseId:
+      reference: case_record
+    
+    ParticipantId:
+      reference: client_person_account
+    
+    Role: Applicant
+    
+    Status: Active
+
+# -------------------------------------------------------
+# CARE PLAN TEMPLATES (Must be Published for CarePlan to use)
+# -------------------------------------------------------
+- object: CarePlanTemplate
+  nickname: care_plan_template
+  count: 5
+  fields:
+    Name:
+      fake.text:
+        max_nb_chars: 80
+    
+    Description:
+      fake: sentence
+    
+    Status: Published
+
+# -------------------------------------------------------
+# CARE PLANS
+# Uses ParticipantId and EndDate (not AccountId/TargetEndDate)
+# -------------------------------------------------------
+- object: CarePlan
+  nickname: care_plan
+  count: 1
+  fields:
+    Name: "Sample Care Plan"
+    
+    CaseId:
+      reference: case_record
+    
+    ParticipantId:
+      reference: client_person_account
+    
+    CarePlanTemplateId:
+      reference: care_plan_template
+    
+    Status: Active
+    
+    StartDate:
+      date_between:
+        start_date: -1m
+        end_date: today
+    
+    EndDate:
+      date_between:
+        start_date: today
+        end_date: +6m
+
+# -------------------------------------------------------
+# INTERACTIONS (Meetings/calls between people)
+# Fields: InteractionType (not Type), StartTime/EndTime (not DateTime/Duration)
+# No Status or InteractionSummaryId fields
+# -------------------------------------------------------
+- object: Interaction
+  nickname: interaction
+  count: 40
+  fields:
+    Name:
+      fake: catch_phrase
+    
+    AccountId:
+      reference: client_person_account
+    
+    InteractionType:
+      random_choice:
+        - Phone Call
+        - In Person
+        - Conference
+        - Email
+    
+    StartTime:
+      date_between:
+        start_date: -3m
+        end_date: today
+    
+    EndTime:
+      date_between:
+        start_date: today
+        end_date: +1d
+    
+    Description:
+      fake: sentence
+
+# -------------------------------------------------------
+# INTERACTION SUMMARIES (Track engagements with clients)
+# -------------------------------------------------------
+- object: InteractionSummary
+  nickname: interaction_summary
+  count: 25
+  fields:
+    Name:
+      fake: catch_phrase
+    
+    AccountId:
+      reference: client_person_account
+    
+    RelatedRecordId:
+      reference: case_record
+    
+    MeetingNotes:
+      fake: sentence
+    
+    ConfidentialityType:
+      random_choice:
+        - Public
+        - Confidential
+
+# -------------------------------------------------------
+# GOAL DEFINITIONS (Template goals)
+# -------------------------------------------------------
+- object: GoalDefinition
+  nickname: goal_definition
+  count: 15
+  fields:
+    Name:
+      fake.text:
+        max_nb_chars: 80
+    
+    Description:
+      fake: sentence
+    
+    Category:
+      random_choice:
+        - Housing
+        - Employment
+        - Education
+        - Health
+        - Financial
+
+# -------------------------------------------------------
+# GOAL ASSIGNMENTS (Specific goals for care plans)
+# -------------------------------------------------------
+- object: GoalAssignment
+  nickname: goal_assignment
+  count: 1
+  fields:
+    # Name is Autonumber
+    
+    GoalDefinitionId:
+      reference: goal_definition
+    
+    ParentRecordId:
+      reference: care_plan
+    
+    GoalAssigneeId:
+      reference: client_person_account
+    
+    Status: In Progress
+    
+    Priority: Medium
+    
+    TargetCompletionDate:
+      date_between:
+        start_date: today
+        end_date: +6m
+    
+    CompletionPercentage: 25
+
+# -------------------------------------------------------
+# UNIT OF MEASURE (Required for BenefitType)
+# -------------------------------------------------------
+- object: UnitOfMeasure
+  nickname: unit_of_measure_hours
+  fields:
+    Name: "Hours"
+    UnitCode: "HR"
+
+- object: UnitOfMeasure
+  nickname: unit_of_measure_sessions
+  fields:
+    Name: "Sessions"
+    UnitCode: "SESS"
+
+- object: UnitOfMeasure
+  nickname: unit_of_measure_dollars
+  fields:
+    Name: "Dollars"
+    UnitCode: "USD"
+
+- object: UnitOfMeasure
+  nickname: unit_of_measure_units
+  fields:
+    Name: "Units"
+    UnitCode: "UNIT"
+
+# -------------------------------------------------------
+# BENEFIT TYPES
+# No IsActive field on BenefitType
+# -------------------------------------------------------
+- object: BenefitType
+  nickname: benefit_type
+  count: 10
+  fields:
+    Name:
+      fake.text:
+        max_nb_chars: 80
+    
+    Description:
+      fake.text:
+        max_nb_chars: 80
+    
+    ProcessType: ProgramManagement
+    
+    UnitOfMeasureId:
+      random_choice:
+        - reference: unit_of_measure_hours
+        - reference: unit_of_measure_sessions
+        - reference: unit_of_measure_dollars
+        - reference: unit_of_measure_units
+
+# -------------------------------------------------------
+# BENEFITS
+# -------------------------------------------------------
+- object: Benefit
+  nickname: benefit
+  count: 15
+  fields:
+    Name:
+      fake: catch_phrase
+    
+    BenefitTypeId:
+      reference: benefit_type
+    
+    ProgramId:
+      reference: program
+    
+    BenefitStatus: Active
+    
+    StartDateTime:
+      date_between:
+        start_date: -1y
+        end_date: today
+    
+    EndDateTime:
+      date_between:
+        start_date: today
+        end_date: +1y
+    
+    IsActive: true
+
+# -------------------------------------------------------
+# DEDICATED BENEFIT FOR ASSIGNMENT CHAIN
+# -------------------------------------------------------
+- object: Benefit
+  nickname: benefit_for_assignment
+  count: 1
+  fields:
+    Name: "Test Benefit for Assignment"
+    BenefitTypeId:
+      reference: benefit_type
+    ProgramId:
+      reference: benefit_program
+    BenefitStatus: Active
+    StartDateTime:
+      date_between:
+        start_date: -1y
+        end_date: today
+    EndDateTime:
+      date_between:
+        start_date: today
+        end_date: +1y
+    IsActive: true
+
+# -------------------------------------------------------
+# BENEFIT ASSIGNMENTS
+# -------------------------------------------------------
+- object: BenefitAssignment
+  nickname: benefit_assignment
+  count: 1
+  fields:
+    # Name is Autonumber
+    
+    BenefitId:
+      reference: benefit_for_assignment
+    
+    ParentRecordId:
+      reference: active_program_enrollment
+    
+    ProgramEnrollmentId:
+      reference: active_program_enrollment
+    
+    EnrolleeId:
+      reference: benefit_client_account
+    
+    Priority: Medium
+    
+    StartDateTime:
+      date_between:
+        start_date: -3m
+        end_date: today
+
+# -------------------------------------------------------
+# BENEFIT DISBURSEMENTS
+# Name is Autonumber
+# Uses DisbursementStatus (not Status)
+# Uses ActualCompletionDate (not DisbursementDate)
+# Uses DisbursedQuantity (not Amount)
+# -------------------------------------------------------
+- object: BenefitDisbursement
+  nickname: benefit_disbursement
+  count: 50
+  fields:
+    # Name is Autonumber - don't set
+    
+    BenefitAssignmentId:
+      reference: benefit_assignment
+    
+    DisbursementStatus:
+      random_choice:
+        - Completed
+        - Enrolled
+        - Absent
+        - Excused
+    
+    ActualCompletionDate:
+      date_between:
+        start_date: -2m
+        end_date: today
+    
+    DisbursedQuantity:
+      random_number:
+        min: 1
+        max: 10
+
+# -------------------------------------------------------
+# CASE PROGRAM (Junction between Case and Program)
+# No ProgramEnrollmentId field
+# -------------------------------------------------------
+- object: CaseProgram
+  nickname: case_program
+  count: 35
+  fields:
+    Name:
+      fake: catch_phrase
+    
+    CaseId:
+      reference: case_record
+    
+    ProgramId:
+      reference: program
+
+# -------------------------------------------------------
+# OUTCOMES
+# -------------------------------------------------------
+- object: Outcome
+  nickname: outcome
+  count: 1
+  fields:
+    Name:
+      fake.text:
+        max_nb_chars: 80
+    
+    Description:
+      fake: sentence
+    
+    Status:
+      random_choice:
+        - Active
+        - Planned
+        - Completed
+        - Canceled
+    
+    IntendedDirection:
+      random_choice:
+        - Increase
+        - Decrease
+        - Maintain
+    
+    Term:
+      random_choice:
+        - Short-Term
+        - Medium-Term
+        - Long-Term
+
+# -------------------------------------------------------
+# OUTCOME ACTIVITIES (Junction between Outcome and activities)
+# -------------------------------------------------------
+- object: OutcomeActivity
+  nickname: outcome_activity
+  count: 1
+  fields:
+    Name:
+      fake: catch_phrase
+    
+    OutcomeId:
+      reference: outcome
+    
+    BenefitId:
+      reference: benefit
+    
+    OutcomeActivityType: Benefit
+
+# -------------------------------------------------------
+# INDICATOR DEFINITIONS
+# No DataType field
+# -------------------------------------------------------
+- object: IndicatorDefinition
+  nickname: indicator_definition
+  count: 8
+  fields:
+    Name:
+      fake.text:
+        max_nb_chars: 80
+    
+    Description:
+      fake: sentence
+    
+    Status: Active
+    
+    UnitOfMeasureId:
+      random_choice:
+        - reference: unit_of_measure_hours
+        - reference: unit_of_measure_sessions
+        - reference: unit_of_measure_dollars
+        - reference: unit_of_measure_units
+
+# -------------------------------------------------------
+# INDICATOR ASSIGNMENTS
+# No StartDate field
+# -------------------------------------------------------
+- object: IndicatorAssignment
+  nickname: indicator_assignment
+  count: 25
+  fields:
+    Name:
+      fake: catch_phrase
+    
+    IndicatorDefinitionId:
+      reference: indicator_definition
+    
+    IndicatorAssignmentType: Program
+    
+    ProgramId:
+      reference: program
+    
+    Status: Active

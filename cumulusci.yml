@@ -65,6 +65,7 @@ tasks:
         - Fundraising_Admin
         - Fundraising_User
         - GroupMembershipPsl
+        - ManageAccountingSubledger
 
   assign_grantmaking_perms:
     description: Assign grantmaking-related permission sets to the current user
@@ -86,6 +87,9 @@ tasks:
         - Benefit_Management_Caseworker
         - OutcomeManagement
         - DocumentChecklist
+        - CaseReferralPsl
+        - IndustriesAssessmentPermissionSet
+        - BenefitManagementPermissionSetLicense
 
   assign_volunteermgmt_perms:
     description: Assign all volunteer management-related permission sets to the current user
@@ -94,6 +98,7 @@ tasks:
       api_names:
         - Volunteer_Management_User
         - GroupMembershipPsl
+        - ManageVolunteerData
 
   assign_volunteerquickstart_perms:
     description: Assign all volunteer management-related permission sets to the current user
