@@ -192,6 +192,16 @@ tasks:
     options:
       path: unpackaged/volunteersQuickStart/step2
 
+  reset_fundraising_data:
+    class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+    options:
+      path: scripts/ResetData.cls
+      apex: resetFundraisingData();
+
+  generate_object_reference:
+    description: Generate a text data dictionary for selected objects
+    class_path: tasks.object_reference.GenerateObjectReference
+
 
 flows:
   assign_all_npc_perms:

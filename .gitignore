@@ -6,3 +6,4 @@
 salesforce.schema
 Referenced Packages
 .DS_STORE
+*/__pycache__/*

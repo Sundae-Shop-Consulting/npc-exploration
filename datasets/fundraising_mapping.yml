@@ -67,8 +67,6 @@ Insert Campaign:
 Insert OutreachSourceCode:
   sf_object: OutreachSourceCode
   fields:
-  - IsActive
-  - Medium
   - Name
   - SourceCode
   lookups:
@@ -76,25 +74,8 @@ Insert OutreachSourceCode:
       table:
       - Campaign
 
-Insert OutreachSummary:
-  sf_object: OutreachSummary
-  lookups:
-    CampaignId:
-      table:
-      - Campaign
-    OutreachSourceCodeId:
-      table:
-      - OutreachSourceCode
-
 Insert PaymentInstrument:
   sf_object: PaymentInstrument
-  fields:
-  - CardType
-  - ExpirationMonth
-  - ExpirationYear
-  - NickName
-  - PaymentMethodType
-  - Status
   lookups:
     AccountId:
       table:
@@ -103,12 +84,11 @@ Insert PaymentInstrument:
 Insert GiftBatch:
   sf_object: GiftBatch
   fields:
-  - BatchDate
   - DoesTotalGiftValueMatch
-  - Name
+  - EstimatedGiftCount
+  - ExpectedValueofGiftsinBatch
   - ScreenTemplateName
   - Status
-  - TotalGiftAmount
 
 Insert GiftDesignation:
   sf_object: GiftDesignation
@@ -143,15 +123,12 @@ Insert Opportunity:
 Insert GiftCommitment:
   sf_object: GiftCommitment
   fields:
-  - CommitmentDate
   - Description
   - ExpectedEndDate
-  - Frequency
   - IsAssetTransferExpected
   - Name
-  - RecordTypeId
+  - ScheduleType
   - Status
-  - TotalAmount
   lookups:
     CampaignId:
       table:
@@ -167,9 +144,7 @@ Insert GiftCommitmentSchedule:
   sf_object: GiftCommitmentSchedule
   fields:
   - EndDate
-  - InstallmentCount
   - StartDate
-  - Status
   - TransactionAmount
   - TransactionPeriod
   - Type
@@ -212,8 +187,6 @@ Insert GiftCmtChangeAttrLog:
   - ChangeStatus
   - ChangeType
   - EffectiveDate
-  - Notes
-  - Reason
   lookups:
     CampaignId:
       table:
@@ -231,16 +204,14 @@ Insert GiftCmtChangeAttrLog:
 Insert GiftTransaction:
   sf_object: GiftTransaction
   fields:
-  - CheckNumber
   - Description
-  - DonationDate
   - GiftType
   - Name
   - OriginalAmount
   - PaymentMethod
   - Status
   - TransactionDate
-  - Type
+  - TransactionDueDate
   lookups:
     CampaignId:
       table:
@@ -269,7 +240,7 @@ Insert GiftTransactionDesignation:
   sf_object: GiftTransactionDesignation
   fields:
   - Amount
-  - Percentage
+  - Percent
   lookups:
     GiftDesignationId:
       table:
@@ -293,8 +264,6 @@ Insert GiftRefund:
 Insert GiftSoftCredit:
   sf_object: GiftSoftCredit
   fields:
-  - Amount
-  - Percentage
   - Role
   lookups:
     GiftTransactionId:
@@ -307,9 +276,8 @@ Insert GiftSoftCredit:
 Insert GiftTribute:
   sf_object: GiftTribute
   fields:
-  - Message
-  - NotificationPreference
   - TributeType
+  - HonoreeName
   lookups:
     GiftCommitmentId:
       table:
@@ -334,9 +302,7 @@ Insert GiftEntry:
   - IsNewRecurringGift
   - IsSetAsDefault
   - LastName
-  - Notes
   - PaymentMethod
-  - Status
   lookups:
     CampaignId:
       table:
