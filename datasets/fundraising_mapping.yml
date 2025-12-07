@@ -13,66 +13,7 @@ Insert Account:
       table:
       - Account
       after: Insert Account
-Insert Campaign:
-  sf_object: Campaign
-  fields:
-  - IsActive
-  - Name
-  lookups:
-    ParentId:
-      table:
-      - Campaign
-      after: Insert Campaign
-Insert ContactPointAddress:
-  sf_object: ContactPointAddress
-  fields:
-  - IsDefault
-  - IsPrimary
-  - IsThirdPartyAddress
-  - IsUndeliverable
-  - Name
-Insert GiftBatch:
-  sf_object: GiftBatch
-  fields:
-  - DoesTotalGiftValueMatch
-  - ScreenTemplateName
-Insert GiftDesignation:
-  sf_object: GiftDesignation
-  fields:
-  - IsActive
-  - IsDefault
-  - Name
-Insert PartyRoleRelation:
-  sf_object: PartyRoleRelation
-  fields:
-  - Name
-  - RelatedRoleName
-  - RelationshipObjectName
-  - RoleName
-  - ShouldCreaInversRoleAuto
-  lookups:
-    RelatedInverseRecordId:
-      table:
-      - PartyRoleRelation
-      after: Insert PartyRoleRelation
-Insert AccountAccountRelation:
-  sf_object: AccountAccountRelation
-  fields:
-  - IsActive
-  lookups:
-    AccountId:
-      table:
-      - Account
-    PartyRoleRelationId:
-      table:
-      - PartyRoleRelation
-    RelatedAccountId:
-      table:
-      - Account
-    RelatedInverseRecordId:
-      table:
-      - AccountAccountRelation
-      after: Insert AccountAccountRelation
+
 Insert Contact:
   sf_object: Contact
   fields:
@@ -90,38 +31,7 @@ Insert Contact:
       table:
       - Contact
       after: Insert Contact
-Insert DonorGiftSummary:
-  sf_object: DonorGiftSummary
-  lookups:
-    DonorId:
-      table:
-      - Account
-    FirstGiftCampaignId:
-      table:
-      - Campaign
-Insert OutreachSourceCode:
-  sf_object: OutreachSourceCode
-  fields:
-  - Name
-  - SourceCode
-  lookups:
-    CampaignId:
-      table:
-      - Campaign
-Insert PartyRelationshipGroup:
-  sf_object: PartyRelationshipGroup
-  fields:
-  - Name
-  lookups:
-    AccountId:
-      table:
-      - Account
-Insert PaymentInstrument:
-  sf_object: PaymentInstrument
-  lookups:
-    AccountId:
-      table:
-      - Account
+
 Insert AccountContactRelation:
   sf_object: AccountContactRelation
   fields:
@@ -136,62 +46,36 @@ Insert AccountContactRelation:
     ContactId:
       table:
       - Contact
-Insert ContactContactRelation:
-  sf_object: ContactContactRelation
+
+Insert Campaign:
+  sf_object: Campaign
+  fields:
+  - Description
+  - EndDate
+  - ExpectedRevenue
+  - IsActive
+  - Name
+  - StartDate
+  - Status
+  - Type
+  lookups:
+    ParentId:
+      table:
+      - Campaign
+      after: Insert Campaign
+
+Insert OutreachSourceCode:
+  sf_object: OutreachSourceCode
   fields:
   - IsActive
-  lookups:
-    ContactId:
-      table:
-      - Contact
-    PartyRoleRelationId:
-      table:
-      - PartyRoleRelation
-    RelatedContactId:
-      table:
-      - Contact
-    RelatedInverseRecordId:
-      table:
-      - ContactContactRelation
-      after: Insert ContactContactRelation
-Insert ContactProfile:
-  sf_object: ContactProfile
-  fields:
-  - IsFirstGenerationStudent
-  lookups:
-    ContactId:
-      table:
-      - Contact
-Insert ListEmail:
-  sf_object: ListEmail
-  fields:
-  - FromAddress
+  - Medium
   - Name
-  - Status
+  - SourceCode
   lookups:
     CampaignId:
       table:
       - Campaign
-    OutreachSourceCodeId:
-      table:
-      - OutreachSourceCode
-Insert Opportunity:
-  sf_object: Opportunity
-  fields:
-  - CloseDate
-  - IsPrivate
-  - Name
-  - StageName
-  lookups:
-    AccountId:
-      table:
-      - Account
-    CampaignId:
-      table:
-      - Campaign
-    ContactId:
-      table:
-      - Contact
+
 Insert OutreachSummary:
   sf_object: OutreachSummary
   lookups:
@@ -201,118 +85,91 @@ Insert OutreachSummary:
     OutreachSourceCodeId:
       table:
       - OutreachSourceCode
-Insert PartyCategory:
-  sf_object: PartyCategory
-  lookups:
-    AccountId:
-      table:
-      - Account
-    ContactId:
-      table:
-      - Contact
-Insert PartyPhilanthropicMilestone:
-  sf_object: PartyPhilanthropicMilestone
-  lookups:
-    AccountId:
-      table:
-      - Account
-    ContactId:
-      table:
-      - Contact
-Insert PartyPhilanthropicRsrchPrfl:
-  sf_object: PartyPhilanthropicRsrchPrfl
+
+Insert PaymentInstrument:
+  sf_object: PaymentInstrument
   fields:
-  - IsResearchCompleted
+  - CardType
+  - ExpirationMonth
+  - ExpirationYear
+  - NickName
+  - PaymentMethodType
+  - Status
   lookups:
     AccountId:
       table:
       - Account
-    ContactId:
-      table:
-      - Contact
-Insert PartyPhilanthropicAssessment:
-  sf_object: PartyPhilanthropicAssessment
+
+Insert GiftBatch:
+  sf_object: GiftBatch
+  fields:
+  - BatchDate
+  - DoesTotalGiftValueMatch
+  - Name
+  - ScreenTemplateName
+  - Status
+  - TotalGiftAmount
+
+Insert GiftDesignation:
+  sf_object: GiftDesignation
+  fields:
+  - Description
+  - IsActive
+  - IsDefault
+  - Name
+
+Insert Opportunity:
+  sf_object: Opportunity
+  fields:
+  - Amount
+  - CloseDate
+  - Description
+  - IsPrivate
+  - Name
+  - Probability
+  - StageName
+  - Type
   lookups:
     AccountId:
       table:
       - Account
-    AssessmentOrganizationId:
+    CampaignId:
       table:
-      - Account
+      - Campaign
     ContactId:
       table:
       - Contact
-    PartyPhilanthropicRsrchPrflId:
-      table:
-      - PartyPhilanthropicRsrchPrfl
-Insert PartyPhilanthropicOccurrence:
-  sf_object: PartyPhilanthropicOccurrence
-  lookups:
-    AccountId:
-      table:
-      - Account
-    ContactId:
-      table:
-      - Contact
-    ParticipantId:
-      table:
-      - Contact
-    PartyPhilanthropicAssessmentId:
-      table:
-      - PartyPhilanthropicAssessment
-    PartyPhilanthropicRsrchPrflId:
-      table:
-      - PartyPhilanthropicRsrchPrfl
-    RelatedOrganizationId:
-      table:
-      - Account
-Insert PartyPhilanthropicIndicator:
-  sf_object: PartyPhilanthropicIndicator
-  lookups:
-    AccountId:
-      table:
-      - Account
-    ContactId:
-      table:
-      - Contact
-    ParticipantId:
-      table:
-      - Contact
-    PartyPhilanthropicOccurrenceId:
-      table:
-      - PartyPhilanthropicOccurrence
-    PartyPhilanthropicRsrchPrflId:
-      table:
-      - PartyPhilanthropicRsrchPrfl
-    RelatedOrganizationId:
-      table:
-      - Account
+
 Insert GiftCommitment:
   sf_object: GiftCommitment
   fields:
+  - CommitmentDate
+  - Description
+  - ExpectedEndDate
+  - Frequency
   - IsAssetTransferExpected
   - Name
+  - RecordTypeId
+  - Status
+  - TotalAmount
   lookups:
     CampaignId:
       table:
       - Campaign
-    CurrentGiftCmtScheduleId:
-      table:
-      - GiftCommitmentSchedule
-      after: Insert GiftCommitmentSchedule
     DonorId:
       table:
       - Account
     OpportunityId:
       table:
       - Opportunity
-    PartyPhilanthropicRsrchPrflId:
-      table:
-      - PartyPhilanthropicRsrchPrfl
+
 Insert GiftCommitmentSchedule:
   sf_object: GiftCommitmentSchedule
   fields:
+  - EndDate
+  - InstallmentCount
   - StartDate
+  - Status
   - TransactionAmount
   - TransactionPeriod
   - Type
@@ -333,6 +190,7 @@ Insert GiftCommitmentSchedule:
     PaymentInstrumentId:
       table:
       - PaymentInstrument
+
 Insert GiftDefaultDesignation:
   sf_object: GiftDefaultDesignation
   fields:
@@ -346,18 +204,7 @@ Insert GiftDefaultDesignation:
       - Campaign
       - GiftCommitment
       - Opportunity
-Insert GiftDefaultSoftCredit:
-  sf_object: GiftDefaultSoftCredit
-  fields:
-  - Role
-  lookups:
-    ParentRecordId:
-      table:
-      - GiftCommitment
-      - Opportunity
-    RecipientId:
-      table:
-      - Account
+
 Insert GiftCmtChangeAttrLog:
   sf_object: GiftCmtChangeAttrLog
   fields:
@@ -365,6 +212,8 @@ Insert GiftCmtChangeAttrLog:
   - ChangeStatus
   - ChangeType
   - EffectiveDate
+  - Notes
+  - Reason
   lookups:
     CampaignId:
       table:
@@ -378,13 +227,20 @@ Insert GiftCmtChangeAttrLog:
     OutreachSourceCodeId:
       table:
       - OutreachSourceCode
+
 Insert GiftTransaction:
   sf_object: GiftTransaction
   fields:
+  - CheckNumber
+  - Description
+  - DonationDate
+  - GiftType
   - Name
   - OriginalAmount
   - PaymentMethod
   - Status
+  - TransactionDate
+  - Type
   lookups:
     CampaignId:
       table:
@@ -405,12 +261,69 @@ Insert GiftTransaction:
     OutreachSourceCodeId:
       table:
       - OutreachSourceCode
-    PartyPhilanthropicRsrchPrflId:
-      table:
-      - PartyPhilanthropicRsrchPrfl
     PaymentInstrumentId:
       table:
       - PaymentInstrument
+
+Insert GiftTransactionDesignation:
+  sf_object: GiftTransactionDesignation
+  fields:
+  - Amount
+  - Percentage
+  lookups:
+    GiftDesignationId:
+      table:
+      - GiftDesignation
+    GiftTransactionId:
+      table:
+      - GiftTransaction
+
+Insert GiftRefund:
+  sf_object: GiftRefund
+  fields:
+  - Amount
+  - Date
+  - Reason
+  - Status
+  lookups:
+    GiftTransactionId:
+      table:
+      - GiftTransaction
+
+Insert GiftSoftCredit:
+  sf_object: GiftSoftCredit
+  fields:
+  - Amount
+  - Percentage
+  - Role
+  lookups:
+    GiftTransactionId:
+      table:
+      - GiftTransaction
+    RecipientId:
+      table:
+      - Account
+
+Insert GiftTribute:
+  sf_object: GiftTribute
+  fields:
+  - Message
+  - NotificationPreference
+  - TributeType
+  lookups:
+    GiftCommitmentId:
+      table:
+      - GiftCommitment
+    GiftTransactionId:
+      table:
+      - GiftTransaction
+    HonoreeContactId:
+      table:
+      - Account
+    NotificationContactId:
+      table:
+      - Account
+
 Insert GiftEntry:
   sf_object: GiftEntry
   fields:
@@ -421,7 +334,9 @@ Insert GiftEntry:
   - IsNewRecurringGift
   - IsSetAsDefault
   - LastName
+  - Notes
   - PaymentMethod
+  - Status
   lookups:
     CampaignId:
       table:
@@ -450,50 +365,3 @@ Insert GiftEntry:
     OutreachSourceCodeId:
       table:
       - OutreachSourceCode
-Insert GiftRefund:
-  sf_object: GiftRefund
-  fields:
-  - Amount
-  - Date
-  lookups:
-    GiftTransactionId:
-      table:
-      - GiftTransaction
-Insert GiftSoftCredit:
-  sf_object: GiftSoftCredit
-  fields:
-  - Role
-  lookups:
-    GiftTransactionId:
-      table:
-      - GiftTransaction
-    PartyPhilanthropicRsrchPrflId:
-      table:
-      - PartyPhilanthropicRsrchPrfl
-    RecipientId:
-      table:
-      - Account
-Insert GiftTransactionDesignation:
-  sf_object: GiftTransactionDesignation
-  lookups:
-    GiftDesignationId:
-      table:
-      - GiftDesignation
-    GiftTransactionId:
-      table:
-      - GiftTransaction
-Insert GiftTribute:
-  sf_object: GiftTribute
-  lookups:
-    GiftCommitmentId:
-      table:
-      - GiftCommitment
-    GiftTransactionId:
-      table:
-      - GiftTransaction
-    HonoreeContactId:
-      table:
-      - Account
-    NotificationContactId:
-      table:
-      - Account
