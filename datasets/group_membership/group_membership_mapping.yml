@@ -1,0 +1,87 @@
+Account:
+  sf_object: Account
+  table: Account
+  fields:
+    Name: Name
+
+Contact:
+  sf_object: Contact
+  table: Contact
+  fields:
+    FirstName: FirstName
+    LastName: LastName
+  lookups:
+    AccountId:
+      table: Account
+      key_field: id
+
+PartyRelationshipGroup:
+  sf_object: PartyRelationshipGroup
+  table: PartyRelationshipGroup
+  fields:
+    Name: Name
+    Category: Category
+    GroupSize: GroupSize
+    Subtype: Subtype
+    Type: Type
+  
+PartyRoleRelation:
+  sf_object: PartyRoleRelation
+  table: PartyRoleRelation
+  fields:
+    Name: Name
+    RelationshipObjectName: RelationshipObjectName
+    RoleName: RoleName
+    RelatedRoleName: RelatedRoleName
+    ShouldCreaInversRoleAuto: ShouldCreaInversRoleAuto
+
+AccountContactRelation:
+  sf_object: AccountContactRelation
+  table: AccountContactRelation
+  fields:
+    Roles: Roles
+    IsPrimaryMember: IsPrimaryMember
+    IsActive: IsActive
+    IsPrimaryGroup: IsPrimaryGroup
+    IsIncludedInGroup: IsIncludedInGroup
+  lookups:
+    AccountId:
+      table: Account
+      key_field: id
+    ContactId:
+      table: Contact
+      key_field: id
+
+AccountAccountRelation:
+  sf_object: AccountAccountRelation
+  table: AccountAccountRelation
+  fields:
+    IsActive: IsActive
+    HierarchyType: HierarchyType
+  lookups:
+    AccountId:
+      table: Account
+      key_field: id
+    RelatedAccountId:
+      table: Account
+      key_field: id
+    PartyRoleRelationId:
+      table: PartyRoleRelation
+      key_field: id
+
+ContactContactRelation:
+  sf_object: ContactContactRelation
+  table: ContactContactRelation
+  fields:
+    IsActive: IsActive
+    HierarchyType: HierarchyType
+  lookups:
+    ContactId:
+      table: Contact
+      key_field: id
+    RelatedContactId:
+      table: Contact
+      key_field: id
+    PartyRoleRelationId:
+      table: PartyRoleRelation
+      key_field: id

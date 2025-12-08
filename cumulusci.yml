@@ -267,6 +267,22 @@ tasks:
     options:
       objects: "Account,Competency,JobPosition,JobPositionAssignment,JobPositionShift,Location,OperatingHours,PersonLocationAvailability,Position,PositionQualification,TimeSlot,VolunteerInitiative"
       output_path: "datasets/volunteer_management/volunteer_objects.txt"
+  
+  generate_group_membership_object_reference:
+    class_path: tasks.object_reference.GenerateObjectReference
+    options:
+      objects: "Account,Contact,PartyRelationshipGroup,AccountContactRelation,AccountAccountRelation,ContactContactRelation,PartyRoleRelation"
+      output_path: "datasets/group_membership/group_membership_objects.txt"
+
+  
+
+
+
+
+
+
+
+
 
 flows:
 
