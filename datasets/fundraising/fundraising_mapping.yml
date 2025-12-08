@@ -1,0 +1,350 @@
+Insert Account:
+  sf_object: Account
+  fields:
+  - FirstName
+  - LastName
+  - Name
+  - PersonDoNotCall
+  - PersonHasOptedOutOfEmail
+  - PersonHasOptedOutOfFax
+  - RecordTypeId
+  lookups:
+    ParentId:
+      table:
+      - Account
+      after: Insert Account
+
+Insert Contact:
+  sf_object: Contact
+  fields:
+  - CanAllowPortalSelfReg
+  - DoNotCall
+  - FirstName
+  - HasOptedOutOfEmail
+  - HasOptedOutOfFax
+  - LastName
+  lookups:
+    AccountId:
+      table:
+      - Account
+    ReportsToId:
+      table:
+      - Contact
+      after: Insert Contact
+
+Insert AccountContactRelation:
+  sf_object: AccountContactRelation
+  fields:
+  - IsActive
+  - IsIncludedInGroup
+  - IsPrimaryGroup
+  - IsPrimaryMember
+  lookups:
+    AccountId:
+      table:
+      - Account
+    ContactId:
+      table:
+      - Contact
+
+Insert Campaign:
+  sf_object: Campaign
+  fields:
+  - Description
+  - EndDate
+  - ExpectedRevenue
+  - IsActive
+  - Name
+  - StartDate
+  - Status
+  - Type
+  lookups:
+    ParentId:
+      table:
+      - Campaign
+      after: Insert Campaign
+
+Insert OutreachSourceCode:
+  sf_object: OutreachSourceCode
+  fields:
+  - Name
+  - SourceCode
+  lookups:
+    CampaignId:
+      table:
+      - Campaign
+
+Insert PaymentInstrument:
+  sf_object: PaymentInstrument
+  lookups:
+    AccountId:
+      table:
+      - Account
+
+Insert GiftBatch:
+  sf_object: GiftBatch
+  fields:
+  - DoesTotalGiftValueMatch
+  - EstimatedGiftCount
+  - ExpectedValueofGiftsinBatch
+  - ScreenTemplateName
+  - Status
+
+Insert GiftDesignation:
+  sf_object: GiftDesignation
+  fields:
+  - Description
+  - IsActive
+  - IsDefault
+  - Name
+
+Insert Opportunity:
+  sf_object: Opportunity
+  fields:
+  - Amount
+  - CloseDate
+  - Description
+  - IsPrivate
+  - Name
+  - Probability
+  - StageName
+  - Type
+  lookups:
+    AccountId:
+      table:
+      - Account
+    CampaignId:
+      table:
+      - Campaign
+    ContactId:
+      table:
+      - Contact
+
+Insert GiftCommitment:
+  sf_object: GiftCommitment
+  fields:
+  - Description
+  - ExpectedEndDate
+  - IsAssetTransferExpected
+  - Name
+  - ScheduleType
+  - Status
+  lookups:
+    CampaignId:
+      table:
+      - Campaign
+    DonorId:
+      table:
+      - Account
+    OpportunityId:
+      table:
+      - Opportunity
+
+Insert GiftCommitmentSchedule:
+  sf_object: GiftCommitmentSchedule
+  fields:
+  - EndDate
+  - StartDate
+  - TransactionAmount
+  - TransactionPeriod
+  - Type
+  lookups:
+    CampaignId:
+      table:
+      - Campaign
+    GiftCommitmentId:
+      table:
+      - GiftCommitment
+    GiftCommitmentSchdBefEditId:
+      table:
+      - GiftCommitmentSchedule
+      after: Insert GiftCommitmentSchedule
+    OutreachSourceCodeId:
+      table:
+      - OutreachSourceCode
+    PaymentInstrumentId:
+      table:
+      - PaymentInstrument
+
+Insert GiftDefaultDesignation:
+  sf_object: GiftDefaultDesignation
+  fields:
+  - AllocatedPercentage
+  lookups:
+    GiftDesignationId:
+      table:
+      - GiftDesignation
+    ParentRecordId:
+      table:
+      - Campaign
+      - GiftCommitment
+      - Opportunity
+
+Insert GiftCmtChangeAttrLog:
+  sf_object: GiftCmtChangeAttrLog
+  fields:
+  - ChangePerDayAmount
+  - ChangeStatus
+  - ChangeType
+  - EffectiveDate
+  lookups:
+    CampaignId:
+      table:
+      - Campaign
+    GiftCommitmentId:
+      table:
+      - GiftCommitment
+    GiftCommitmentScheduleId:
+      table:
+      - GiftCommitmentSchedule
+    OutreachSourceCodeId:
+      table:
+      - OutreachSourceCode
+
+Insert GiftTransaction:
+  sf_object: GiftTransaction
+  fields:
+  - Description
+  - GiftType
+  - Name
+  - OriginalAmount
+  - PaymentMethod
+  - Status
+  - TransactionDate
+  - TransactionDueDate
+  lookups:
+    CampaignId:
+      table:
+      - Campaign
+    DonorId:
+      table:
+      - Account
+    GiftCommitmentId:
+      table:
+      - GiftCommitment
+    GiftCommitmentScheduleId:
+      table:
+      - GiftCommitmentSchedule
+    MatchingEmployerTransactionId:
+      table:
+      - GiftTransaction
+      after: Insert GiftTransaction
+    OutreachSourceCodeId:
+      table:
+      - OutreachSourceCode
+    PaymentInstrumentId:
+      table:
+      - PaymentInstrument
+
+Insert GiftTransactionDesignation:
+  sf_object: GiftTransactionDesignation
+  fields:
+  - Amount
+  - Percent
+  lookups:
+    GiftDesignationId:
+      table:
+      - GiftDesignation
+    GiftTransactionId:
+      table:
+      - GiftTransaction
+
+Insert GiftRefund:
+  sf_object: GiftRefund
+  fields:
+  - Amount
+  - Date
+  - Reason
+  - Status
+  lookups:
+    GiftTransactionId:
+      table:
+      - GiftTransaction
+
+Insert GiftSoftCredit:
+  sf_object: GiftSoftCredit
+  fields:
+  - Role
+  lookups:
+    GiftTransactionId:
+      table:
+      - GiftTransaction
+    RecipientId:
+      table:
+      - Account
+
+Insert GiftTribute:
+  sf_object: GiftTribute
+  fields:
+  - TributeType
+  - HonoreeName
+  lookups:
+    GiftCommitmentId:
+      table:
+      - GiftCommitment
+    GiftTransactionId:
+      table:
+      - GiftTransaction
+    HonoreeContactId:
+      table:
+      - Account
+    NotificationContactId:
+      table:
+      - Account
+
+Insert GiftEntry:
+  sf_object: GiftEntry
+  fields:
+  - FirstName
+  - GiftAmount
+  - GiftReceivedDate
+  - GiftType
+  - IsNewRecurringGift
+  - IsSetAsDefault
+  - LastName
+  - PaymentMethod
+  lookups:
+    CampaignId:
+      table:
+      - Campaign
+    DonorId:
+      table:
+      - Account
+    GiftBatchId:
+      table:
+      - GiftBatch
+    GiftCommitmentId:
+      table:
+      - GiftCommitment
+    GiftDesignation1Id:
+      table:
+      - GiftDesignation
+    GiftDesignation2Id:
+      table:
+      - GiftDesignation
+    GiftDesignation3Id:
+      table:
+      - GiftDesignation
+    OutreachSourceCodeId:
+      table:
+      - OutreachSourceCode
+
+Insert Task:
+  sf_object: Task
+  fields:
+  - Subject
+  - Status
+  - Priority
+  - ActivityDate
+  - Description
+  lookups:
+    WhatId:
+      table:
+      - Account
+      - GiftBatch
+      - GiftCommitment
+      - GiftTransaction
+      - Campaign
+    WhoId:
+      table:
+      - Contact

@@ -192,6 +192,24 @@ tasks:
     options:
       path: unpackaged/volunteersQuickStart/step2
 
+  reset_fundraising_data:
+    class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+    options:
+      path: scripts/ResetData.cls
+      apex: resetFundraisingData();
+
+  ### Object and Field Metadata
+  
+  generate_object_reference:
+    description: Generate a text data dictionary for selected objects
+    class_path: tasks.object_reference.GenerateObjectReference
+
+  generate_fundraising_object_reference:
+    class_path: tasks.object_reference.GenerateObjectReference
+    options:
+      objects: "Account,Contact,AccountContactRelation,Campaign,OutreachSourceCode,PaymentInstrument,GiftBatch,GiftDesignation,Opportunity,GiftCommitment,GiftCommitmentSchedule,GiftDefaultDesignation,GiftCmtChangeAttrLog,GiftTransaction,GiftTransactionDesignation,GiftRefund,GiftSoftCredit,GiftTribute,GiftEntry,Task"
+      output_path: "datasets/fundraising/fundraising_objects.txt"
+
 
 flows:
   assign_all_npc_perms:
