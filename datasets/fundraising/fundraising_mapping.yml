@@ -325,9 +325,26 @@ Insert GiftEntry:
     GiftDesignation3Id:
       table:
       - GiftDesignation
-    GiftTransactionId:
-      table:
-      - GiftTransaction
     OutreachSourceCodeId:
       table:
       - OutreachSourceCode
+
+Insert Task:
+  sf_object: Task
+  fields:
+  - Subject
+  - Status
+  - Priority
+  - ActivityDate
+  - Description
+  lookups:
+    WhatId:
+      table:
+      - Account
+      - GiftBatch
+      - GiftCommitment
+      - GiftTransaction
+      - Campaign
+    WhoId:
+      table:
+      - Contact

@@ -150,6 +150,12 @@ INSERT INTO "Account" VALUES('Account-73','Julie','Barnes','','False','False','F
 INSERT INTO "Account" VALUES('Account-74','Carl','Ross','','False','False','False','RT-PERSON',NULL);
 INSERT INTO "Account" VALUES('Account-75','Anna','Henderson','','False','False','False','RT-PERSON',NULL);
 INSERT INTO "Account" VALUES('Account-76','Arthur','Coleman','','False','False','False','RT-PERSON',NULL);
+INSERT INTO "Account" VALUES('Account-103','Michael','Roberts','','False','False','False','RT-PERSON',NULL);
+INSERT INTO "Account" VALUES('Account-104','Patricia','Davis','','False','False','False','RT-PERSON',NULL);
+INSERT INTO "Account" VALUES('Account-105','Christopher','Wilson','','False','False','False','RT-PERSON',NULL);
+INSERT INTO "Account" VALUES('Account-106','Elizabeth','Taylor','','False','False','False','RT-PERSON',NULL);
+INSERT INTO "Account" VALUES('Account-107','Daniel','Martinez','','False','False','False','RT-PERSON',NULL);
+INSERT INTO "Account" VALUES('Account-108','Michelle','Anderson','','False','False','False','RT-PERSON',NULL);
 INSERT INTO "Account" VALUES('Account-77','Frances','Jenkins','','False','False','False','RT-PERSON',NULL);
 INSERT INTO "Account" VALUES('Account-78','Douglas','Perry','','False','False','False','RT-PERSON',NULL);
 INSERT INTO "Account" VALUES('Account-79','Marie','Powell','','False','False','False','RT-PERSON',NULL);
@@ -322,9 +328,8 @@ CREATE TABLE "GiftBatch" (
     PRIMARY KEY (id)
 );
 
-INSERT INTO "GiftBatch" VALUES('GB-1','True',3,'125000','Standard','Unprocessed');
-INSERT INTO "GiftBatch" VALUES('GB-2','True',3,'87500','Standard','Unprocessed');
-INSERT INTO "GiftBatch" VALUES('GB-3','False',3,'23000','Standard','Unprocessed');
+-- Open batch from Spring Gala event - awaiting processing
+INSERT INTO "GiftBatch" VALUES('GB-1','False',6,'8500','Standard','Unprocessed');
 
 -- =========================================================
 -- GiftDesignation (funds/programs donors can designate to)
@@ -682,21 +687,51 @@ CREATE TABLE "GiftEntry" (
     "GiftDesignation1Id" VARCHAR(255),
     "GiftDesignation2Id" VARCHAR(255),
     "GiftDesignation3Id" VARCHAR(255),
-    "GiftTransactionId" VARCHAR(255),
     "OutreachSourceCodeId" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
--- Batch entry records for year-end campaign
-INSERT INTO "GiftEntry" VALUES('GE-1','Jennifer',30000.00,'2024-12-20','Individual','False','True','Chen','Check','Campaign-2','Account-3','GB-2','GC-3','GD-1',NULL,NULL,NULL,'OSC-3');
-INSERT INTO "GiftEntry" VALUES('GE-2','Sarah',2500.00,'2024-12-31','Individual','False','True','Mitchell','Credit Card','Campaign-2','Account-11','GB-2',NULL,'GD-1',NULL,NULL,NULL,'OSC-3');
-INSERT INTO "GiftEntry" VALUES('GE-3','Thomas',5000.00,'2024-12-28','Individual','False','True','Brown','Credit Card','Campaign-2','Account-12','GB-2',NULL,'GD-1',NULL,NULL,NULL,'OSC-3');
+-- Pending entries from Spring Gala (March 2025) - collected at event, not yet processed
+INSERT INTO "GiftEntry" VALUES('GE-1','Michael','2500.00','2025-03-15','Individual','False','True','Roberts','Credit Card','Campaign-3','Account-103','GB-1',NULL,'GD-1',NULL,NULL,'OSC-5');
+INSERT INTO "GiftEntry" VALUES('GE-2','Patricia','1500.00','2025-03-15','Individual','False','True','Davis','Check','Campaign-3','Account-104','GB-1',NULL,'GD-2',NULL,NULL,'OSC-5');
+INSERT INTO "GiftEntry" VALUES('GE-3','Christopher','1000.00','2025-03-15','Individual','False','True','Wilson','Credit Card','Campaign-3','Account-105','GB-1',NULL,'GD-1',NULL,NULL,'OSC-5');
+INSERT INTO "GiftEntry" VALUES('GE-4','Elizabeth','750.00','2025-03-15','Individual','False','True','Taylor','Cash','Campaign-3','Account-106','GB-1',NULL,'GD-3',NULL,NULL,'OSC-5');
+INSERT INTO "GiftEntry" VALUES('GE-5','Daniel','1250.00','2025-03-15','Individual','False','True','Martinez','Credit Card','Campaign-3','Account-107','GB-1',NULL,'GD-1',NULL,NULL,'OSC-5');
+INSERT INTO "GiftEntry" VALUES('GE-6','Michelle','1500.00','2025-03-15','Individual','False','True','Anderson','Check','Campaign-3','Account-108','GB-1',NULL,'GD-2',NULL,NULL,'OSC-5');
 
--- Spring campaign entries
-INSERT INTO "GiftEntry" VALUES('GE-4','Carl',500.00,'2025-03-20','Individual','False','True','Ross','Check','Campaign-3','Account-74','GB-3',NULL,'GD-1',NULL,NULL,NULL,'OSC-5');
-INSERT INTO "GiftEntry" VALUES('GE-5','Anna',250.00,'2025-03-15','Individual','False','True','Henderson','Credit Card','Campaign-3','Account-75','GB-3',NULL,'GD-2',NULL,NULL,NULL,'OSC-5');
+-- =========================================================
+-- Task (open tasks for fundraising operations)
+-- =========================================================
 
--- Pending entry (not yet processed)
-INSERT INTO "GiftEntry" VALUES('GE-6','Arthur',1000.00,'2025-04-01','Individual','False','True','Coleman','Check','Campaign-3','Account-76','GB-3',NULL,NULL,NULL,NULL,NULL,'OSC-5');
+CREATE TABLE "Task" (
+    id VARCHAR(255) NOT NULL,
+    "Subject" VARCHAR(255),
+    "Status" VARCHAR(255),
+    "Priority" VARCHAR(255),
+    "ActivityDate" VARCHAR(255),
+    "Description" VARCHAR(2000),
+    "WhatId" VARCHAR(255),
+    "WhoId" VARCHAR(255),
+    PRIMARY KEY (id)
+);
+
+-- Tasks related to gift batch processing
+INSERT INTO "Task" VALUES('Task-1','Process Spring Gala gift batch (GB-1)','Not Started','High','2025-03-18','Review and process the 6 gift entries from the Spring Gala event. Verify batch total matches expected value of $8,500.','GB-1',NULL);
+
+-- Tasks related to gift commitments
+INSERT INTO "Task" VALUES('Task-2','Follow up on Rodriguez quarterly pledge','In Progress','Normal','2025-12-15','Check in with Maria Rodriguez about her Q1 2025 pledge payment. Last payment was on time in December.','Account-2',NULL);
+
+INSERT INTO "Task" VALUES('Task-3','Send thank you letter for Thompson major gift','Not Started','High','2025-12-10','Send personalized thank you to John Thompson for $50,000 commitment. Include information about capital campaign impact.','Account-1',NULL);
+
+-- Tasks related to upcoming transactions
+INSERT INTO "Task" VALUES('Task-4','Prepare receipt for Chen year-end gift','Not Started','Normal','2025-12-22','Generate tax receipt for Jennifer Chen''s $30,000 year-end donation. Ensure proper designation coding for general fund.','Account-3',NULL);
+
+-- Tasks related to donor stewardship (using Contact for institutional relationships)
+INSERT INTO "Task" VALUES('Task-5','Update Smith Foundation grant reporting','In Progress','Normal','2025-12-20','Prepare quarterly report for Smith Foundation grant showing program outcomes and budget spend.','Account-100','Contact-1');
+
+INSERT INTO "Task" VALUES('Task-6','Schedule meeting with Anderson about stock gift','Not Started','Normal','2025-12-12','Meet with William Anderson to discuss additional stock gift opportunities for 2025 tax year.','Account-4',NULL);
+
+-- Task related to payment instruments
+INSERT INTO "Task" VALUES('Task-7','Update expiring credit cards for recurring donors','Not Started','High','2025-12-31','Contact 3 monthly sustainers whose credit cards expire in December. Accounts: Thompson, Williams, Taylor.','Campaign-1',NULL);
 
 COMMIT;
