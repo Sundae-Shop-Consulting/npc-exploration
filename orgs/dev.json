@@ -40,6 +40,9 @@
     "enhancedNotesSettings": {
       "enableEnhancedNotes": true
     },
+    "opportunitySettings": {
+      "enableOpportunityFieldHistoryTracking": true
+    },
     "industriesSettings": {
       "enableBenefitAndGoalSharingPref": true,
       "enableBenefitManagementPreference": true,

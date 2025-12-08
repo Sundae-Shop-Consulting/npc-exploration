@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+
+    <!-- Dashboard -->
+    <types>
+        <members>FundraisingDashboards/</members>
+        <members>FundraisingDashboards/XlXJkuQNoPyekKVxiQcNoPpIebJPMD</members>
+        <name>Dashboard</name>
+    </types>
+
+    <!-- Report Types -->
+    <types>
+        <members>Accounts_with_Donor_Gift_Summaries</members>
+        <members>Accounts_with_Gift_Commitments</members>
+        <members>Benefit_Assignments</members>
+        <members>Benefit_Disbursements</members>
+        <members>Care_Plans</members>
+        <members>Funding_Awards_with_Disbursements</members>
+        <members>Funding_Awards_with_Requirements</members>
+        <members>Funding_Opportunities_with_Applications</members>
+        <members>Gift_Commitments</members>
+        <members>Gift_Commitments_with_Gift_Transactions</members>
+        <members>Gift_Commitments_with_Gift_Tributes</members>
+        <members>Gift_Transactions</members>
+        <members>Gift_Transactions_with_Gift_Tributes</members>
+        <members>Gift_Transactions_with_Transaction_Designations</members>
+        <members>Individual_Applications_with_Decision</members>
+        <members>Individual_Applications_with_Review</members>
+        <members>MDF_Claim_Request_Crt</members>
+        <members>Opportunities_with_Commitments_Transactions</members>
+        <members>Opportunities_with_Gift_Commitments</members>
+        <members>Opportunities_with_Historical_Trending</members>
+        <members>Program_Enrollments</members>
+        <members>Referrals</members>
+        <name>ReportType</name>
+    </types>
+
+    <!-- Reports -->
+    <types>
+        <members>CaseManagement/</members>
+        <members>CaseManagement/Case_Owner_DE6</members>
+        <members>CaseManagement/New_Report_ywr</members>
+        <members>CaseManagement/Program_Enrollments_lTA</members>
+        <members>CaseManagement/Referrals_Report_Ggr</members>
+        <members>Fundraising/</members>
+        <members>Fundraising/Active_Recurring_Donations_gC5</members>
+        <members>Fundraising/Donors_with_Total_Contributions_Mzb</members>
+        <members>Fundraising/Expected_Gift_Transactions_this_Calendar_niv</members>
+        <members>Fundraising/Gift_Commitments_This_Calendar_Year_swK</members>
+        <members>Fundraising/Gift_Commitments_with_Gift_Transactions_G4o</members>
+        <members>Fundraising/Opportunities_This_Calendar_Year_9OS</members>
+        <name>Report</name>
+    </types>
+
+    <version>64.0</version>
+</Package>

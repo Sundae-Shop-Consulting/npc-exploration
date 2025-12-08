@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>BenefitAssignment$Name</field>
+    </columns>
+    <columns>
+        <field>BenefitAssignment.BenefitDisbursement$Name</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>BenefitAssignment.BenefitDisbursement$DisbursedQuantity</field>
+    </columns>
+    <columns>
+        <field>BenefitAssignment.BenefitDisbursement$StartDate</field>
+    </columns>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BenefitAssignment$Benefit</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>BenefitAssignment.BenefitDisbursement$DisbursementStatus</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Assigned Benefits with/out Disbursements</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Benefit_Assignments__c</reportType>
+    <scope>user</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>BenefitAssignment$CreatedDate</dateColumn>
+        <interval>INTERVAL_CURRENT</interval>
+    </timeFrameFilter>
+</Report>

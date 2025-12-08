@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>GiftTransaction$TransactionDate</field>
+    </columns>
+    <columns>
+        <field>GiftTransaction$Donor</field>
+    </columns>
+    <columns>
+        <field>GiftTransaction$Campaign</field>
+    </columns>
+    <columns>
+        <field>GiftTransaction$OutreachSourceCode</field>
+    </columns>
+    <description>A list of expected gift transactions that are grouped as unpaid and overdue transactions in this calendar year.</description>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>GiftTransaction$Status</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Expected Gift Transactions This CY</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Gift_Transactions__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>GiftTransaction$TransactionDate</dateColumn>
+        <interval>INTERVAL_CURY</interval>
+    </timeFrameFilter>
+</Report>

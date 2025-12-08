@@ -242,6 +242,16 @@ tasks:
     options:
       path: unpackaged/volunteersQuickStart/step2
 
+  # ======================================
+  # Configuration from NPC Trial Orgs
+  # ======================================
+  deploy_npc_trial:
+    group: NPC Trial Config
+    description: Deploy the configuration captured from an NPC trial org.
+    class_path: cumulusci.tasks.salesforce.Deploy
+    options:
+      path: unpackaged/trial/
+
 
   # ======================================
   # Object & Field Metadata / References
@@ -293,14 +303,13 @@ flows:
   # ===========================
 
   dev_org:
-    group: Org Setup
+    group: NPC Org Setup
     description: Base dev org setup including NPC permissions and default app menu ordering.
     steps:
       90: 
         flow: assign_all_npc_perms
       91: 
         task: reorder_app_menu    
-
 
   # ===========================
   # Volunteer Quick Start Flows
@@ -321,7 +330,7 @@ flows:
       5:
         task: deploy_volunteers_quick_start_step2
       6: 
-        task: reorder_app_menu
+        task: reorder_app_menu_volunteering
   
   volunteer_quick_start_org:
     group: Org Setup
@@ -331,3 +340,4 @@ flows:
         flow: dev_org
       2:
         flow: deploy_volunteer_quick_start
+
