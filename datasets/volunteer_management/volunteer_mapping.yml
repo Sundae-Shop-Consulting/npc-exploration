@@ -2,16 +2,19 @@ Insert Competency:
   sf_object: Competency
   fields:
   - Name
+
 Insert OperatingHours:
   sf_object: OperatingHours
   fields:
   - Name
   - TimeZone
+
 Insert Position:
   sf_object: Position
   fields:
   - IsInternalApprovalRequired
   - Name
+
 Insert VolunteerInitiative:
   sf_object: VolunteerInitiative
   fields:
@@ -32,6 +35,7 @@ Insert VolunteerInitiative:
       table:
       - VolunteerInitiative
       after: Insert VolunteerInitiative
+
 Insert Account:
   sf_object: Account
   table: Account
@@ -53,16 +57,17 @@ Insert Account:
       table:
       - Account
       after: Insert Account
-# Insert PositionQualification:
-#   sf_object: PositionQualification
-#   lookups:
-#     PositionId:
-#       table:
-#         - Position
-#     QualificationReferenceRecordId:
-#       table:
-#         - Competency
-#       key_field: id
+
+Insert PositionQualification:
+  sf_object: PositionQualification
+  lookups:
+    PositionId:
+      table:
+      - Position
+    QualificationReferenceRecordId:
+      table:
+      - Competency
+
 Insert TimeSlot:
   sf_object: TimeSlot
   fields:
@@ -74,6 +79,7 @@ Insert TimeSlot:
     OperatingHoursId:
       table:
       - OperatingHours
+
 Insert Location:
   sf_object: Location
   fields:
@@ -81,15 +87,12 @@ Insert Location:
   - IsMobile
   - LocationType
   - Name
-  - ShouldSyncWithOci
   lookups:
-    AccountId:
-      table:
-      - Account
     ParentLocationId:
       table:
       - Location
       after: Insert Location
+
 Insert JobPosition:
   sf_object: JobPosition
   fields:
@@ -108,6 +111,7 @@ Insert JobPosition:
     VolunteerInitiativeId:
       table:
       - VolunteerInitiative
+
 Insert PersonLocationAvailability:
   sf_object: PersonLocationAvailability
   fields:
@@ -122,22 +126,24 @@ Insert PersonLocationAvailability:
     OperatingHoursId:
       table:
       - OperatingHours
-# Insert JobPositionQualification:
-#   sf_object: JobPositionQualification
-#   lookups:
-#     JobPositionId:
-#       table:
-#         - JobPosition
-#     QualificationReferenceRecordId:
-#       table:
-#         - Competency
-#       key_field: id
+
+Insert JobPositionQualification:
+  sf_object: JobPositionQualification
+  lookups:
+    JobPositionId:
+      table:
+      - JobPosition
+    QualificationReferenceRecordId:
+      table:
+      - Competency
+
 Insert JobPositionShift:
   sf_object: JobPositionShift
   lookups:
     JobPositionId:
       table:
       - JobPosition
+
 Insert JobPositionAssignment:
   sf_object: JobPositionAssignment
   fields:

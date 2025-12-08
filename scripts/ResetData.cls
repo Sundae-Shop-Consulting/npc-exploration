@@ -1,3 +1,7 @@
+/* These methods are used to delete records that would block subsequent data loads while we're testing recipes
+* because of uniqueness constraints. You wouldn't actually want to load a single dataset multiple times in a demo org.
+*/
+
 public static void resetFundraisingData() {
     delete [ SELECT Id FROM GiftTransaction ];
     delete [ SELECT Id FROM OutreachSourceCode ];

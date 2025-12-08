@@ -300,6 +300,10 @@ INSERT INTO "PositionQualification" VALUES('PositionQualification-12','Position-
 INSERT INTO "PositionQualification" VALUES('PositionQualification-13','Position-6','Competency-6');
 INSERT INTO "PositionQualification" VALUES('PositionQualification-14','Position-6','Competency-7');
 
+-- =========================================================
+-- Volunteer Initiatives
+-- =========================================================
+
 CREATE TABLE "VolunteerInitiative" (
     id VARCHAR(255) NOT NULL,
     "IsPublished" VARCHAR(255),
@@ -324,7 +328,7 @@ INSERT INTO "VolunteerInitiative" VALUES('VolunteerInitiative-3','True','After-S
 INSERT INTO "VolunteerInitiative" VALUES('VolunteerInitiative-4','True','Summer Youth Tutoring Intensive','VolunteerInitiative-3','A focused 6-week tutoring program to prepare students for fall classes.','2025-07-01','2025-08-15','Upcoming','0','0','10','0','10','0');
 
 -- =========================================================
--- Locations
+-- Locations (CORRECTED - removed ShouldSyncWithOci and AccountId)
 -- =========================================================
 
 CREATE TABLE "Location" (
@@ -333,15 +337,13 @@ CREATE TABLE "Location" (
     "IsMobile" VARCHAR(255),
     "LocationType" VARCHAR(255),
     "Name" VARCHAR(255),
-    "ShouldSyncWithOci" VARCHAR(255),
-    "AccountId" VARCHAR(255),
     "ParentLocationId" VARCHAR(255),
     PRIMARY KEY (id)
 );
 
-INSERT INTO "Location" VALUES('Location-1','False','False','Program Site','Food Bank Warehouse','False','Account-1','');
-INSERT INTO "Location" VALUES('Location-2','False','False','Program Site','Greenlake Park North Meadow','False','Account-2','');
-INSERT INTO "Location" VALUES('Location-3','False','False','Program Site','Community Center Classroom 101','False','Account-1','');
+INSERT INTO "Location" VALUES('Location-1','False','False','Business Site','Food Bank Warehouse','');
+INSERT INTO "Location" VALUES('Location-2','False','False','Business Site','Greenlake Park North Meadow','');
+INSERT INTO "Location" VALUES('Location-3','False','False','Business Site','Community Center Classroom 101','');
 
 -- =========================================================
 -- Person Location Availability
@@ -399,31 +401,6 @@ INSERT INTO "JobPosition" VALUES('JobPosition-5','Tuesday Math Tutor','Youth Tut
 INSERT INTO "JobPosition" VALUES('JobPosition-6','Tuesday Check-In & Snacks','Youth Program Assistant','Location-3','Account-10','Position-6','VolunteerInitiative-3');
 
 -- =========================================================
--- Job Position Shifts
--- =========================================================
-
-CREATE TABLE "JobPositionShift" (
-    id VARCHAR(255) NOT NULL,
-    "JobPositionId" VARCHAR(255),
-    PRIMARY KEY (id)
-);
-
--- Food bank shifts
-INSERT INTO "JobPositionShift" VALUES('JobPositionShift-1','JobPosition-1');
-INSERT INTO "JobPositionShift" VALUES('JobPositionShift-2','JobPosition-1');
-INSERT INTO "JobPositionShift" VALUES('JobPositionShift-3','JobPosition-2');
-
--- Park cleanup shifts
-INSERT INTO "JobPositionShift" VALUES('JobPositionShift-4','JobPosition-3');
-INSERT INTO "JobPositionShift" VALUES('JobPositionShift-5','JobPosition-3');
-INSERT INTO "JobPositionShift" VALUES('JobPositionShift-6','JobPosition-4');
-
--- Tutoring shifts
-INSERT INTO "JobPositionShift" VALUES('JobPositionShift-7','JobPosition-5');
-INSERT INTO "JobPositionShift" VALUES('JobPositionShift-8','JobPosition-5');
-INSERT INTO "JobPositionShift" VALUES('JobPositionShift-9','JobPosition-6');
-
--- =========================================================
 -- Job Position Qualifications (JobPosition -> Competency)
 -- =========================================================
 
@@ -448,6 +425,31 @@ INSERT INTO "JobPositionQualification" VALUES('JobPositionQualification-11','Job
 INSERT INTO "JobPositionQualification" VALUES('JobPositionQualification-12','JobPosition-5','Competency-9');
 INSERT INTO "JobPositionQualification" VALUES('JobPositionQualification-13','JobPosition-6','Competency-6');
 INSERT INTO "JobPositionQualification" VALUES('JobPositionQualification-14','JobPosition-6','Competency-7');
+
+-- =========================================================
+-- Job Position Shifts
+-- =========================================================
+
+CREATE TABLE "JobPositionShift" (
+    id VARCHAR(255) NOT NULL,
+    "JobPositionId" VARCHAR(255),
+    PRIMARY KEY (id)
+);
+
+-- Food bank shifts
+INSERT INTO "JobPositionShift" VALUES('JobPositionShift-1','JobPosition-1');
+INSERT INTO "JobPositionShift" VALUES('JobPositionShift-2','JobPosition-1');
+INSERT INTO "JobPositionShift" VALUES('JobPositionShift-3','JobPosition-2');
+
+-- Park cleanup shifts
+INSERT INTO "JobPositionShift" VALUES('JobPositionShift-4','JobPosition-3');
+INSERT INTO "JobPositionShift" VALUES('JobPositionShift-5','JobPosition-3');
+INSERT INTO "JobPositionShift" VALUES('JobPositionShift-6','JobPosition-4');
+
+-- Tutoring shifts
+INSERT INTO "JobPositionShift" VALUES('JobPositionShift-7','JobPosition-5');
+INSERT INTO "JobPositionShift" VALUES('JobPositionShift-8','JobPosition-5');
+INSERT INTO "JobPositionShift" VALUES('JobPositionShift-9','JobPosition-6');
 
 -- =========================================================
 -- Job Position Assignments (volunteers signed up)
