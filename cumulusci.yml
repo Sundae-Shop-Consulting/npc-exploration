@@ -9,8 +9,13 @@ project:
     source_format: sfdx
 
 tasks:
-  # permissions
+
+  # ===========================
+  # Permissions & Access Setup
+  # ===========================
+
   assign_psl_kitchen_sink:
+    group: NPC Permissions & Access
     description: Assigns basically every PSL that looked relevant to NPC for the scratch org definition. This should be revised as requirements become clearer.
     class_path: cumulusci.tasks.salesforce.users.permsets.AssignPermissionSetLicenses 
     options:
@@ -57,7 +62,8 @@ tasks:
         - Volunteer_Management_User
 
   assign_fundraising_perms:
-    description: Assign all fundraising-related permission sets to the current user
+    group: NPC Permissions & Access
+    description: Assign all fundraising-related permission sets to the current user.
     class_path: cumulusci.tasks.salesforce.users.permsets.AssignPermissionSets
     options:
       api_names:
@@ -68,7 +74,8 @@ tasks:
         - ManageAccountingSubledger
 
   assign_grantmaking_perms:
-    description: Assign grantmaking-related permission sets to the current user
+    group: NPC Permissions & Access
+    description: Assign grantmaking-related permission sets to the current user.
     class_path: cumulusci.tasks.salesforce.users.permsets.AssignPermissionSets
     options:
       api_names:
@@ -76,7 +83,8 @@ tasks:
         - GrantmakingManager
 
   assign_casemgmt_perms:
-    description: Assign all case management-related permission sets to the current user
+    group: NPC Permissions & Access
+    description: Assign all case management-related permission sets to the current user.
     class_path: cumulusci.tasks.salesforce.users.permsets.AssignPermissionSets
     options:
       api_names:
@@ -92,7 +100,8 @@ tasks:
         - BenefitManagementPermissionSetLicense
 
   assign_volunteermgmt_perms:
-    description: Assign all volunteer management-related permission sets to the current user
+    group: NPC Permissions & Access
+    description: Assign all volunteer management-related permission sets to the current user.
     class_path: cumulusci.tasks.salesforce.users.permsets.AssignPermissionSets
     options:
       api_names:
@@ -101,60 +110,95 @@ tasks:
         - ManageVolunteerData
 
   assign_volunteerquickstart_perms:
-    description: Assign all volunteer management-related permission sets to the current user
+    group: NPC Permissions & Access
+    description: Assign Volunteer Quick Start-specific permission sets to the current user.
     class_path: cumulusci.tasks.salesforce.users.permsets.AssignPermissionSets
     options:
       api_names:
         - VMQS_Custom_Fields
 
-  load_volunteer_sample_data:
-    description: "Loads volunteer sample data into the org using volunteer_mapping.yml and volunteer_storydata.sql"
-    class_path: cumulusci.tasks.bulkdata.load.LoadData
-    options:
-      mapping: datasets/volunteer_mapping.yml
-      sql_path: datasets/volunteer_storydata.sql
 
-  # ui
+  # ===========================
+  # UI / App Navigation Tweaks
+  # ===========================
+
   reorder_app_menu:
+    group: NPC App Menu
+    description: Set the default org-wide app menu order for general NPC exploration.
     class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
     options:
       path: scripts/ReorderAppMenu.cls
       apex: applyOrgAppOrder();
 
   reorder_app_menu_volunteering:
+    group: NPC App Menu
+    description: Set the app menu order optimized for volunteering workflows.
     class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
     options:
       path: scripts/ReorderAppMenu.cls
       apex: applyVolunteerAppOrder();
 
   reorder_app_menu_fundraising:
+    group: NPC App Menu
+    description: Set the app menu order optimized for fundraising workflows.
     class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
     options:
       path: scripts/ReorderAppMenu.cls
       apex: applyFundraisingAppOrder();
 
   reorder_app_menu_grantmaking:
+    group: NPC App Menu
+    description: Set the app menu order optimized for grantmaking workflows.
     class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
     options:
       path: scripts/ReorderAppMenu.cls
       apex: applyGrantmakingAppOrder();
 
   reorder_app_menu_programs:
+    group: NPC App Menu
+    description: Set the app menu order optimized for program management workflows.
     class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
     options:
       path: scripts/ReorderAppMenu.cls
       apex: applyProgramManagementAppOrder();
-  
-  # sample data
+
+
+  # ===========================
+  # Sample / Demo Data
+  # ===========================
+
+  load_volunteer_sample_data:
+    group: NPC Sample Data
+    description: Load volunteer sample data using volunteer_mapping.yml and volunteer_storydata.sql.
+    class_path: cumulusci.tasks.bulkdata.load.LoadData
+    options:
+      mapping: datasets/volunteer_mapping.yml
+      sql_path: datasets/volunteer_storydata.sql
+
   load_volunteer_fake_data_from_snowfakery:
-    description: Load NPC volunteer sample data via Snowfakery
+    group: NPC Sample Data
+    description: Load NPC volunteer sample data via Snowfakery.
     class_path: cumulusci.tasks.bulkdata.snowfakery.Snowfakery
     options:
       recipe: datasets/volunteer_recipe.yml
       drop_missing_schema: True
 
-  # volunteer quick start setup
+  reset_fundraising_data:
+    group: NPC Sample Data
+    description: Reset fundraising sample data using the ResetData Apex script.
+    class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+    options:
+      path: scripts/ResetData.cls
+      apex: resetFundraisingData();
+
+
+  # ======================================
+  # Volunteer Quick Start (VMSQ) Metadata
+  # ======================================
+
   update_verification_status_values:
+    group: NPC Volunteer Quick Start
+    description: Add required Verification Status picklist values for Volunteer Quick Start.
     class_path: cumulusci.tasks.metadata_etl.AddValueSetEntries
     options:
       api_names: LPIPXMVerificationStatusTypeEnum
@@ -167,8 +211,9 @@ tasks:
           label: Approved
         - fullName: Not Approved
           label: Not Approved
-    
+
   install_volunteer_quick_start_package:
+    group: NPC Volunteer Quick Start
     description: Installs VMSQ package from Salesforce (https://github.com/SFDC-Assets/PSA-Volunteer-Management). To get install to succeed you must manually rename the Address/Examination layouts that conflict with unmanaged package install and enable History Tracking on Account. You shouldn't need to use this unless you want to compare the unpackaged metadata here with the original contents.
     class_path: cumulusci.tasks.salesforce.InstallPackageVersion
     options:  
@@ -176,49 +221,62 @@ tasks:
       version_number: 1.3
 
   retrieve_volunteer_quick_start_components:
-    description: Retrieves all components in the VMSQ package if you run it against an org with the package installed. Note that the package.xml file for retrieve contains some components like compactLayout that are embedded in object files, so the manifest for retrieve doesn't exactly match the manifest for deploy.
+    group: NPC Volunteer Quick Start
+    description: Retrieve all components in the VMSQ package from an org where it is installed (for comparison with unpackaged metadata).
     class_path: cumulusci.tasks.salesforce.RetrieveUnpackaged
     options:
       path: unpackaged/volunteersQuickStartRetrieve
       package_xml: unpackaged/volunteersQuickStartRetrieve/package.xml
 
   deploy_volunteers_quick_start_step1:
+    group: NPC Volunteer Quick Start
+    description: Deploy the first set of Volunteer Quick Start metadata (core objects and configuration).
     class_path: cumulusci.tasks.salesforce.Deploy
     options:
       path: unpackaged/volunteersQuickStart/step1
 
   deploy_volunteers_quick_start_step2:
+    group: NPC Volunteer Quick Start
+    description: Deploy the second set of Volunteer Quick Start metadata (remaining configuration).
     class_path: cumulusci.tasks.salesforce.Deploy
     options:
       path: unpackaged/volunteersQuickStart/step2
 
-  reset_fundraising_data:
-    class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
-    options:
-      path: scripts/ResetData.cls
-      apex: resetFundraisingData();
 
-  ### Object and Field Metadata
-  
+  # ======================================
+  # Object & Field Metadata / References
+  # ======================================
+
   generate_object_reference:
-    description: Generate a text data dictionary for selected objects
+    group: NPC Metadata Utilities
+    description: Generate a text data dictionary for selected objects.
     class_path: tasks.object_reference.GenerateObjectReference
 
   generate_fundraising_object_reference:
+    group: NPC Metadata Utilities
+    description: Generate a text data dictionary for fundraising-related objects.
     class_path: tasks.object_reference.GenerateObjectReference
     options:
       objects: "Account,Contact,AccountContactRelation,Campaign,OutreachSourceCode,PaymentInstrument,GiftBatch,GiftDesignation,Opportunity,GiftCommitment,GiftCommitmentSchedule,GiftDefaultDesignation,GiftCmtChangeAttrLog,GiftTransaction,GiftTransactionDesignation,GiftRefund,GiftSoftCredit,GiftTribute,GiftEntry,Task"
       output_path: "datasets/fundraising/fundraising_objects.txt"
 
   generate_volunteer_object_reference:
+    group: NPC Metadata Utilities
+    description: Generate a text data dictionary for volunteer management-related objects.
     class_path: tasks.object_reference.GenerateObjectReference
     options:
-      objects: "Account,Competency,JobPosition,JobPositionAssignment,JobPositionQualification,JobPositionShift,Location,OperatingHours,PersonLocationAvailability,Position,PositionQualification,TimeSlot,VolunteerInitiative"
+      objects: "Account,Competency,JobPosition,JobPositionAssignment,JobPositionShift,Location,OperatingHours,PersonLocationAvailability,Position,PositionQualification,TimeSlot,VolunteerInitiative"
       output_path: "datasets/volunteer_management/volunteer_objects.txt"
 
 flows:
+
+  # ===========================
+  # Permission / Setup Flows
+  # ===========================
+
   assign_all_npc_perms:
-    description: Assign all NPC implementation-guide permissions to me
+    group: NPC Permissions & Access
+    description: Assign all NPC implementation guide-related permissions to the current user.
     steps:
       1:
         task: assign_fundraising_perms
@@ -229,15 +287,28 @@ flows:
       4:
         task: assign_volunteermgmt_perms
 
+
+  # ===========================
+  # Org Setup / Dev Flows
+  # ===========================
+
   dev_org:
+    group: Org Setup
+    description: Base dev org setup including NPC permissions and default app menu ordering.
     steps:
       90: 
         flow: assign_all_npc_perms
       91: 
         task: reorder_app_menu    
 
+
+  # ===========================
+  # Volunteer Quick Start Flows
+  # ===========================
+
   deploy_volunteer_quick_start:
-    description: Deploys contents of Salesforce's open source Volunteer Management Quick Start
+    group: NPC Volunteer Quick Start
+    description: Deploy the unpackaged Salesforce Volunteer Management Quick Start metadata.
     steps:
       1:
         task: update_verification_status_values
@@ -253,10 +324,10 @@ flows:
         task: reorder_app_menu
   
   volunteer_quick_start_org:
+    group: Org Setup
+    description: Create a dev org with NPC defaults and then deploy Volunteer Quick Start metadata.
     steps:
       1: 
         flow: dev_org
       2:
         flow: deploy_volunteer_quick_start
-    
-      
