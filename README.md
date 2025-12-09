@@ -1,21 +1,35 @@
 # npc-exploration
 
-The goal of this project is to make it possible to easily explore Nonprofit Cloud features using default configurations and sample datasets, like an NPC trial org but in a throwaway environment. This project is not affiliated with Salesforce and the actual trial experience will differ now and may deviate going forward. This is a work in progress and nothing should be considered complete yet.
+This project makes it easy to spin up throwaway Nonprofit Cloud exploration environments using CumulusCI. It provides automated org setup plus a growing library of scenario-based sample datasets to help you explore the new on-platform Nonprofit Cloud architecture.
 
-## Exploration and Development
+This project is community-driven and not affiliated with Salesforce. It is a work in progress — configurations, datasets, and automation will continue to evolve.
+
+--> **Visit the [project wiki](https://github.com/Sundae-Shop-Consulting/npc-exploration/wiki) for dataset details, scenarios, and more info.** <--
+
+## Getting Started: Create an Exploration Org
 
 To create a scratch org using this configuration:
 
-1. [Set up CumulusCI](https://cumulusci.readthedocs.io/en/latest/tutorial.html)
-2. Run `cci org scratch dev explore --default` to deploy this project and assign yourself a whole bunch of permissions.
-3. Run `cci flow run dev_org` to deploy this project and assign yourself a whole bunch of permissions.
-4. Run `cci org browser` to open the org in your browser.
+1. **Set up CumulusCI**  
+   https://cumulusci.readthedocs.io/en/latest/tutorial.html
 
-This will create a scratch org with a number of NPC features enabled, including Fundraising, Program Management, Volunteer Management, and Grantmaking. In the future this will also include setup for Experience Cloud sites, but for now this just includes the internal-facing apps.
+2. **Create a scratch org**  
+   `cci org scratch dev explore --default --days 30`
+   
+3. **Deploy metadata and assign permissions**
+   `cci flow run dev_org`
+   
+5. **Open the org**
+   `cci org browser`
+
+This builds an org with core Nonprofit Cloud features enabled — including Fundraising, Program Management, Volunteer Management, and Grantmaking — plus baseline configuration to support dataset loading. Experience Cloud setup will be added in future versions.
 
 ![Screenshot of the app](docs/images/npc_app_screenshot.png)
 
-### Volunteer Management Quick Start
+## Learn More & Contribute
 
-This includes a flow to configure an org using the components from the Volunteer Management Quick Start package provided by Salesforce Solution Engineering. To create an org with the quick start configured and an initial sample dataset, run `cci flow run volunteer_quick_start_org`. You can run this instead of running the `dev_org` flow, or you can run it on an existing scratch org. This includes deployment of metadata that overwrites some standard configuration, so don't deploy it against an existing org unless you know what you're doing.
+The [wiki](https://github.com/Sundae-Shop-Consulting/npc-exploration/wiki) includes:
+- Overview and project context
+- Pages for each dataset (Households, Fundraising, Case Management, Volunteer Management)
 
+Contributions are welcome — you do not need deep CCI or Git knowledge to get involved!
