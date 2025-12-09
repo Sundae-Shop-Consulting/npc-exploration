@@ -167,22 +167,6 @@ tasks:
   # Sample / Demo Data
   # ===========================
 
-  load_volunteer_sample_data:
-    group: NPC Sample Data
-    description: Load volunteer sample data using volunteer_mapping.yml and volunteer_storydata.sql.
-    class_path: cumulusci.tasks.bulkdata.load.LoadData
-    options:
-      mapping: datasets/volunteer_mapping.yml
-      sql_path: datasets/volunteer_storydata.sql
-
-  load_volunteer_fake_data_from_snowfakery:
-    group: NPC Sample Data
-    description: Load NPC volunteer sample data via Snowfakery.
-    class_path: cumulusci.tasks.bulkdata.snowfakery.Snowfakery
-    options:
-      recipe: datasets/volunteer_recipe.yml
-      drop_missing_schema: True
-
   reset_fundraising_data:
     group: NPC Sample Data
     description: Reset fundraising sample data using the ResetData Apex script.
@@ -190,6 +174,12 @@ tasks:
     options:
       path: scripts/ResetData.cls
       apex: resetFundraisingData();
+
+  reset_group_membership_data:
+    class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+    options:
+      path: scripts/ResetData.cls
+      apex: resetGroupMembershipData();
 
 
   # ======================================
@@ -242,17 +232,7 @@ tasks:
     options:
       path: unpackaged/volunteersQuickStart/step2
 
-  reset_fundraising_data:
-    class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
-    options:
-      path: scripts/ResetData.cls
-      apex: resetFundraisingData();
   
-  reset_group_membership_data:
-    class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
-    options:
-      path: scripts/ResetData.cls
-      apex: resetGroupMembershipData();
 
   # ======================================
   # Object & Field Metadata / References
