@@ -242,6 +242,17 @@ tasks:
     options:
       path: unpackaged/volunteersQuickStart/step2
 
+  reset_fundraising_data:
+    class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+    options:
+      path: scripts/ResetData.cls
+      apex: resetFundraisingData();
+  
+  reset_group_membership_data:
+    class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+    options:
+      path: scripts/ResetData.cls
+      apex: resetGroupMembershipData();
 
   # ======================================
   # Object & Field Metadata / References

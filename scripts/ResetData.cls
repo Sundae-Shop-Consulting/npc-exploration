@@ -36,3 +36,11 @@ public static void resetCaseManagementData() {
     delete [SELECT Id FROM CodeSet WHERE Code LIKE '%DEMO'];
 
 }
+
+public static void resetGroupMembershipData() {
+    delete [ SELECT Id FROM ContactContactRelation ];
+    delete [ SELECT Id FROM AccountContactRelation ];
+    delete [ SELECT Id FROM PartyRelationshipGroup ];
+    delete [ SELECT Id FROM AccountAccountRelation ];
+    delete [ SELECT Id FROM PartyRoleRelation ];
+}

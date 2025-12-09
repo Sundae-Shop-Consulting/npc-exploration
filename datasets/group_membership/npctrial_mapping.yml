@@ -10,7 +10,6 @@ Insert Account:
       table:
       - Account
       after: Insert Account
-
 Insert PartyRoleRelation:
   sf_object: PartyRoleRelation
   fields:
@@ -24,7 +23,6 @@ Insert PartyRoleRelation:
       table:
       - PartyRoleRelation
       after: Insert PartyRoleRelation
-
 Insert AccountAccountRelation:
   sf_object: AccountAccountRelation
   fields:
@@ -43,7 +41,6 @@ Insert AccountAccountRelation:
       table:
       - AccountAccountRelation
       after: Insert AccountAccountRelation
-
 Insert Contact:
   sf_object: Contact
   fields:
@@ -57,7 +54,6 @@ Insert Contact:
       table:
       - Contact
       after: Insert Contact
-
 Insert PartyRelationshipGroup:
   sf_object: PartyRelationshipGroup
   fields:
@@ -66,7 +62,6 @@ Insert PartyRelationshipGroup:
     AccountId:
       table:
       - Account
-
 Insert AccountContactRelation:
   sf_object: AccountContactRelation
   fields:
@@ -81,7 +76,6 @@ Insert AccountContactRelation:
     ContactId:
       table:
       - Contact
-
 Insert ContactContactRelation:
   sf_object: ContactContactRelation
   fields:
