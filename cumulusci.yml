@@ -181,6 +181,12 @@ tasks:
       path: scripts/ResetData.cls
       apex: resetGroupMembershipData();
 
+  reset_grantmaking_data:
+    class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+    options:
+      path: scripts/ResetData.cls
+      apex: resetGrantmakingData();
+
 
   # ======================================
   # Volunteer Quick Start (VMSQ) Metadata
@@ -238,9 +244,15 @@ tasks:
   # Object & Field Metadata / References
   # ======================================
 
-  generate_object_reference:
+
+  list_org_objects:
+    description: List API names and labels of every object in the org
     group: NPC Metadata Utilities
+    class_path: tasks.list_org_objects.ListOrgObjects
+
+  generate_object_reference:
     description: Generate a text data dictionary for selected objects.
+    group: NPC Metadata Utilities
     class_path: tasks.object_reference.GenerateObjectReference
 
   generate_fundraising_object_reference:
@@ -260,12 +272,20 @@ tasks:
       output_path: "datasets/volunteer_management/volunteer_objects.txt"
   
   generate_group_membership_object_reference:
+    group: NPC Metadata Utilities
+    description: Generate a text data dictionary for household and party relationship group-related objects.
     class_path: tasks.object_reference.GenerateObjectReference
     options:
       objects: "Account,Contact,PartyRelationshipGroup,AccountContactRelation,AccountAccountRelation,ContactContactRelation,PartyRoleRelation"
       output_path: "datasets/group_membership/group_membership_objects.txt"
 
-  
+  generate_grantmaking_object_reference:
+    group: NPC Metadata Utilities
+    description: Generate a text data dictionary for grantmaking-related objects.
+    class_path: tasks.object_reference.GenerateObjectReference
+    options:
+      objects: "User,Account,Contact,Contract,ApplicationDecision,ApplicationRenderMethod,ApplicationReview,ApplicationStageDefinition,ApplicationTimeline,PreliminaryApplicationRef,IndividualApplication,IndividualApplicationTask,PublicApplicationParticipant,DocumentChecklistItem,ActionPlanTemplate,ActionPlanTemplateVersion,ActionPlan,Budget,BudgetAllocation,BudgetCategory,BudgetCategoryValue,BudgetPeriod,FundingOpportunity,FundingAward,FundingAwardAmendment,FundingAwardRequirement,FundingAwardRqmtSection,FundingDisbursement,Program,OutcomeActivity,IndicatorAssignment,IndicatorPerformancePeriod"
+      output_path: "datasets/grantmaking/grantmaking_objects.txt"
 
 
 
