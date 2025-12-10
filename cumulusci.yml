@@ -167,20 +167,42 @@ tasks:
   # Sample / Demo Data
   # ===========================
 
-  reset_fundraising_data:
+  load_group_membership_data:
     group: NPC Sample Data
-    description: Reset fundraising sample data using the ResetData Apex script.
-    class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+    class_path: cumulusci.tasks.bulkdata.load.LoadData
     options:
-      path: scripts/ResetData.cls
-      apex: resetFundraisingData();
+      mapping: datasets/group_membership/group_membership_mapping.yml
+      sql_path: datasets/group_membership/group_membership_data.sql
 
-  reset_group_membership_data:
-    class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+  load_fundraising_data:
+    group: NPC Sample Data
+    class_path: cumulusci.tasks.bulkdata.load.LoadData
     options:
-      path: scripts/ResetData.cls
-      apex: resetGroupMembershipData();
+      mapping: datasets/fundraising/fundraising_mapping.yml
+      sql_path: datasets/fundraising/fundraising_data.sql
 
+  load_volunteer_management_data:
+    group: NPC Sample Data
+    class_path: cumulusci.tasks.bulkdata.load.LoadData
+    options:
+      mapping: datasets/volunteer_management/volunteer_mapping.yml
+      sql_path: datasets/volunteer_management/volunteer_data.sql
+
+  load_case_management_data:
+    group: NPC Sample Data
+    description: Loads case and program management data. Remember to manually enable Program Cohorts and Benefit Disbursements first if you want the complete dataset.
+    class_path: cumulusci.tasks.bulkdata.load.LoadData
+    options:
+      mapping: datasets/case_management/casemgmt_mapping.yml
+      sql_path: datasets/case_management/casemgmt_data.sql
+      drop_missing_schema: True
+
+  load_grantmaking_data:
+    group: NPC Sample Data
+    class_path: cumulusci.tasks.bulkdata.load.LoadData
+    options:
+      mapping: datasets/grantmaking/grantmaking_mapping.yml
+      sql_path: datasets/grantmaking/grantmaking_data.sql
 
   # ======================================
   # Volunteer Quick Start (VMSQ) Metadata
@@ -238,10 +260,21 @@ tasks:
   # Object & Field Metadata / References
   # ======================================
 
-  generate_object_reference:
+  list_org_objects:
+    description: List API names and labels of every object in the org
     group: NPC Metadata Utilities
+    class_path: tasks.list_org_objects.ListOrgObjects
+
+  generate_object_reference:
     description: Generate a text data dictionary for selected objects.
+    group: NPC Metadata Utilities
     class_path: tasks.object_reference.GenerateObjectReference
+
+  generate_group_membership_reference:
+    description: Generate a text data dictionary for household and group-related objects.
+    options:
+      objects: "Account,Contact,PartyRelationshipGroup,AccountContactRelation,AccountAccountRelation,ContactContactRelation,PartyRoleRelation"
+      output_path: datasets/group_membership/group_membership_objects.yml
 
   generate_fundraising_object_reference:
     group: NPC Metadata Utilities
@@ -249,7 +282,7 @@ tasks:
     class_path: tasks.object_reference.GenerateObjectReference
     options:
       objects: "Account,Contact,AccountContactRelation,Campaign,OutreachSourceCode,PaymentInstrument,GiftBatch,GiftDesignation,Opportunity,GiftCommitment,GiftCommitmentSchedule,GiftDefaultDesignation,GiftCmtChangeAttrLog,GiftTransaction,GiftTransactionDesignation,GiftRefund,GiftSoftCredit,GiftTribute,GiftEntry,Task"
-      output_path: "datasets/fundraising/fundraising_objects.txt"
+      output_path: datasets/fundraising/fundraising_objects.yml
 
   generate_volunteer_object_reference:
     group: NPC Metadata Utilities
@@ -257,23 +290,23 @@ tasks:
     class_path: tasks.object_reference.GenerateObjectReference
     options:
       objects: "Account,Competency,JobPosition,JobPositionAssignment,JobPositionShift,Location,OperatingHours,PersonLocationAvailability,Position,PositionQualification,TimeSlot,VolunteerInitiative"
-      output_path: "datasets/volunteer_management/volunteer_objects.txt"
+      output_path: datasets/volunteer_management/volunteer_objects.yml
   
   generate_group_membership_object_reference:
+    group: NPC Metadata Utilities
+    description: Generate a text data dictionary for household and party relationship group-related objects.
     class_path: tasks.object_reference.GenerateObjectReference
     options:
       objects: "Account,Contact,PartyRelationshipGroup,AccountContactRelation,AccountAccountRelation,ContactContactRelation,PartyRoleRelation"
-      output_path: "datasets/group_membership/group_membership_objects.txt"
+      output_path: datasets/group_membership/group_membership_objects.yml
 
-  
-
-
-
-
-
-
-
-
+  generate_grantmaking_object_reference:
+    group: NPC Metadata Utilities
+    description: Generate a text data dictionary for grantmaking-related objects.
+    class_path: tasks.object_reference.GenerateObjectReference
+    options:
+      objects: "User,Account,Contact,Contract,ApplicationDecision,ApplicationRenderMethod,ApplicationReview,ApplicationStageDefinition,ApplicationTimeline,PreliminaryApplicationRef,IndividualApplication,IndividualApplicationTask,PublicApplicationParticipant,DocumentChecklistItem,ActionPlanTemplate,ActionPlanTemplateVersion,ActionPlan,Budget,BudgetAllocation,BudgetCategory,BudgetCategoryValue,BudgetPeriod,FundingOpportunity,FundingAward,FundingAwardAmendment,FundingAwardRequirement,FundingAwardRqmtSection,FundingDisbursement,Program,OutcomeActivity,IndicatorAssignment,IndicatorPerformancePeriod"
+      output_path: datasets/grantmaking/grantmaking_objects.yml
 
 flows:
 
@@ -308,6 +341,21 @@ flows:
       91: 
         task: reorder_app_menu    
 
+  load_all_datasets:
+    group: Org Setup
+    description: Loads all datasets into a single org. This will take a while to run, so consider using 
+      individual datasets if that's all you need.
+    steps:
+      1: 
+        task: load_group_membership_data
+      2: 
+        task: load_fundraising_data
+      3: 
+        task: load_volunteer_management_data
+      4: 
+        task: load_case_management_data
+      5: 
+        task: load_grantmaking_data
 
   # ===========================
   # Volunteer Quick Start Flows
