@@ -1,10 +1,11 @@
 # tasks/object_reference.py
 
+import yaml
 from cumulusci.tasks.salesforce import BaseSalesforceApiTask
 
 
 class GenerateObjectReference(BaseSalesforceApiTask):
-    """Generate a simple text data dictionary for selected objects."""
+    """Generate a structured YAML data dictionary for selected objects."""
 
     task_options = {
         "objects": {
@@ -12,10 +13,37 @@ class GenerateObjectReference(BaseSalesforceApiTask):
             "required": True,
         },
         "output_path": {
-            "description": "Path to the output text file",
+            "description": "Path to the output YAML file",
             "required": True,
         },
     }
+
+    # Standard Salesforce system fields (explicit exclusions)
+    SYSTEM_FIELDS = {
+        "Id",
+        "OwnerId",
+        "IsDeleted",
+        "CreatedById",
+        "CreatedDate",
+        "LastModifiedById",
+        "LastModifiedDate",
+        "SystemModstamp",
+        "LastReferencedDate",
+        "LastViewedDate",
+        "MasterRecordId",
+        "ConnectionReceivedId",
+        "ConnectionSentId",
+    }
+
+    def _is_excluded_by_name(self, field_name: str) -> bool:
+        """Skip state/country/timezone-style fields for now."""
+        lower = field_name.lower()
+        if lower.endswith("state") or lower.endswith("country") or lower.endswith("timezone"):
+            return True
+        # Common SF timezone field
+        if lower in ("timezonesidkey",):
+            return True
+        return False
 
     def _run_task(self):
         object_names = [
@@ -25,54 +53,108 @@ class GenerateObjectReference(BaseSalesforceApiTask):
         ]
         output_path = self.options["output_path"]
 
-        lines = []
+        result = {
+            "objects": [],
+            "errors": [],
+        }
 
         for obj in object_names:
             try:
-                # self.sf is a pre-authenticated simple_salesforce client
                 desc = getattr(self.sf, obj).describe()
             except Exception as e:
-                msg = f"ERROR: Could not describe object {obj}: {e}"
-                self.logger.error(msg)
-                lines.append(msg)
-                lines.append("")  # blank line
+                result["errors"].append(
+                    {"object": obj, "message": f"Could not describe object: {e}"}
+                )
                 continue
 
-            lines.append(f"### Object: {desc['name']}")
-            lines.append(f"Label: {desc.get('label', '')}")
-            lines.append("Fields:")
+            obj_entry = {"name": obj, "fields": []}
 
             for field in desc["fields"]:
-                name = field["name"]
-                label = field.get("label", "")
+                fname = field["name"]
                 ftype = field["type"]
-                length = field.get("length")
 
-                # Base field line
-                field_line = (
-                    f"  - {name} ({label}) "
-                    f"Type: {ftype}"
-                    + (f", Length: {length}" if length else "")
-                )
-                lines.append(field_line)
+                # Skip explicit system fields
+                if fname in self.SYSTEM_FIELDS:
+                    continue
 
-                # If it's a picklist or multipicklist, include values
-                if ftype in ("picklist", "multipicklist"):
-                    picklist_values = field.get("picklistValues") or []
-                    if picklist_values:
-                        lines.append("      Picklist Values:")
-                        for pv in picklist_values:
-                            pv_label = pv.get("label", "")
-                            pv_value = pv.get("value", "")
-                            default = " (default)" if pv.get("defaultValue") else ""
-                            active = "" if pv.get("active", True) else " [inactive]"
-                            lines.append(
-                                f"        * {pv_label} ({pv_value}){default}{active}"
-                            )
+                # Skip state/country/timezone style fields entirely (per current plan)
+                if self._is_excluded_by_name(fname):
+                    continue
 
-            lines.append("")  # blank line between objects
+                createable = field.get("createable", False)
+                updateable = field.get("updateable", False)
+                calculated = field.get("calculated", False)
 
+                # Skip fully system-managed fields (not createable/updateable and not formula)
+                if not createable and not updateable and not calculated:
+                    continue
+
+                auto_number = field.get("autoNumber", False)
+
+                # Normalize access
+                if updateable:
+                    access = "read_write"
+                elif createable:
+                    access = "create_only"
+                else:
+                    access = "read_only"
+
+                # Requiredness:
+                # Rough rule: not nillable and no default => required on create.
+                nillable = field.get("nillable", True)
+                defaulted_on_create = field.get("defaultedOnCreate", False)
+                is_required = (not nillable) and (not defaulted_on_create)
+
+                field_entry = {
+                    "name": fname,
+                    "type": ftype,
+                    "access": access,
+                    "is_formula": bool(calculated),
+                    "is_auto_number": bool(auto_number),
+                    "is_required": bool(is_required),
+                }
+
+                # ----- Lookups / references -----
+                if ftype == "reference":
+                    ref_to = field.get("referenceTo") or []
+                    relationship_name = field.get("relationshipName")
+                    ref_info = {
+                        # Typically a list of one, but keep full list just in case.
+                        "reference_to": ref_to,
+                    }
+                    if relationship_name:
+                        ref_info["relationship_name"] = relationship_name
+                    field_entry["reference"] = ref_info
+
+                # ----- Picklists -----
+                if ftype == "picklist":
+                    values = [v["value"] for v in field.get("picklistValues", [])]
+
+                    if len(values) <= 5:
+                        picklist_info = {
+                            "initial_values": values,
+                            "total_values": len(values),
+                        }
+                    else:
+                        picklist_info = {
+                            "initial_values": values[:5],
+                            "total_values": len(values),
+                        }
+
+                    field_entry["picklist"] = picklist_info
+
+                obj_entry["fields"].append(field_entry)
+
+            result["objects"].append(obj_entry)
+
+        # ---------- Write YAML ----------
         with open(output_path, "w", encoding="utf-8") as f:
-            f.write("\n".join(lines))
+            yaml.safe_dump(
+                result,
+                f,
+                sort_keys=False,
+                allow_unicode=True,
+                default_flow_style=False,
+            )
 
-        self.logger.info(f"Wrote object reference to {output_path}")
+        self.logger.info(f"Object reference (YAML) written to {output_path}")
