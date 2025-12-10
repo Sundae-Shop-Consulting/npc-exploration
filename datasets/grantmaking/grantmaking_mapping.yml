@@ -103,6 +103,14 @@ Insert RegulatoryAuthorizationType:
   fields:
     - Name
 
+Insert ApplicationStageDefinition:
+  sf_object: ApplicationStageDefinition
+  table: ApplicationStageDefinition
+  fields:
+    - Name
+    - Description
+    - Type
+
 Insert IndividualApplication:
   sf_object: IndividualApplication
   table: IndividualApplication
@@ -272,14 +280,6 @@ Insert FundingAwardRequirement:
       table: FundingAward
     AssignedContactId:
       table: Contact
-
-Insert ApplicationStageDefinition:
-  sf_object: ApplicationStageDefinition
-  table: ApplicationStageDefinition
-  fields:
-    - Name
-    - Description
-    - Type
 
 Insert Outcome:
   sf_object: Outcome
