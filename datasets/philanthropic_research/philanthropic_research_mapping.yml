@@ -1,0 +1,209 @@
+Insert Account:
+  sf_object: Account
+  fields:
+    - FirstName
+    - LastName
+    - PersonEmail
+    - PersonBirthdate
+    - PersonMailingStreet
+    - PersonMailingCity
+    - PersonMailingState
+    - PersonMailingPostalCode
+    - PersonMailingCountry
+    - Phone
+    - Description
+    - RecordTypeId
+
+Insert Contact:
+  sf_object: Contact
+  fields:
+    - FirstName
+    - LastName
+    - Email
+    - Birthdate
+    - MailingStreet
+    - MailingCity
+    - MailingState
+    - MailingPostalCode
+    - MailingCountry
+    - Phone
+    - Title
+    - Description
+  lookups:
+    AccountId:
+      table:
+        - Account
+
+Insert ContactProfile:
+  sf_object: ContactProfile
+  fields:
+    - BirthPlace
+    - PrimaryCitizenshipType
+    - HighestEducationLevel
+    - Ethnicity
+    - OtherAssetsValue
+    - RetirementSavingsAmount
+    - StockValue
+    - RealEstateValue
+    - BusinessOwnershipValue
+    - Income
+    - OtherNonprofitGiftCount
+    - OtherNonprofitGiftAmount
+    - RecurringDonorType
+    - Location
+    - GenerationalCohort
+    - AdvancementGraduationDate
+  lookups:
+    ContactId:
+      table:
+        - Contact
+
+Insert PartyCategory:
+  sf_object: PartyCategory
+  fields:
+    - Classification
+    - Status
+    - StartDate
+    - EndDate
+  lookups:
+    AccountId:
+      table:
+        - Account
+
+Insert ConstituentRole:
+  sf_object: ConstituentRole
+  fields:
+    - RoleType
+    - Status
+    - EffectiveStartDate
+    - EffectiveEndDate
+    - Description
+  lookups:
+    PersonId:
+      table:
+        - Contact
+
+Insert PartyPhilanthropicRsrchPrfl:
+  sf_object: PartyPhilanthropicRsrchPrfl
+  fields:
+    - ResearchProfileType
+    - ResearchProfilePhase
+    - StartDate
+    - EndDate
+    - DetailedSummary
+    - ShortSummary
+  lookups:
+    AccountId:
+      table:
+        - Account
+
+Insert Case:
+  sf_object: Case
+  fields:
+    - Subject
+    - Description
+    - Status
+    - Priority
+    - Origin
+    - Type
+  lookups:
+    AccountId:
+      table:
+        - Account
+
+Insert PartyPhilanthropicAssessment:
+  sf_object: PartyPhilanthropicAssessment
+  fields:
+    - Date
+    - OverallRating
+    - AssessmentType
+    - StrengthsAndOpportunities
+    - ShortSummary
+    - WealthAmount
+  lookups:
+    AccountId:
+      table:
+        - Account
+
+Insert PartyPhilanthropicIndicator:
+  sf_object: PartyPhilanthropicIndicator
+  fields:
+    - IndicatorType
+    - Indicator
+    - EstimatedValue
+    - Summary
+  lookups:
+    AccountId:
+      table:
+        - Account
+
+Insert PartyPhilanthropicOccurrence:
+  sf_object: PartyPhilanthropicOccurrence
+  fields:
+    - ResearchType
+    - OccurrenceType
+    - EstimatedValue
+    - Summary
+  lookups:
+    AccountId:
+      table:
+        - Account
+
+Insert PartyPhilanthropicMilestone:
+  sf_object: PartyPhilanthropicMilestone
+  fields:
+    - OverallRating
+    - ShortSummary
+    - WealthAmount
+    - Income
+    - RealEstateValue
+  lookups:
+    AccountId:
+      table:
+        - Account
+
+Insert InteractionSummary:
+  sf_object: InteractionSummary
+  fields:
+    - Name
+    - ConfidentialityType
+    - InteractionPurpose
+    - Status
+    - MeetingNotes
+    - NextSteps
+  lookups:
+    AccountId:
+      table:
+        - Account
+
+Insert BusinessMilestone:
+  sf_object: BusinessMilestone
+  fields:
+    - Name
+    - MilestoneDate
+    - IsTentative
+    - MilestoneType
+    - MilestoneDescription
+  lookups:
+    PrimaryAccountId:
+      table:
+        - Account
+
+Insert PersonLifeEvent:
+  sf_object: PersonLifeEvent
+  fields:
+    - Name
+    - EventDate
+    - EventDescription
+    - IsTentative
+    - EventType
+    - EventLocationCity
+    - EventLocationState
+    - EventLocationCountry
+  lookups:
+    PrimaryPersonId:
+      table:
+        - Contact
+    RelatedPersonId:
+      table:
+        - Contact

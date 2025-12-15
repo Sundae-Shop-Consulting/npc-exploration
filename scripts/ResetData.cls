@@ -36,3 +36,26 @@ public static void resetCaseManagementData() {
     delete [SELECT Id FROM CodeSet WHERE Code LIKE '%DEMO'];
 
 }
+
+public static void resetGroupMembershipData() {
+    delete [ SELECT Id FROM ContactContactRelation ];
+    delete [ SELECT Id FROM AccountContactRelation ];
+    delete [ SELECT Id FROM PartyRelationshipGroup ];
+    delete [ SELECT Id FROM AccountAccountRelation ];
+    delete [ SELECT Id FROM PartyRoleRelation ];
+}
+
+public static void resetGrantmakingData() {
+    // delete [ SELECT Id FROM IndicatorPerformancePeriod ];
+    // delete [ SELECT Id FROM TimePeriod ];
+    // delete [ SELECT Id FROM IndicatorAssignment ];
+    // delete [ SELECT Id FROM IndicatorDefinition ];
+    // delete [ SELECT Id FROM UnitOfMeasure ];
+    // delete [ SELECT Id FROM OutcomeActivity ];
+    // delete [ SELECT Id FROM Outcome ];
+    // delete [ SELECT Id FROM XXX ];
+    
+    delete [ SELECT Id FROM Entitlement ];
+    delete [ SELECT Id FROM Account ];
+    
+}

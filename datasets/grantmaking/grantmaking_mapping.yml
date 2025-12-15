@@ -1,0 +1,378 @@
+Insert Program:
+  sf_object: Program
+  table: Program
+  fields:
+    - Name
+    - Summary
+    - AdditionalContext
+    - StartDate
+    - EndDate
+    - Status
+    - UsageType
+
+Insert ApplicationTimeline:
+  sf_object: ApplicationTimeline
+  table: ApplicationTimeline
+  fields:
+    - Name
+    - ApplicationOpenDate
+    - ApplicationCloseDate
+    - DecisionReleaseDate
+    - Type
+
+Insert FundingOpportunity:
+  sf_object: FundingOpportunity
+  table: FundingOpportunity
+  fields:
+    - ProgramId
+    - Name
+    - Description
+    - ApplicationInstructions
+    - StartDate
+    - EndDate
+    - MinimumFundingAmount
+    - MaximumFundingAmount
+    - Status
+    - ApplicationTimelineId
+    - BudgetTemplateId
+  lookups:
+    ProgramId:
+      table: Program
+    ApplicationTimelineId:
+      table: ApplicationTimeline
+
+Insert Account:
+  sf_object: Account
+  table: Account
+  fields:
+    - FirstName
+    - LastName
+    - Name
+    - RecordTypeId
+    - PersonEmail
+    - PersonMobilePhone
+    - PersonMailingStreet
+    - PersonMailingCity
+    - PersonMailingState
+    - PersonMailingPostalCode
+    - PersonMailingCountry
+    - BillingStreet
+    - BillingCity
+    - BillingState
+    - BillingPostalCode
+    - BillingCountry
+
+Insert Contact:
+  sf_object: Contact
+  table: Contact
+  fields:
+    - AccountId
+    - FirstName
+    - LastName
+    - Email
+    - MobilePhone
+    - Title
+  lookups:
+    AccountId:
+      table: Account
+
+Insert Budget:
+  sf_object: Budget
+  table: Budget
+  fields:
+    - Name
+    - ProgramId
+    - AccountId
+    - PeriodName
+    - PeriodStartDate
+    - PeriodEndDate
+    - Amount
+    - Type
+    - Status
+    - Description
+    - IsSubmitted
+  lookups:
+    ProgramId:
+      table: Program
+    AccountId:
+      table: Account
+
+Insert RegulatoryAuthorizationType:
+  sf_object: RegulatoryAuthorizationType
+  table: RegulatoryAuthorizationType
+  fields:
+    - Name
+
+Insert ApplicationStageDefinition:
+  sf_object: ApplicationStageDefinition
+  table: ApplicationStageDefinition
+  fields:
+    - Name
+    - Description
+    - Type
+
+Insert IndividualApplication:
+  sf_object: IndividualApplication
+  table: IndividualApplication
+  fields:
+    - FundingOpportunityId
+    - AccountId
+    - ContactId
+    - LicenseTypeId
+    - ApplicationName
+    - RequestedAmount
+    - FundingRequestPurpose
+    - ApplicationCategory
+    - Category
+    - Status
+    - InternalStatus
+    - AppliedDate
+    - IsSubmitted
+    - BudgetId
+  lookups:
+    FundingOpportunityId:
+      table: FundingOpportunity
+    AccountId:
+      table: Account
+    ContactId:
+      table: Contact
+    LicenseTypeId:
+      table: RegulatoryAuthorizationType
+    BudgetId:
+      table: Budget
+
+Insert ApplicationReview:
+  sf_object: ApplicationReview
+  table: ApplicationReview
+  fields:
+    - ApplicationId
+    - ApplicationStageDefinitionId
+    - Status
+    - DueDate
+    - StartDate
+    - EndDate
+    - Comment
+    - ApplicationRecommendation
+    - IsRequired
+    - DisplayOrder
+    - IsSubmitted
+  lookups:
+    ApplicationId:
+      table: IndividualApplication
+    ApplicationStageDefinitionId:
+      table: ApplicationStageDefinition
+
+Insert ApplicationDecision:
+  sf_object: ApplicationDecision
+  table: ApplicationDecision
+  fields:
+    - ApplicationId
+    - ApplicationDecision
+    - Comment
+  lookups:
+    ApplicationId:
+      table: IndividualApplication
+
+Insert FundingAward:
+  sf_object: FundingAward
+  table: FundingAward
+  fields:
+    - Name
+    - FundingOpportunityId
+    - IndividualApplicationId
+    - AwardeeId
+    - ContactId
+    - ProgramId
+    - DecisionDate
+    - StartDate
+    - EndDate
+    - Amount
+    - Status
+    - BudgetId
+  lookups:
+    FundingOpportunityId:
+      table: FundingOpportunity
+    IndividualApplicationId:
+      table: IndividualApplication
+    AwardeeId:
+      table: Account
+    ContactId:
+      table: Contact
+    ProgramId:
+      table: Program
+    BudgetId:
+      table: Budget
+
+Insert BudgetCategory:
+  sf_object: BudgetCategory
+  table: BudgetCategory
+  fields:
+    - Name
+    - BudgetId
+    - Description
+    - SequenceNumber
+  lookups:
+    BudgetId:
+      table: Budget
+
+Insert BudgetCategoryValue:
+  sf_object: BudgetCategoryValue
+  table: BudgetCategoryValue
+  fields:
+    - BudgetCategoryId
+    - Amount
+    - Quantity
+    - ActualAmount
+    - ActualQuantity
+    - Comments
+  lookups:
+    BudgetCategoryId:
+      table: BudgetCategory
+
+Insert FundingDisbursement:
+  sf_object: FundingDisbursement
+  table: FundingDisbursement
+  fields:
+    - FundingAwardId
+    - DisbursementName
+    - Amount
+    - Status
+    - ScheduledDate
+    - DisbursementDate
+    - PaymentMethodType
+  lookups:
+    FundingAwardId:
+      table: FundingAward
+
+Insert BudgetAllocation:
+  sf_object: BudgetAllocation
+  table: BudgetAllocation
+  fields:
+    - Name
+    - BudgetId
+    - BudgetCategoryValueId
+    - FundingDisbursementId
+    - Amount
+    - Quantity
+    - Status
+  lookups:
+    BudgetId:
+      table: Budget
+    BudgetCategoryValueId:
+      table: BudgetCategoryValue
+    FundingDisbursementId:
+      table: FundingDisbursement
+
+Insert FundingAwardRequirement:
+  sf_object: FundingAwardRequirement
+  table: FundingAwardRequirement
+  fields:
+    - Name
+    - FundingAwardId
+    - Type
+    - Description
+    - Status
+    - DueDate
+    - AssignedContactId
+    - IsSubmitted
+  lookups:
+    FundingAwardId:
+      table: FundingAward
+    AssignedContactId:
+      table: Contact
+
+Insert Outcome:
+  sf_object: Outcome
+  table: Outcome
+  fields:
+    - Name
+    - Description
+    - Status
+
+Insert OutcomeActivity:
+  sf_object: OutcomeActivity
+  table: OutcomeActivity
+  fields:
+    - Name
+    - OutcomeId
+    - OutcomeActivityType
+    - ProgramId
+    - FundingOpportunityId
+    - FundingAwardId
+  lookups:
+    OutcomeId:
+      table: Outcome
+    ProgramId:
+      table: Program
+    FundingOpportunityId:
+      table: FundingOpportunity
+    FundingAwardId:
+      table: FundingAward
+
+Insert UnitOfMeasure:
+  sf_object: UnitOfMeasure
+  table: UnitOfMeasure
+  fields:
+    - Name
+    - UnitCode
+
+Insert IndicatorDefinition:
+  sf_object: IndicatorDefinition
+  table: IndicatorDefinition
+  fields:
+    - Name
+    - Description
+    - Status
+    - UnitOfMeasureId
+  lookups:
+    UnitOfMeasureId:
+      table: UnitOfMeasure
+
+Insert IndicatorAssignment:
+  sf_object: IndicatorAssignment
+  table: IndicatorAssignment
+  fields:
+    - Name
+    - IndicatorDefinitionId
+    - IndicatorAssignmentType
+    - OutcomeId
+    - ProgramId
+    - FundingOpportunityId
+    - FundingAwardId
+    - IntendedDirection
+    - Status
+  lookups:
+    IndicatorDefinitionId:
+      table: IndicatorDefinition
+    OutcomeId:
+      table: Outcome
+    ProgramId:
+      table: Program
+    FundingOpportunityId:
+      table: FundingOpportunity
+    FundingAwardId:
+      table: FundingAward
+
+Insert TimePeriod:
+  sf_object: TimePeriod
+  table: TimePeriod
+  fields:
+    - Name
+    - StartDate
+    - EndDate
+
+Insert IndicatorPerformancePeriod:
+  sf_object: IndicatorPerformancePeriod
+  table: IndicatorPerformancePeriod
+  fields:
+    - Name
+    - IndicatorAssignmentId
+    - TimePeriodId
+    - TargetValue
+    - BaselineValue
+    - TargetProgress
+  lookups:
+    IndicatorAssignmentId:
+      table: IndicatorAssignment
+    TimePeriodId:
+      table: TimePeriod

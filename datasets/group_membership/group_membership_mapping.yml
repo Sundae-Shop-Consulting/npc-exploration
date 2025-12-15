@@ -1,0 +1,102 @@
+Insert Account:
+  sf_object: Account
+  fields:
+  - FirstName
+  - LastName
+  - Name
+  - RecordTypeId
+  lookups:
+    ParentId:
+      table:
+      - Account
+      after: Insert Account
+
+Insert PartyRoleRelation:
+  sf_object: PartyRoleRelation
+  fields:
+  - Name
+  - RelatedRoleName
+  - RelationshipObjectName
+  - RoleName
+  - ShouldCreaInversRoleAuto
+  lookups:
+    RelatedInverseRecordId:
+      table:
+      - PartyRoleRelation
+      after: Insert PartyRoleRelation
+
+Insert AccountAccountRelation:
+  sf_object: AccountAccountRelation
+  fields:
+  - IsActive
+  lookups:
+    AccountId:
+      table:
+      - Account
+    PartyRoleRelationId:
+      table:
+      - PartyRoleRelation
+    RelatedAccountId:
+      table:
+      - Account
+    RelatedInverseRecordId:
+      table:
+      - AccountAccountRelation
+      after: Insert AccountAccountRelation
+
+Insert Contact:
+  sf_object: Contact
+  fields:
+  - FirstName
+  - LastName
+  lookups:
+    AccountId:
+      table:
+      - Account
+    ReportsToId:
+      table:
+      - Contact
+      after: Insert Contact
+
+Insert PartyRelationshipGroup:
+  sf_object: PartyRelationshipGroup
+  fields:
+  - Name
+  lookups:
+    AccountId:
+      table:
+      - Account
+
+Insert AccountContactRelation:
+  sf_object: AccountContactRelation
+  fields:
+  - IsActive
+  - IsIncludedInGroup
+  - IsPrimaryGroup
+  - IsPrimaryMember
+  lookups:
+    AccountId:
+      table:
+      - Account
+    ContactId:
+      table:
+      - Contact
+
+Insert ContactContactRelation:
+  sf_object: ContactContactRelation
+  fields:
+  - IsActive
+  lookups:
+    ContactId:
+      table:
+      - Contact
+    PartyRoleRelationId:
+      table:
+      - PartyRoleRelation
+    RelatedContactId:
+      table:
+      - Contact
+    RelatedInverseRecordId:
+      table:
+      - ContactContactRelation
+      after: Insert ContactContactRelation
