@@ -204,6 +204,13 @@ tasks:
       mapping: datasets/grantmaking/grantmaking_mapping.yml
       sql_path: datasets/grantmaking/grantmaking_data.sql
 
+  load_philanthropic_research_data:
+    group: NPC Sample Data
+    class_path: cumulusci.tasks.bulkdata.load.LoadData
+    options:
+      mapping: datasets/philanthropic_research/philanthropic_research_mapping.yml
+      sql_path: datasets/philanthropic_research/philanthropic_research_data.sql
+
   # ======================================
   # Volunteer Quick Start (VMSQ) Metadata
   # ======================================
@@ -308,6 +315,14 @@ tasks:
       objects: "User,Account,Contact,Contract,ApplicationDecision,ApplicationRenderMethod,ApplicationReview,ApplicationStageDefinition,ApplicationTimeline,PreliminaryApplicationRef,IndividualApplication,IndividualApplicationTask,PublicApplicationParticipant,DocumentChecklistItem,ActionPlanTemplate,ActionPlanTemplateVersion,ActionPlan,Budget,BudgetAllocation,BudgetCategory,BudgetCategoryValue,BudgetPeriod,FundingOpportunity,FundingAward,FundingAwardAmendment,FundingAwardRequirement,FundingAwardRqmtSection,FundingDisbursement,Program,OutcomeActivity,IndicatorAssignment,IndicatorPerformancePeriod"
       output_path: datasets/grantmaking/grantmaking_objects.yml
 
+  generate_philanthropic_research_object_reference:
+    group: NPC Metadata Utilities
+    description: Generate a text data dictionary for philanthropic research-related objects.
+    class_path: tasks.object_reference.GenerateObjectReference
+    options:
+      objects: "PartyCategory,ContactProfile,Account,Contact,ConstituentRole,PartyPhilanthropicRsrchPrfl,Case,PartyPhilanthropicAssessment,PartyPhilanthropicOccurrence,PartyPhilanthropicIndicator,PartyPhilanthropicMilestone,InteractionSummary,BusinessMilestone,PersonLifeEvent"
+      output_path: datasets/philanthropic_research/philanthropic_research_objects.yml
+
 flows:
 
   # ===========================
@@ -356,6 +371,8 @@ flows:
         task: load_case_management_data
       5: 
         task: load_grantmaking_data
+      6:
+        task: load_philanthropic_research_data
 
   # ===========================
   # Volunteer Quick Start Flows
