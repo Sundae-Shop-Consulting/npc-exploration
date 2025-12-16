@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>CompanyDashboards/FundraisingDashboards/</members>
+        <members>CompanyDashboards/FundraisingDashboards/fundraising</members>
+        <name>Dashboard</name>
+    </types>
+    <types>
+        <members>Fundraising/</members>
+        <members>Fundraising/Active_Recurring_Donations_gC5</members>
+        <members>Fundraising/Campaign_Performance_UDT</members>
+        <members>Fundraising/Donors_with_Total_Contributions_Mzb</members>
+        <members>Fundraising/Expected_Gift_Transactions_this_Calendar_niv</members>
+        <members>Fundraising/Gift_Commitments_This_Calendar_Year_swK</members>
+        <members>Fundraising/Gift_Commitments_with_Gift_Transactions_G4o</members>
+        <members>Fundraising/Opportunities_This_Calendar_Year_9OS</members>
+        <members>Fundraising/Top_Donors_NQF</members>
+        <name>Report</name>
+    </types>
+    <types>
+        <members>Accounts_with_Donor_Gift_Summaries</members>
+        <members>Accounts_with_Gift_Commitments</members>
+        <members>Gift_Commitments</members>
+        <members>Gift_Commitments_with_Gift_Transactions</members>
+        <members>Gift_Commitments_with_Gift_Tributes</members>
+        <members>Gift_Transactions</members>
+        <members>Gift_Transactions_with_Gift_Tributes</members>
+        <members>Gift_Transactions_with_Transaction_Designations</members>
+        <members>Opportunities_with_Commitments_Transactions</members>
+        <members>Opportunities_with_Gift_Commitments</members>
+        <name>ReportType</name>
+    </types>
+    <version>64.0</version>
+</Package>
