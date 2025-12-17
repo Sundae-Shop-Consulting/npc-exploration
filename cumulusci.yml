@@ -38,11 +38,6 @@ tasks:
         - DynamicAssessmentPsl
         - EinsteinAnalyticsPlusPsl
         - EvidenceManagementPSL
-        # - ExplainabilityServicePSL
-        # - FieldServiceDispatcherPsl
-        # - FieldServiceMobilePsl
-        # - FieldServiceSchedulingPsl
-        # - FieldServiceStandardPsl
         - FundraisingAccessPsl
         - GrantmakingPsl
         - GroupMembershipPsl
@@ -57,14 +52,11 @@ tasks:
         - OmniStudioDesigner
         - OmniStudioRuntime
         - OutcomeManagementPsl
-        # - PipelineInspectionUserPsl
         - ProgramManagementPsl
-        # - ProviderManagementPsl
         - Salesforce_org_AccountingSubledgerPsl
         - Salesforce_org_NonprofitCloudCaseManagementPsl
         - SonicEmbeddedStorePsl
         - SurveyCreatorPsl
-        # - Volunteer_Management_User
 
   assign_service_excellence_perms:
     group: NPC Permissions & Access
