@@ -23,6 +23,10 @@
         <name>FlexiPage</name>
     </types>
     <types>
+        <members>Admin</members>
+        <name>Profile</name>
+    </types>
+    <types>
         <members>Case.New_Action_Plan</members>
         <members>Record_Alert</members>
         <members>Referral.Update</members>
