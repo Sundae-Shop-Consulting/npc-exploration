@@ -492,6 +492,24 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
+                    <name>configuration</name>
+                    <value>DEPLOYMENT</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>deploymentId</name>
+                    <value>PersonAccount</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Activities &amp; Tasks</value>
+                </componentInstanceProperties>
+                <componentName>industries_service_excellence:actionLauncher</componentName>
+                <identifier>industries_service_excellence_actionLauncher</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
                     <name>showLegacyActivityComposer</name>
                     <value>false</value>
                 </componentInstanceProperties>

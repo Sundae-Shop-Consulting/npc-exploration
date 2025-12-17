@@ -306,6 +306,23 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
+                    <name>configuration</name>
+                    <value>DEPLOYMENT</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>deploymentId</name>
+                    <value>PersonAccount</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                </componentInstanceProperties>
+                <componentName>industries_service_excellence:actionLauncher</componentName>
+                <identifier>industries_service_excellence_actionLauncher</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
                     <name>contextField</name>
                     <value>InteractionSummary.AccountId</value>
                 </componentInstanceProperties>

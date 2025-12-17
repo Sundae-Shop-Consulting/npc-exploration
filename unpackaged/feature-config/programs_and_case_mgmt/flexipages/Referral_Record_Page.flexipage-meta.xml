@@ -182,6 +182,24 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
+                    <name>configuration</name>
+                    <value>DEPLOYMENT</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>deploymentId</name>
+                    <value>CaseManagement</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Manage Cases</value>
+                </componentInstanceProperties>
+                <componentName>industries_service_excellence:actionLauncher</componentName>
+                <identifier>industries_service_excellence_actionLauncher</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
                     <name>tabs</name>
                     <value>sidebartabs</value>
                 </componentInstanceProperties>

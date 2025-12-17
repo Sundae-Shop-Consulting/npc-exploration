@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
+        <members>SPCMCreateReferralCaseEnglish_5q1restoxfrj1lc6rt5y52icb</members>
+        <name>ActionLauncherItemDef</name>
+    </types>
+    <types>
         <members>CaseManagement</members>
         <name>CustomApplication</name>
     </types>
@@ -19,8 +23,16 @@
         <name>FlexiPage</name>
     </types>
     <types>
+        <members>Case.New_Action_Plan</members>
+        <members>Record_Alert</members>
         <members>Referral.Update</members>
         <name>QuickAction</name>
+    </types>
+    <types>
+        <members>CaseActions</members>
+        <members>CaseManagement</members>
+        <members>PersonAccount</members>
+        <name>RecordActionDeployment</name>
     </types>
     <types>
         <members>Outcomes</members>

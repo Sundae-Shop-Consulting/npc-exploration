@@ -6,6 +6,10 @@
         <name>Dashboard</name>
     </types>
     <types>
+        <members>GiftProcesses</members>
+        <name>RecordActionDeployment</name>
+    </types>
+    <types>
         <members>BusinessOrg_Fundraising_ARC</members>
         <members>Fundraising_Household_ARC</members>
         <members>Fundraising_Individual_ARCGraph</members>
