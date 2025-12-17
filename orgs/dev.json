@@ -14,6 +14,7 @@
     "DocumentChecklist",
     "DocGenInd",
     "EnableSetPasswordInApi",
+    "Explainability",
     "Fundraising",
     "Grantmaking",
     "IndustriesActionPlan",
@@ -40,15 +41,21 @@
     "enhancedNotesSettings": {
       "enableEnhancedNotes": true
     },
+    "opportunitySettings": {
+      "enableOpportunityFieldHistoryTracking": true
+    },
     "industriesSettings": {
       "enableBenefitAndGoalSharingPref": true,
       "enableBenefitManagementPreference": true,
       "enableCarePlansPreference": true,
       "enableCaseReferralPref": true,
+      "enableDiscoveryFrameworkMetadata": true,
       "enableFundraising": true,
       "enableGrantmaking": true,
       "enableGroupMembershipPref": true,
+      "enableIndustriesAssessment": true,  
       "enableInteractionSummaryPref": true,
+      "enableTimelinePref": true,
       "enableOutcomes": true,
       "enableVolunteerManagement": true
     },

@@ -14,6 +14,7 @@ private static String GRANTMAKING = 'Grantmaking';
 private static String OUTCOMES_MANAGEMENT = 'OutcomeManagementConsole';
 private static String PHILANTHROPIC_RESEARCH = 'PhilanthropicResearch';
 private static String PHILANTHROPY_AND_PARTNERSHIPS = 'PhilanthropyAndPartnerships';
+private static String CASE_MANAGEMENT = 'CaseManagement';
 
 // Put these at the top, in this order
 private static List<String> DEFAULT_PRIORITY_APPS = new List<String>{
@@ -45,6 +46,7 @@ public static void applyVolunteerAppOrder() {
 
 public static void applyProgramManagementAppOrder() {
     List<String> programsPriorityApps = new List<String>{
+        CASE_MANAGEMENT,
         PROGRAM_MANAGEMENT,
         OUTCOMES_MANAGEMENT,
         VOLUNTEER_MANAGEMENT,

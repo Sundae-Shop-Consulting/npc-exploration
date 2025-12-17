@@ -33,14 +33,11 @@ tasks:
         - ComplaintsManagementPsl
         - CompliantDataSharingPsl
         - DataProcessingEnginePsl
+        - DecisionExplainerPSL
         - DocumentChecklistPsl
         - DynamicAssessmentPsl
         - EinsteinAnalyticsPlusPsl
         - EvidenceManagementPSL
-        - FieldServiceDispatcherPsl
-        - FieldServiceMobilePsl
-        - FieldServiceSchedulingPsl
-        - FieldServiceStandardPsl
         - FundraisingAccessPsl
         - GrantmakingPsl
         - GroupMembershipPsl
@@ -49,6 +46,7 @@ tasks:
         - IndustriesInteractionSummaryPsl
         - IndustriesSalesExcellencePsl
         - IndustriesServiceExcellencePsl
+        - IndustriesVisitPsl 
         - InsightsBuilderPsl
         - LifeEventsAccessPSL
         - OmniStudioDesigner
@@ -59,8 +57,49 @@ tasks:
         - Salesforce_org_NonprofitCloudCaseManagementPsl
         - SonicEmbeddedStorePsl
         - SurveyCreatorPsl
-        - Volunteer_Management_User
 
+  assign_service_excellence_perms:
+    group: NPC Permissions & Access
+    description: Assign Industries Service Excellence permission sets
+    class_path: cumulusci.tasks.salesforce.users.permsets.AssignPermissionSets
+    options:
+      api_names:
+        - IndustriesServiceExcellence      
+        - ActionableSegmentation           
+        - IndustriesVisit                  
+
+  assign_omnistudio_perms:
+    group: NPC Permissions & Access
+    description: Assign OmniStudio permission sets
+    class_path: cumulusci.tasks.salesforce.users.permsets.AssignPermissionSets
+    options:
+      api_names:
+        - OmniStudioAdmin                
+        - OmniStudioExecution            
+        - OmniStudioUser                 
+
+  assign_analytics_perms:
+    group: NPC Permissions & Access  
+    description: Assign analytics permission sets
+    class_path: cumulusci.tasks.salesforce.users.permsets.AssignPermissionSets
+    options:
+      api_names:
+        - AnalyticsQueryService            
+        - AnalyticsStoreUser               
+
+  assign_additional_npc_perms:
+    group: NPC Permissions & Access
+    description: Assign additional NPC permission sets
+    class_path: cumulusci.tasks.salesforce.users.permsets.AssignPermissionSets
+    options:
+      api_names:
+        - AccessAccountingSubledgerGrowth  
+        - ComplaintsManagementAccess       
+        - ExplainabilityServicePSL         
+        - IndustriesAssessmentPermissionSet 
+        - ManageVolunteerData              
+        - RunAccountingSubledgerJob        
+        
   assign_fundraising_perms:
     group: NPC Permissions & Access
     description: Assign all fundraising-related permission sets to the current user.
@@ -261,7 +300,44 @@ tasks:
     options:
       path: unpackaged/volunteersQuickStart/step2
 
-  
+  # ======================================
+  # Configuration from baseline configuration
+  # ======================================
+  deploy_shared_config:
+    group: NPC Org Config
+    description: Deploy configuration that is shared across features
+    class_path: cumulusci.tasks.salesforce.Deploy
+    options:
+      path: unpackaged/feature-config/shared/
+
+
+  deploy_fundraising_config:
+    group: NPC Org Config
+    description: Deploy fundraising-related configuration 
+    class_path: cumulusci.tasks.salesforce.Deploy
+    options:
+      path: unpackaged/feature-config/fundraising/
+
+  deploy_case_management_config:
+    group: NPC Org Config
+    description: Deploy programs and case management-related configuration 
+    class_path: cumulusci.tasks.salesforce.Deploy
+    options:
+      path: unpackaged/feature-config/programs_and_case_mgmt/
+
+  deploy_program_cohort_config:
+    group: NPC Org Config
+    description: Updates components of program management that are only valid if program cohorts are enabled
+    class_path: cumulusci.tasks.salesforce.Deploy
+    options:
+      path: unpackaged/feature-config/program_cohorts/
+
+  deploy_grantmaking_config:
+    group: NPC Org Config
+    description: Deploy grantmaking-related configuration 
+    class_path: cumulusci.tasks.salesforce.Deploy
+    options:
+      path: unpackaged/feature-config/grantmaking
 
   # ======================================
   # Object & Field Metadata / References
@@ -341,14 +417,21 @@ flows:
         task: assign_casemgmt_perms
       4:
         task: assign_volunteermgmt_perms
-
-
+      5:
+        task: assign_service_excellence_perms     
+      6:
+        task: assign_omnistudio_perms             
+      7:
+        task: assign_analytics_perms              
+      8:
+        task: assign_additional_npc_perms         
+      
   # ===========================
   # Org Setup / Dev Flows
   # ===========================
 
   dev_org:
-    group: Org Setup
+    group: NPC Org Setup
     description: Base dev org setup including NPC permissions and default app menu ordering.
     steps:
       90: 
@@ -393,7 +476,7 @@ flows:
       5:
         task: deploy_volunteers_quick_start_step2
       6: 
-        task: reorder_app_menu
+        task: reorder_app_menu_volunteering
   
   volunteer_quick_start_org:
     group: Org Setup
@@ -403,3 +486,31 @@ flows:
         flow: dev_org
       2:
         flow: deploy_volunteer_quick_start
+
+  case_mgmt_org:
+    group: Org Setup
+    steps:
+      1: 
+        flow: dev_org
+      2:
+        task: deploy_shared_config
+      3:
+        task: deploy_case_management_config
+      4: 
+        task: load_case_management_data
+      5: 
+        task: reorder_app_menu_programs
+
+  fundraising_org:
+    group: Org Setup
+    steps:
+      1: 
+        flow: dev_org
+      2:
+        task: deploy_shared_config
+      3:
+        task: deploy_fundraising_config
+      4: 
+        task: load_fundraising_data
+      5: 
+        task: reorder_app_menu_fundraising

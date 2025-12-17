@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ActionLauncherItemDef xmlns="http://soap.sforce.com/2006/04/metadata">
+    <identifier>_5q1restoxfrj1lc6rt5y52icb</identifier>
+    <itemActionType>Omniscript</itemActionType>
+    <itemCategory>dbBased</itemCategory>
+    <itemLanguage>English</itemLanguage>
+    <masterLabel>SPCM/CreateReferralCase/English</masterLabel>
+    <subType>CreateReferralCase</subType>
+    <type>SPCM</type>
+</ActionLauncherItemDef>
