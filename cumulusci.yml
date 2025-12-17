@@ -311,6 +311,14 @@ tasks:
   # ======================================
   # Configuration from baseline configuration
   # ======================================
+  deploy_shared_config:
+    group: NPC Org Config
+    description: Deploy configuration that is shared across features
+    class_path: cumulusci.tasks.salesforce.Deploy
+    options:
+      path: unpackaged/feature-config/shared/
+
+
   deploy_fundraising_config:
     group: NPC Org Config
     description: Deploy fundraising-related configuration 
@@ -318,14 +326,19 @@ tasks:
     options:
       path: unpackaged/feature-config/fundraising/
 
+  deploy_case_management_config:
+    group: NPC Org Config
+    description: Deploy programs and case management-related configuration 
+    class_path: cumulusci.tasks.salesforce.Deploy
+    options:
+      path: unpackaged/feature-config/programs_and_case_mgmt/
 
-  # currently debugging
-  # deploy_case_management_config:
-  #   group: NPC Org Config
-  #   description: Deploy programs and case management-related configuration 
-  #   class_path: cumulusci.tasks.salesforce.Deploy
-  #   options:
-  #     path: unpackaged/feature-config/programs_and_case_mgmt/
+  deploy_program_cohort_config:
+    group: NPC Org Config
+    description: Updates components of program management that are only valid if program cohorts are enabled
+    class_path: cumulusci.tasks.salesforce.Deploy
+    options:
+      path: unpackaged/feature-config/program_cohorts/
 
   # deploy_grantmaking_config:
   #   group: NPC Org Config

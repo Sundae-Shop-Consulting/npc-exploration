@@ -14,7 +14,17 @@
         <members>Case_Record_Page</members>
         <members>Client_Account_View</members>
         <members>Client_Case</members>
+        <members>Program_Record_Page</members>
+        <members>Referral_Record_Page</members>
         <name>FlexiPage</name>
+    </types>
+    <types>
+        <members>Referral.Update</members>
+        <name>QuickAction</name>
+    </types>
+    <types>
+        <members>Outcomes</members>
+        <name>RelationshipGraphDefinition</name>
     </types>
     <types>
         <members>CaseManagement/</members>

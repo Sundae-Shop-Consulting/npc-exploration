@@ -1,0 +1,2918 @@
+objects:
+- name: PartyCategory
+  fields:
+  - name: AccountId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: true
+    reference:
+      reference_to:
+      - Account
+      relationship_name: Account
+  - name: ContactId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Contact
+      relationship_name: Contact
+  - name: Classification
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Lapsed Donor
+      - Legacy Prospect
+      - Undergrad or Grad Prospect
+      - Influencer Prospect
+      - High Net Worth Prospect
+      total_values: 10
+  - name: Status
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Active
+      - Inactive
+      - Pending
+      - Superseded
+      - Archived
+      total_values: 6
+  - name: StartDate
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: EndDate
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+- name: ContactProfile
+  fields:
+  - name: ContactId
+    type: reference
+    access: create_only
+    is_formula: false
+    is_auto_number: false
+    is_required: true
+    reference:
+      reference_to:
+      - Contact
+      relationship_name: Contact
+  - name: Race
+    type: multipicklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: BirthPlace
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PrimaryCitizenshipType
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - National
+      - Refugee
+      - Asylum
+      - Other
+      total_values: 4
+  - name: SecondaryCitizenshipType
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - National
+      - Refugee
+      - Asylum
+      - Other
+      total_values: 4
+  - name: MilitaryBranch
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Army
+      - Marine Corps
+      - Navy
+      - Air Force
+      - Space Force
+      total_values: 7
+  - name: MilitaryService
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Active Duty
+      - Retired
+      - Active Reserve
+      - Veteran
+      - Unknown
+      total_values: 8
+  - name: IsFirstGenerationStudent
+    type: boolean
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: HighestEducationLevel
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - High School
+      - Graduate
+      - Masters
+      - PhD
+      - Other
+      total_values: 5
+  - name: Ethnicity
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Hispanic or Latino
+      - Not Hispanic or Latino
+      - Not Selected
+      total_values: 3
+  - name: OtherAssetsValue
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: RetirementSavingsAmount
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: StockValue
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: RealEstateValue
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: BusinessOwnershipValue
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: AssetLiquidationValue
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Income
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: OtherNonprofitGiftCount
+    type: int
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: OtherNonprofitGiftAmount
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: RecurringDonorType
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Active
+      - Lapsed
+      - Former
+      total_values: 3
+  - name: Location
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: GenerationalCohort
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Silent Generation (1928-1945)
+      - Baby Boomers (1946-1964)
+      - Generation X (1965-1980)
+      - Millennials (1981-1996)
+      - Generation Z (1997-2012)
+      total_values: 6
+  - name: AdvancementGraduationDate
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Website
+    type: url
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+- name: Account
+  fields:
+  - name: Name
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: LastName
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: FirstName
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Salutation
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Mr.
+      - Ms.
+      - Mrs.
+      - Dr.
+      - Prof.
+      total_values: 6
+  - name: MiddleName
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Suffix
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Type
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Analyst
+      - Competitor
+      - Customer
+      - Integrator
+      - Investor
+      total_values: 10
+  - name: RecordTypeId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - RecordType
+      relationship_name: RecordType
+  - name: ParentId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Account
+      relationship_name: Parent
+  - name: BillingStreet
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: BillingCity
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: BillingPostalCode
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: BillingStateCode
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - AC
+      - AG
+      - AG
+      - '05'
+      - '02'
+      total_values: 384
+  - name: BillingCountryCode
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - AF
+      - AX
+      - AL
+      - DZ
+      - AD
+      total_values: 235
+  - name: BillingLatitude
+    type: double
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: BillingLongitude
+    type: double
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: BillingGeocodeAccuracy
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Address
+      - NearAddress
+      - Block
+      - Street
+      - ExtendedZip
+      total_values: 11
+  - name: ShippingStreet
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ShippingCity
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ShippingPostalCode
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ShippingStateCode
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - AC
+      - AG
+      - AG
+      - '05'
+      - '02'
+      total_values: 384
+  - name: ShippingCountryCode
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - AF
+      - AX
+      - AL
+      - DZ
+      - AD
+      total_values: 235
+  - name: ShippingLatitude
+    type: double
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ShippingLongitude
+    type: double
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ShippingGeocodeAccuracy
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Address
+      - NearAddress
+      - Block
+      - Street
+      - ExtendedZip
+      total_values: 11
+  - name: Phone
+    type: phone
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Fax
+    type: phone
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: AccountNumber
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Website
+    type: url
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Sic
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Industry
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Agriculture
+      - Apparel
+      - Banking
+      - Biotechnology
+      - Chemicals
+      total_values: 32
+  - name: AnnualRevenue
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: NumberOfEmployees
+    type: int
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Ownership
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Public
+      - Private
+      - Subsidiary
+      - Other
+      total_values: 4
+  - name: TickerSymbol
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Description
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Rating
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Hot
+      - Warm
+      - Cold
+      total_values: 3
+  - name: Site
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: SourceSystemIdentifier
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: IsCustomerPortal
+    type: boolean
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonMailingStreet
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonMailingCity
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonMailingPostalCode
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonMailingStateCode
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - AC
+      - AG
+      - AG
+      - '05'
+      - '02'
+      total_values: 384
+  - name: PersonMailingCountryCode
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - AF
+      - AX
+      - AL
+      - DZ
+      - AD
+      total_values: 235
+  - name: PersonMailingLatitude
+    type: double
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonMailingLongitude
+    type: double
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonMailingGeocodeAccuracy
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Address
+      - NearAddress
+      - Block
+      - Street
+      - ExtendedZip
+      total_values: 11
+  - name: PersonOtherStreet
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonOtherCity
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonOtherPostalCode
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonOtherStateCode
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - AC
+      - AG
+      - AG
+      - '05'
+      - '02'
+      total_values: 384
+  - name: PersonOtherCountryCode
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - AF
+      - AX
+      - AL
+      - DZ
+      - AD
+      total_values: 235
+  - name: PersonOtherLatitude
+    type: double
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonOtherLongitude
+    type: double
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonOtherGeocodeAccuracy
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Address
+      - NearAddress
+      - Block
+      - Street
+      - ExtendedZip
+      total_values: 11
+  - name: PersonMobilePhone
+    type: phone
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonHomePhone
+    type: phone
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonOtherPhone
+    type: phone
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonAssistantPhone
+    type: phone
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonEmail
+    type: email
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonTitle
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonDepartment
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonAssistantName
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonLeadSource
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Advertisement
+      - Employee Referral
+      - External Referral
+      - Partner
+      - Public Relations
+      total_values: 11
+  - name: PersonBirthdate
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonHasOptedOutOfEmail
+    type: boolean
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonHasOptedOutOfFax
+    type: boolean
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonDoNotCall
+    type: boolean
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonEmailBouncedReason
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonEmailBouncedDate
+    type: datetime
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PersonIndividualId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Individual
+      relationship_name: PersonIndividual
+  - name: PersonMaritalStatus
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Married
+      - Single
+      - Divorced
+      - Widowed
+      - Separated
+      total_values: 5
+  - name: PersonPronouns
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - He/Him
+      - She/Her
+      - They/Them
+      - He/They
+      - She/They
+      total_values: 6
+  - name: PersonGenderIdentity
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Male
+      - Female
+      - Nonbinary
+      - Not Listed
+      total_values: 4
+  - name: Jigsaw
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: AccountSource
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Advertisement
+      - Employee Referral
+      - External Referral
+      - Partner
+      - Public Relations
+      total_values: 11
+  - name: SicDesc
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: OperatingHoursId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - OperatingHours
+      relationship_name: OperatingHours
+- name: Contact
+  fields:
+  - name: AccountId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Account
+      relationship_name: Account
+  - name: LastName
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: true
+  - name: FirstName
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Salutation
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Mr.
+      - Ms.
+      - Mrs.
+      - Dr.
+      - Prof.
+      total_values: 6
+  - name: MiddleName
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Suffix
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: OtherStreet
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: OtherCity
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: OtherPostalCode
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: OtherStateCode
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - AC
+      - AG
+      - AG
+      - '05'
+      - '02'
+      total_values: 384
+  - name: OtherCountryCode
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - AF
+      - AX
+      - AL
+      - DZ
+      - AD
+      total_values: 235
+  - name: OtherLatitude
+    type: double
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: OtherLongitude
+    type: double
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: OtherGeocodeAccuracy
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Address
+      - NearAddress
+      - Block
+      - Street
+      - ExtendedZip
+      total_values: 11
+  - name: MailingStreet
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: MailingCity
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: MailingPostalCode
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: MailingStateCode
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - AC
+      - AG
+      - AG
+      - '05'
+      - '02'
+      total_values: 384
+  - name: MailingCountryCode
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - AF
+      - AX
+      - AL
+      - DZ
+      - AD
+      total_values: 235
+  - name: MailingLatitude
+    type: double
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: MailingLongitude
+    type: double
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: MailingGeocodeAccuracy
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Address
+      - NearAddress
+      - Block
+      - Street
+      - ExtendedZip
+      total_values: 11
+  - name: Phone
+    type: phone
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Fax
+    type: phone
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: MobilePhone
+    type: phone
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: HomePhone
+    type: phone
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: OtherPhone
+    type: phone
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: AssistantPhone
+    type: phone
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ReportsToId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Contact
+      relationship_name: ReportsTo
+  - name: Email
+    type: email
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Title
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Department
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: AssistantName
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: LeadSource
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Advertisement
+      - Employee Referral
+      - External Referral
+      - Partner
+      - Public Relations
+      total_values: 11
+  - name: Birthdate
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Description
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: HasOptedOutOfEmail
+    type: boolean
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: HasOptedOutOfFax
+    type: boolean
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: DoNotCall
+    type: boolean
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: CanAllowPortalSelfReg
+    type: boolean
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: EmailBouncedReason
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: EmailBouncedDate
+    type: datetime
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Jigsaw
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: IndividualId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Individual
+      relationship_name: Individual
+  - name: MaritalStatus
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Married
+      - Single
+      - Divorced
+      - Widowed
+      - Separated
+      total_values: 5
+  - name: Pronouns
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - He/Him
+      - She/Her
+      - They/Them
+      - He/They
+      - She/They
+      total_values: 6
+  - name: GenderIdentity
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Male
+      - Female
+      - Nonbinary
+      - Not Listed
+      total_values: 4
+  - name: ContactSource
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Auto Create
+      total_values: 1
+  - name: TitleType
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - ceo
+      - executive
+      - vp
+      - directorOrManager
+      - individualContributor
+      total_values: 5
+  - name: DepartmentGroup
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - chiefExecutive
+      - sales
+      - finance
+      - tech
+      - support
+      total_values: 10
+  - name: BuyerAttributes
+    type: multipicklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+- name: ConstituentRole
+  fields:
+  - name: PersonId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: true
+    reference:
+      reference_to:
+      - Account
+      - Contact
+      - Individual
+      relationship_name: Person
+  - name: Description
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: RoleType
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: true
+    picklist:
+      initial_values:
+      - Donor
+      - Philanthropic Prospect
+      - Volunteer
+      - Participant
+      total_values: 4
+  - name: Status
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: true
+    picklist:
+      initial_values:
+      - Active
+      - Former
+      total_values: 2
+  - name: EffectiveStartDate
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: EffectiveEndDate
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: InstitutionId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Account
+      relationship_name: Institution
+- name: PartyPhilanthropicRsrchPrfl
+  fields:
+  - name: AccountId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: true
+    reference:
+      reference_to:
+      - Account
+      relationship_name: Account
+  - name: ContactId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Contact
+      relationship_name: Contact
+  - name: CaseId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Case
+      relationship_name: Case
+  - name: ResearchProfileType
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Planned Giving
+      - Capital Campaign
+      total_values: 2
+  - name: ResearchProfilePhase
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Planning
+      - Identification
+      - Initial Screening
+      - Qualification
+      - Rating and Segmentation
+      total_values: 11
+  - name: StartDate
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: EndDate
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ResearcherAssignedId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - User
+      relationship_name: ResearcherAssigned
+  - name: HoursSpentOnResearch
+    type: double
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PctOfResearchCompleted
+    type: percent
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: IsResearchCompleted
+    type: boolean
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: DetailedSummary
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ShortSummary
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+- name: Case
+  fields:
+  - name: ContactId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Contact
+      relationship_name: Contact
+  - name: AccountId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Account
+      relationship_name: Account
+  - name: AssetId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Asset
+      relationship_name: Asset
+  - name: ProductId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Product2
+      relationship_name: Product
+  - name: EntitlementId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Entitlement
+      relationship_name: Entitlement
+  - name: SourceId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - BusinessMilestone
+      - EmailMessage
+      - PersonLifeEvent
+      - PublicComplaint
+      - SocialPost
+      - SvcCatalogRequest
+      relationship_name: Source
+  - name: BusinessHoursId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: true
+    reference:
+      reference_to:
+      - BusinessHours
+      relationship_name: BusinessHours
+  - name: ParentId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Case
+      relationship_name: Parent
+  - name: SuppliedName
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: SuppliedEmail
+    type: email
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: SuppliedPhone
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: SuppliedCompany
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Type
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Sample Cases
+      - Trial
+      total_values: 2
+  - name: Status
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - On Hold
+      - Escalated
+      - Closed
+      - New
+      total_values: 4
+  - name: Reason
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - User didn't attend training
+      - Complex functionality
+      - Existing problem
+      - Instructions not clear
+      - New problem
+      total_values: 5
+  - name: Origin
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Email
+      - Phone
+      - Web
+      - Chatter Answers
+      total_values: 4
+  - name: IsVisibleInSelfService
+    type: boolean
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Subject
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Priority
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - High
+      - Medium
+      - Low
+      total_values: 3
+  - name: Description
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: IsEscalated
+    type: boolean
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: IsClosedOnCreate
+    type: boolean
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: IsSelfServiceClosed
+    type: boolean
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: SlaStartDate
+    type: datetime
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: IsStopped
+    type: boolean
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Comments
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+- name: PartyPhilanthropicAssessment
+  fields:
+  - name: AccountId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: true
+    reference:
+      reference_to:
+      - Account
+      relationship_name: Account
+  - name: ContactId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Contact
+      relationship_name: Contact
+  - name: AssessmentOrganizationId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Account
+      relationship_name: AssessmentOrganization
+  - name: Date
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: OverallRating
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - High
+      - Medium
+      - Low
+      total_values: 3
+  - name: AssessmentType
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Executive Summary
+      - Donor Brief
+      - Third Party Assessment
+      - AI Agent-Generated
+      total_values: 4
+  - name: StrengthsAndOpportunities
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: WeaknessesAndDrawbacks
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ShortSummary
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ExtendedSummary
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: WealthAmount
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: AssetLiquidationValue
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: BusinessOwnershipValue
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Income
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: OtherAssetsValue
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: OtherNonprofitGiftAmount
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: OtherNonprofitGiftCount
+    type: int
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: RealEstateValue
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: RetirementSavingsAmount
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: StockValue
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: GivingLevel
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - $25,000,000+
+      - $10,000,000-$24,999,999
+      - $5,000,000-$9,999,999
+      - $1,000,000-$4,999,999
+      - $250,000-$999,999
+      total_values: 15
+  - name: ResponsiblePersonId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - User
+      relationship_name: ResponsiblePerson
+  - name: AttributedUserId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - User
+      relationship_name: AttributedUser
+  - name: PartyPhilanthropicRsrchPrflId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - PartyPhilanthropicRsrchPrfl
+      relationship_name: PartyPhilanthropicRsrchPrfl
+  - name: CaseId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Case
+      relationship_name: Case
+  - name: ResearchHours
+    type: double
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ResearchStartDate
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ResearchEndDate
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ResearchSharedDate
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+- name: PartyPhilanthropicOccurrence
+  fields:
+  - name: AccountId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: true
+    reference:
+      reference_to:
+      - Account
+      relationship_name: Account
+  - name: ContactId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Contact
+      relationship_name: Contact
+  - name: ParticipantId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Contact
+      relationship_name: Participant
+  - name: RelatedOrganizationId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Account
+      relationship_name: RelatedOrganization
+  - name: ResearchType
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Wealth
+      - Philanthropy
+      - Engagement
+      - Communication
+      - Volunteerism
+      total_values: 6
+  - name: OccurrenceType
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Net Worth
+      - Donation History
+      - Volunteer Hours
+      - Inheritance
+      total_values: 4
+  - name: EstimatedValue
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Summary
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: SourceId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - BusinessMilestone
+      - InteractionSummary
+      - PersonLifeEvent
+      relationship_name: Source
+  - name: OtherSource
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: SourceType
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - External Interaction
+      - Internal Data
+      - Third-Party Data
+      - Public Records
+      total_values: 4
+  - name: VerificationType
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Known
+      - Inferred
+      total_values: 2
+  - name: DateCollected
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PartyPhilanthropicAssessmentId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - PartyPhilanthropicAssessment
+      relationship_name: PartyPhilanthropicAssessment
+  - name: AttributedUserId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - User
+      relationship_name: AttributedUser
+  - name: PartyPhilanthropicRsrchPrflId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - PartyPhilanthropicRsrchPrfl
+      relationship_name: PartyPhilanthropicRsrchPrfl
+  - name: CaseId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Case
+      relationship_name: Case
+  - name: ResearchHours
+    type: double
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ResearchStartDate
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ResearchEndDate
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ResearchSharedDate
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+- name: PartyPhilanthropicIndicator
+  fields:
+  - name: AccountId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: true
+    reference:
+      reference_to:
+      - Account
+      relationship_name: Account
+  - name: ContactId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Contact
+      relationship_name: Contact
+  - name: ParticipantId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Contact
+      relationship_name: Participant
+  - name: RelatedOrganizationId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Account
+      relationship_name: RelatedOrganization
+  - name: IndicatorType
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Wealth
+      - Philanthropy
+      - Engagement
+      - Communication
+      - Volunteerism
+      total_values: 6
+  - name: Indicator
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Net Worth
+      - Donation History
+      - Volunteer Hours
+      - Inheritance
+      total_values: 4
+  - name: EstimatedValue
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Summary
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: SourceId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - BusinessMilestone
+      - InteractionSummary
+      - PersonLifeEvent
+      relationship_name: Source
+  - name: OtherSource
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: SourceType
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - External Interaction
+      - Internal Data
+      - Third-Party Data
+      - Public Records
+      total_values: 4
+  - name: DateCollected
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Status
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Promoted
+      total_values: 1
+  - name: PartyPhilanthropicOccurrenceId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - PartyPhilanthropicOccurrence
+      relationship_name: PartyPhilanthropicOccurrence
+  - name: AttributedUserId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - User
+      relationship_name: AttributedUser
+  - name: PartyPhilanthropicRsrchPrflId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - PartyPhilanthropicRsrchPrfl
+      relationship_name: PartyPhilanthropicRsrchPrfl
+  - name: CaseId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Case
+      relationship_name: Case
+  - name: ResearchHours
+    type: double
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ResearchStartDate
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ResearchEndDate
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ResearchSharedDate
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+- name: PartyPhilanthropicMilestone
+  fields:
+  - name: AccountId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: true
+    reference:
+      reference_to:
+      - Account
+      relationship_name: Account
+  - name: ContactId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Contact
+      relationship_name: Contact
+  - name: OverallRating
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - High
+      - Medium
+      - Low
+      total_values: 3
+  - name: StrengthsAndOpportunities
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: WeaknessesAndDrawbacks
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ShortSummary
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ExtendedSummary
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: WealthAmount
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: AssetLiquidationValue
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: BusinessOwnershipValue
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Income
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: OtherAssetsValue
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: OtherNonprofitGiftAmount
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: OtherNonprofitGiftCount
+    type: int
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: RealEstateValue
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: RetirementSavingsAmount
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: StockValue
+    type: currency
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: Date
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: GivingLevel
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - $25,000,000+
+      - $10,000,000-$24,999,999
+      - $5,000,000-$9,999,999
+      - $1,000,000-$4,999,999
+      - $250,000-$999,999
+      total_values: 15
+  - name: PtyPhilanthropicIndCnt
+    type: int
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PtyPhilanthropicOccrCnt
+    type: int
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: PtyPhilanthropicAsmtCnt
+    type: int
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ResponsiblePersonId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - User
+      relationship_name: ResponsiblePerson
+  - name: LastAssessmentDate
+    type: date
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+- name: InteractionSummary
+  fields:
+  - name: Name
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: true
+  - name: AccountId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Account
+      relationship_name: Account
+  - name: InteractionId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Interaction
+      relationship_name: Interaction
+  - name: PartnerAccountId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Account
+      relationship_name: PartnerAccount
+  - name: ConfidentialityType
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Confidential
+      - Public
+      total_values: 2
+  - name: InteractionPurpose
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Deal Execution
+      - Meet and Greet
+      - Quarterly Check-In
+      total_values: 3
+  - name: Status
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Draft
+      - Published
+      total_values: 2
+  - name: Offering
+    type: multipicklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: RelatedRecordId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - ApplicationForm
+      - ApplicationFormProduct
+      - BenefitAssignment
+      - CarePlan
+      - Case
+      - CaseParticipant
+      - ComplaintParticipant
+      - Contact
+      - GoalAssignment
+      - IndividualApplication
+      - Opportunity
+      - PartyPhilanthropicAssessment
+      - PartyPhilanthropicIndicator
+      - PartyPhilanthropicMilestone
+      - PartyPhilanthropicOccurrence
+      - PartyRelationshipGroup
+      - PublicComplaint
+      - Referral
+      - Visit
+      relationship_name: RelatedRecord
+  - name: MeetingNotes
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: NextSteps
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+- name: BusinessMilestone
+  fields:
+  - name: Name
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: true
+  - name: PrimaryAccountId
+    type: reference
+    access: create_only
+    is_formula: false
+    is_auto_number: false
+    is_required: true
+    reference:
+      reference_to:
+      - Account
+      relationship_name: PrimaryAccount
+  - name: MilestoneDate
+    type: datetime
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: true
+  - name: IsTentative
+    type: boolean
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: MilestoneType
+    type: picklist
+    access: create_only
+    is_formula: false
+    is_auto_number: false
+    is_required: true
+    picklist:
+      initial_values:
+      - Merger & Acquisition
+      - Expansion
+      - Bankruptcy
+      - New Partnership
+      - New Funding
+      total_values: 6
+  - name: SourceSystemIdentifier
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: SourceSystem
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: MilestoneSiteId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Location
+      relationship_name: MilestoneSite
+  - name: MilestoneDescription
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: IsExpired
+    type: boolean
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ExpirationDate
+    type: datetime
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ExpirationDescription
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+- name: PersonLifeEvent
+  fields:
+  - name: Name
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: true
+  - name: PrimaryPersonId
+    type: reference
+    access: create_only
+    is_formula: false
+    is_auto_number: false
+    is_required: true
+    reference:
+      reference_to:
+      - Contact
+      relationship_name: PrimaryPerson
+  - name: EventDate
+    type: datetime
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: true
+  - name: EventDescription
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: IsTentative
+    type: boolean
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: RelatedPersonId
+    type: reference
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    reference:
+      reference_to:
+      - Contact
+      relationship_name: RelatedPerson
+  - name: EventType
+    type: picklist
+    access: create_only
+    is_formula: false
+    is_auto_number: false
+    is_required: true
+    picklist:
+      initial_values:
+      - Birth
+      - Graduation
+      - Job
+      - Marriage
+      - Relocation
+      total_values: 8
+  - name: SourceSystemIdentifier
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: SourceSystem
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: EventLocationStreet
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: EventLocationCity
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: EventLocationPostalCode
+    type: string
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: EventLocationStateCode
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - AC
+      - AG
+      - AG
+      - '05'
+      - '02'
+      total_values: 384
+  - name: EventLocationCountryCode
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - AF
+      - AX
+      - AL
+      - DZ
+      - AD
+      total_values: 235
+  - name: EventLocationLatitude
+    type: double
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: EventLocationLongitude
+    type: double
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: EventLocationGeocodeAccuracy
+    type: picklist
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+    picklist:
+      initial_values:
+      - Address
+      - NearAddress
+      - Block
+      - Street
+      - ExtendedZip
+      total_values: 11
+  - name: IsExpired
+    type: boolean
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ExpirationDate
+    type: datetime
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+  - name: ExpirationDescription
+    type: textarea
+    access: read_write
+    is_formula: false
+    is_auto_number: false
+    is_required: false
+errors: []

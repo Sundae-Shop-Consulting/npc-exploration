@@ -6,6 +6,12 @@
         <name>Dashboard</name>
     </types>
     <types>
+        <members>BusinessOrg_Fundraising_ARC</members>
+        <members>Fundraising_Household_ARC</members>
+        <members>Fundraising_Individual_ARCGraph</members>
+        <name>RelationshipGraphDefinition</name>
+    </types>
+    <types>
         <members>Fundraising/</members>
         <members>Fundraising/Active_Recurring_Donations_gC5</members>
         <members>Fundraising/Campaign_Performance_UDT</members>
