@@ -340,12 +340,12 @@ tasks:
     options:
       path: unpackaged/feature-config/program_cohorts/
 
-  # deploy_grantmaking_config:
-  #   group: NPC Org Config
-  #   description: Deploy grantmaking-related configuration 
-  #   class_path: cumulusci.tasks.salesforce.Deploy
-  #   options:
-  #     path: unpackaged/feature-config/grantmaking
+  deploy_grantmaking_config:
+    group: NPC Org Config
+    description: Deploy grantmaking-related configuration 
+    class_path: cumulusci.tasks.salesforce.Deploy
+    options:
+      path: unpackaged/feature-config/grantmaking
 
   # ======================================
   # Object & Field Metadata / References

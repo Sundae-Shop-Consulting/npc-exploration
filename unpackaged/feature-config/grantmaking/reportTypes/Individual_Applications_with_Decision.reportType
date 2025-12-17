@@ -152,11 +152,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Application</field>
-            <table>IndividualApplication.ApplicationDecision</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>ApplicationDecision</field>
             <table>IndividualApplication.ApplicationDecision</table>
         </columns>
