@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordActionDeployment xmlns="http://soap.sforce.com/2006/04/metadata">
+    <componentName>ActionLauncher</componentName>
+    <deploymentContexts>
+        <entityName>Account</entityName>
+    </deploymentContexts>
+    <deploymentContexts>
+        <entityName>Contact</entityName>
+    </deploymentContexts>
+    <hasComponents>false</hasComponents>
+    <hasGuidedActions>true</hasGuidedActions>
+    <hasOmniscripts>false</hasOmniscripts>
+    <hasRecommendations>false</hasRecommendations>
+    <masterLabel>High Touch Deployment</masterLabel>
+    <selectableItems>
+        <action>SendEmail</action>
+        <frequentActionSequenceNbr>2</frequentActionSequenceNbr>
+        <isFrequentAction>true</isFrequentAction>
+        <type>QuickAction</type>
+    </selectableItems>
+    <selectableItems>
+        <action>LogACall</action>
+        <frequentActionSequenceNbr>1</frequentActionSequenceNbr>
+        <isFrequentAction>true</isFrequentAction>
+        <type>QuickAction</type>
+    </selectableItems>
+    <selectableItems>
+        <action>NewContact</action>
+        <frequentActionSequenceNbr>3</frequentActionSequenceNbr>
+        <isFrequentAction>true</isFrequentAction>
+        <type>QuickAction</type>
+    </selectableItems>
+    <selectableItems>
+        <action>NewTask</action>
+        <frequentActionSequenceNbr>0</frequentActionSequenceNbr>
+        <isFrequentAction>true</isFrequentAction>
+        <type>QuickAction</type>
+    </selectableItems>
+    <selectableItems>
+        <action>serviceprocess__auwakeflow</action>
+        <frequentActionSequenceNbr>4</frequentActionSequenceNbr>
+        <isFrequentAction>true</isFrequentAction>
+        <type>Flow</type>
+    </selectableItems>
+</RecordActionDeployment>

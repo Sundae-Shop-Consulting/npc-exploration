@@ -1,12 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>CompanyDashboards/FundraisingDashboards/</members>
-        <members>CompanyDashboards/FundraisingDashboards/fundraising</members>
+        <members>FundraisingDashboards/</members>
+        <members>FundraisingDashboards/campaign_performance</members>
+        <members>FundraisingDashboards/fundraising</members>
         <name>Dashboard</name>
     </types>
     <types>
+        <members>Account_Record_Page</members>
+        <members>Campaign_Record_Page</members>
+        <members>Donor_Support</members>
+        <members>Gift_Batch_Record_Page</members>
+        <members>Gift_Commitment_Record_Page</members>
+        <members>Gift_Commitment_Record_Page1</members>
+        <members>Household_Fundraising</members>
+        <members>Opportunity_Record_Page</members>
+        <members>Opportunity_Record_Page1</members>
+        <members>OrgBusiness_Fundraising_Operations</members>
+        <members>Org_Business_Account_Fundraising</members>
+        <members>Outreach_Source_Code_Record_Page</members>
+        <members>Outreach_Source_Code_Record_Page1</members>
+        <members>Philanthropy_Partnerships</members>
+        <members>Supporter_Fundraising</members>
+        <members>Supporter_Fundraising_Operations</members>
+        <name>FlexiPage</name>
+    </types>
+    <types>
+        <members>Admin</members>
+        <name>Profile</name>
+    </types>
+    <types>
         <members>GiftProcesses</members>
+        <members>HighTouchDeployment</members>
         <name>RecordActionDeployment</name>
     </types>
     <types>
