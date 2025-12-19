@@ -399,6 +399,51 @@ tasks:
       objects: "PartyCategory,ContactProfile,Account,Contact,ConstituentRole,PartyPhilanthropicRsrchPrfl,Case,PartyPhilanthropicAssessment,PartyPhilanthropicOccurrence,PartyPhilanthropicIndicator,PartyPhilanthropicMilestone,InteractionSummary,BusinessMilestone,PersonLifeEvent"
       output_path: datasets/philanthropic_research/philanthropic_research_objects.yml
 
+  # ===========================
+  # Data Processing Engine
+  # ===========================
+
+  # List all Data Processing Engine definitions
+  list_dpe_definitions:
+    description: List all Data Processing Engine definitions in the org
+    class_path: tasks.dpe_tasks.ListDPEDefinitions
+    options: {}
+
+  # # List only active DPE definitions
+  # list_active_dpe_definitions:
+  #   description: List only active Data Processing Engine definitions
+  #   class_path: tasks.dpe_tasks.ListDPEDefinitions
+  #   options:
+  #     active_only: True
+
+  # # Retrieve DPE definitions from org
+  # retrieve_dpe_definitions:
+  #   description: Retrieve Data Processing Engine definitions from org to local files
+  #   class_path: tasks.dpe_tasks.RetrieveDPEDefinitions
+  #   options:
+  #     path: dpe_definitions
+  #     # definitions: "Definition1,Definition2"  # Optional: specify which ones
+
+  # # Deploy DPE definitions to org
+  # deploy_dpe_definitions:
+  #   description: Deploy Data Processing Engine definitions from local files to org
+  #   class_path: tasks.dpe_tasks.DeployDPEDefinitions
+  #   options:
+  #     path: dpe_definitions
+  #     # definitions: "Definition1,Definition2"  # Optional: specify which ones
+
+  # # Clone a DPE definition
+  # clone_dpe_definition:
+  #   description: Clone an existing DPE definition with a new name
+  #   class_path: tasks.dpe_tasks.CloneDPEDefinition
+  #   options:
+  #     # These would be overridden at runtime:
+  #     # source: "Source_Definition_Name"
+  #     # target: "Target_Definition_Name"
+  #     # label: "Target Definition Label"
+  #     # description: "Optional description"
+  #     activate: False  # Deploy as inactive by default
+
 flows:
 
   # ===========================
@@ -514,3 +559,21 @@ flows:
         task: load_fundraising_data
       5: 
         task: reorder_app_menu_fundraising
+
+# # Backup all DPE definitions
+#   backup_dpe_definitions:
+#     description: Retrieve and backup all DPE definitions to version control
+#     steps:
+#       1:
+#         task: list_dpe_definitions
+#       2:
+#         task: retrieve_dpe_definitions
+
+#   # Deploy DPE definitions after customization
+#   deploy_custom_dpe:
+#     description: Deploy customized DPE definitions to org
+#     steps:
+#       1:
+#         task: deploy_dpe_definitions
+#       2:
+#         task: list_dpe_definitions
